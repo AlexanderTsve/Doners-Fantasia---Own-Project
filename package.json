@@ -1,8 +1,29 @@
 {
+  "name": "doners-fantasia---own-project",
+  "version": "1.0.0",
+  "description": "Fast-food chain website",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderTsve/Doners-Fantasia---Own-Project.git"
+  },
+  "author": "Alexander Tsvetkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexanderTsve/Doners-Fantasia---Own-Project/issues"
+  },
+  "homepage": "https://github.com/AlexanderTsve/Doners-Fantasia---Own-Project#readme",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.2",
     "parcel": "^2.8.2"
   },
   "dependencies": {
-    "core-js": "^3.27.1"
+    "@types/core-js": "^2.5.5",
+    "@types/sass": "^1.43.1",
+    "core-js": "^3.27.1",
+    "sass": "^1.57.1"
   }
 }
