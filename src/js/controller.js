@@ -369,9 +369,13 @@ const showProduct = async () => {
       categoryParaEl.innerText = `Category: ${product.category}`;
       productBodyDivEl.classList.add("card-body", "product_card_body");
       inputQtyEl.setAttribute("type", "number");
+      inputQtyEl.setAttribute("placeholder", "count...");
+      inputQtyEl.classList.add("product_card_qty_input");
       addBtnEl.setAttribute("type", "submit");
       addBtnEl.innerText = "Add to Cart";
+      addBtnEl.classList.add("doner_app_button");
       detailsBtnEl.innerText = "Details";
+      detailsBtnEl.classList.add("doner_app_button");
       productFooterDivEl.classList.add("card-footer", "product_card_footer");
 
       figEl.append(imageEl, nameEl);
