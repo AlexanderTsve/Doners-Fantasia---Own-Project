@@ -1,6 +1,7 @@
 import * as bootstrap from "bootstrap";
 import * as images from "../img/products_imgs/*.png";
-console.log(bootstrap);
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 // import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
