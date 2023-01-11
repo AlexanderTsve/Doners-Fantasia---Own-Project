@@ -1,0 +1,19 @@
+.product_card {
+  width: 18rem;
+  margin: 1rem;
+  &_body,
+  &_header {
+    background-color: $color-primary;
+  }
+  &_header {
+    display: block;
+    margin-block: 0;
+    margin-inline: 0;
+  }
+  &_footer {
+    background-color: $color-secondary;
+  }
+  &_img {
+    height: 14rem;
+  }
+}

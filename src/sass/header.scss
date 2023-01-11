@@ -1,5 +1,5 @@
 .header {
-  background-color: #ffefa4;
+  background-color: $color-primary;
 
   &__logo {
     margin-left: 1rem;
@@ -15,10 +15,13 @@
   &__list {
     list-style: none;
     display: flex;
+    align-items: center;
   }
 
   &__item {
     position: relative;
+    margin-right: 1rem;
     cursor: pointer;
+    text-decoration: underline;
   }
 }
