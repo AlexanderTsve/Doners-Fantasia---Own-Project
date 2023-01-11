@@ -1,2 +1,18 @@
 $color-primary: #ffefa4;
 $color-secondary: #b02020;
+$dark-green-color: #263d2f;
+$orange-color: #d98837;
+$violet-color: #707cc0;
+
+.header-footer-items {
+  cursor: pointer;
+  text-decoration: underline;
+  color: $color-secondary;
+  font-weight: bold;
+  &:hover {
+    color: $dark-green-color;
+  }
+  &:active {
+    color: $violet-color;
+  }
+}

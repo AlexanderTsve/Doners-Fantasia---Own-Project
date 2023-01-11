@@ -1,6 +1,8 @@
 .product_card {
-  width: 18rem;
-  margin: 1rem;
+  width: 20rem;
+  margin: 1.87rem;
+  border: $dark-green-color 5px;
+  border-radius: 5px;
   &_body,
   &_header {
     background-color: $color-primary;
@@ -12,8 +14,27 @@
   }
   &_footer {
     background-color: $color-secondary;
+    display: flex;
+    justify-content: space-around;
   }
   &_img {
     height: 14rem;
+  }
+  &_qty_input {
+    width: 5rem;
+    border-radius: 5px;
+  }
+}
+.doner_app_button {
+  border-radius: 5px;
+  color: $color-secondary;
+  background-color: $color-primary;
+  &:hover {
+    color: $dark-green-color;
+    background-color: $orange-color;
+  }
+  &:active {
+    background-color: $dark-green-color;
+    color: $orange-color;
   }
 }

@@ -1,0 +1,13 @@
+.footer {
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-around;
+  background-color: $color-primary;
+  color: $color-secondary;
+  font-weight: bold;
+  font-style: italic;
+  &_item {
+    display: flex;
+    padding: 1rem;
+  }
+}
