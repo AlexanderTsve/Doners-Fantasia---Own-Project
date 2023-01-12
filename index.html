@@ -26,15 +26,41 @@
       </nav>
     </header>
     <main>
-      <div id="menu-page"></div>
-      <!-- <div>Main page</div>
-      <div>Restaurants</div>
-      <div>Order</div>
-      <div>Order History</div>
-      <div>Cart</div>
-      <div>News</div>
-      <div>Feedback</div>
-      <div>Error</div> -->
+      <div id="menu-page">
+        <div class="search_dropdown_container">
+          <div class="input-group input-group-sm mb-3 p-3 search_input">
+            <span
+              class="input-group-text search_input_span"
+              id="inputGroup-sizing-sm"
+              >Search by letter:</span
+            ><input
+              type="text"
+              class="form-control search-input-field"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm"
+            />
+          </div>
+          <div class="dropdown">
+            <span class="dropdown_label">Choose a category:</span
+            ><select id="category">
+              <option value="none"></option>
+              <option value="doner">Doner</option>
+              <option value="burger">Burger</option>
+              <option value="pizza">Pizza</option>
+              <option value="drinks">Drinks</option>
+            </select>
+          </div>
+        </div>
+        <div class="products-container"></div>
+      </div>
+      <div id="details-page"></div>
+      <div id="restaurants-page"></div>
+      <div id="order-page"></div>
+      <div id="order-history-page"></div>
+      <div id="cart-page"></div>
+      <div id="news-page"></div>
+      <div id="feedback-page"></div>
+      <div id="error-page"></div>
     </main>
     <footer class="footer">
       <p class="footer_item header-footer-items">

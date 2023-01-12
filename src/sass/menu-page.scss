@@ -1,5 +1,35 @@
 #menu-page {
+  background-color: $violet-color;
+  min-height: 40rem;
+}
+.products-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: $violet-color;
+}
+.search_dropdown_container {
+  background-color: $dark-green-color;
+  width: 100vw;
+  display: flex;
+  .search_input {
+    width: 15rem;
+    &_span {
+      color: $color-primary;
+      background-color: $color-secondary;
+    }
+  }
+  .dropdown {
+    width: 25rem;
+    margin-top: 0.75rem;
+    margin-left: 1rem;
+    &_label {
+      padding: 0.5rem;
+      border-radius: 5px;
+      color: $color-primary;
+      background-color: $color-secondary;
+    }
+    #category {
+      padding: 0.4rem;
+      border-radius: 5px;
+    }
+  }
 }

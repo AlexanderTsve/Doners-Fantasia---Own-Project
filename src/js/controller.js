@@ -2,6 +2,7 @@ import * as bootstrap from "bootstrap";
 import * as images from "../img/products_imgs/*.png";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import { HASH_ARR } from "./config.js";
 // import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
@@ -321,10 +322,73 @@ import "regenerator-runtime/runtime";
 
 // ---------------
 
-const menuPage = document.getElementById("menu-page");
+const productsContainer = document.querySelector(".products-container");
 
-const showProduct = async () => {
+const renderSpinner = (parentEl) => {
+  const markup = `<div class='spinner'></div>`;
+  parentEl.innerHTML = "";
+  parentEl.insertAdjacentHTML("afterbegin", markup);
+};
+const renderProducts = (arrOfProducts) => {
+  arrOfProducts.forEach((product) => {
+    const productDivEl = document.createElement("div");
+    const figEl = document.createElement("figure");
+    const imageEl = document.createElement("img");
+    const nameEl = document.createElement("h5");
+    const productBodyDivEl = document.createElement("div");
+    const weightParaEl = document.createElement("p");
+    const categoryParaEl = document.createElement("p");
+    const productFooterDivEl = document.createElement("div");
+    const inputQtyEl = document.createElement("input");
+    const addBtnEl = document.createElement("button");
+    const detailsBtnEl = document.createElement("button");
+
+    productDivEl.classList.add("card", "text-center");
+    productDivEl.classList.add("product_card");
+    figEl.classList.add("product_card_header");
+    imageEl.classList.add("loading", "card-img-top", "product_card_img");
+    imageEl.src = product.imgSrc;
+    renderSpinner(figEl);
+
+    imageEl.addEventListener("load", function () {
+      figEl.innerHTML = "";
+      figEl.append(imageEl, nameEl);
+      imageEl.classList.remove("loading");
+    });
+    nameEl.innerText = `${product.name}`;
+    nameEl.classList.add("card-title");
+    weightParaEl.innerText = product.weight
+      ? `Weight(gr): ${product.weight}`
+      : "";
+    categoryParaEl.innerText = `Category: ${product.category}`;
+    productBodyDivEl.classList.add("card-body", "product_card_body");
+    inputQtyEl.setAttribute("type", "number");
+    inputQtyEl.setAttribute("placeholder", "count...");
+    inputQtyEl.classList.add("product_card_qty_input");
+    addBtnEl.setAttribute("type", "submit");
+    addBtnEl.innerText = "Add to Cart";
+    addBtnEl.classList.add("doner_app_button");
+    detailsBtnEl.innerText = "Details";
+    detailsBtnEl.classList.add("doner_app_button");
+    productFooterDivEl.classList.add("card-footer", "product_card_footer");
+
+    detailsBtnEl.addEventListener("click", function () {
+      location.hash = product.id;
+    });
+
+    productBodyDivEl.append(weightParaEl, categoryParaEl);
+    productFooterDivEl.append(inputQtyEl, addBtnEl, detailsBtnEl);
+    productDivEl.append(figEl, productBodyDivEl, productFooterDivEl);
+    productsContainer.append(productDivEl);
+  });
+};
+
+// let handleHashChange = function () {
+//   let hash = location.hash.slice(1);
+// };
+const showProducts = async () => {
   try {
+    renderSpinner(productsContainer);
     const response = await fetch(
       "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
     );
@@ -342,50 +406,53 @@ const showProduct = async () => {
         id: product.productId,
       };
     });
-    console.log(arrOfProducts);
-    arrOfProducts.forEach((product) => {
-      const productDivEl = document.createElement("div");
-      const figEl = document.createElement("figure");
-      const imageEl = document.createElement("img");
-      const nameEl = document.createElement("h5");
-      const productBodyDivEl = document.createElement("div");
-      const weightParaEl = document.createElement("p");
-      const categoryParaEl = document.createElement("p");
-      const productFooterDivEl = document.createElement("div");
-      const inputQtyEl = document.createElement("input");
-      const addBtnEl = document.createElement("button");
-      const detailsBtnEl = document.createElement("button");
-
-      productDivEl.classList.add("card", "text-center");
-      productDivEl.classList.add("product_card");
-      figEl.classList.add("product_card_header");
-      imageEl.src = product.imgSrc;
-      imageEl.classList.add("card-img-top", "product_card_img");
-      nameEl.innerText = `${product.name}`;
-      nameEl.classList.add("card-title");
-      weightParaEl.innerText = product.weight
-        ? `Weight(gr): ${product.weight}`
-        : "";
-      categoryParaEl.innerText = `Category: ${product.category}`;
-      productBodyDivEl.classList.add("card-body", "product_card_body");
-      inputQtyEl.setAttribute("type", "number");
-      inputQtyEl.setAttribute("placeholder", "count...");
-      inputQtyEl.classList.add("product_card_qty_input");
-      addBtnEl.setAttribute("type", "submit");
-      addBtnEl.innerText = "Add to Cart";
-      addBtnEl.classList.add("doner_app_button");
-      detailsBtnEl.innerText = "Details";
-      detailsBtnEl.classList.add("doner_app_button");
-      productFooterDivEl.classList.add("card-footer", "product_card_footer");
-
-      figEl.append(imageEl, nameEl);
-      productBodyDivEl.append(weightParaEl, categoryParaEl);
-      productFooterDivEl.append(inputQtyEl, addBtnEl, detailsBtnEl);
-      productDivEl.append(figEl, productBodyDivEl, productFooterDivEl);
-      menuPage.append(productDivEl);
-    });
+    productsContainer.innerHTML = "";
+    renderProducts(arrOfProducts);
   } catch (err) {
     alert(err);
   }
 };
-showProduct();
+window.addEventListener("load", showProducts);
+
+const renderSearchResults = () => {
+  const searchField = document.querySelector(".search-input-field");
+  searchField.addEventListener("input", async function () {
+    if (searchField.value) {
+      productsContainer.innerHTML = "";
+      try {
+        renderSpinner(productsContainer);
+        const response = await fetch(
+          "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
+        );
+        if (!response.ok) {
+          throw new Error(`Something went wrong! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(Object.values(data)[0]);
+        const arrOfProducts = Object.values(data)[0]
+          .filter((product) =>
+            product.name.toLowerCase().includes(searchField.value.toLowerCase())
+          )
+          .map((product) => {
+            return {
+              category: product.category,
+              name: product.name,
+              price: product.price,
+              weight: product.weight,
+              imgSrc: `${images[product.imgIdentifier]}`,
+              id: product.productId,
+            };
+          });
+        console.log(arrOfProducts);
+        productsContainer.innerHTML = "";
+        renderProducts(arrOfProducts);
+      } catch (err) {
+        alert(err);
+      }
+    } else {
+      await showProducts();
+    }
+  });
+};
+
+renderSearchResults();
