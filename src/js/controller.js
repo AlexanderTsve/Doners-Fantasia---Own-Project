@@ -3,6 +3,7 @@ import * as images from "../img/products_imgs/*.png";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { HASH_ARR } from "./config.js";
+import { async } from "regenerator-runtime";
 // import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
@@ -321,11 +322,24 @@ import { HASH_ARR } from "./config.js";
 // sendProducts();
 
 // ---------------
-
+let debounceTimer;
 const productsContainer = document.querySelector(".products-container");
+const searchField = document.querySelector(".search-input-field");
+const dropdownComponent = document.getElementById("category");
+
+const debounce = (callback, time) => {
+  window.clearTimeout(debounceTimer);
+  debounceTimer = window.setTimeout(callback, time);
+};
 
 const renderSpinner = (parentEl) => {
   const markup = `<div class='spinner'></div>`;
+  parentEl.innerHTML = "";
+  parentEl.insertAdjacentHTML("afterbegin", markup);
+};
+
+const renderMessage = (parentEl, searchQuote) => {
+  const markup = `<p>There are no products with "${searchQuote}" in their name!</p>`;
   parentEl.innerHTML = "";
   parentEl.insertAdjacentHTML("afterbegin", markup);
 };
@@ -383,9 +397,6 @@ const renderProducts = (arrOfProducts) => {
   });
 };
 
-// let handleHashChange = function () {
-//   let hash = location.hash.slice(1);
-// };
 const showProducts = async () => {
   try {
     renderSpinner(productsContainer);
@@ -414,24 +425,24 @@ const showProducts = async () => {
 };
 window.addEventListener("load", showProducts);
 
-const renderSearchResults = () => {
-  const searchField = document.querySelector(".search-input-field");
-  searchField.addEventListener("input", async function () {
-    if (searchField.value) {
-      productsContainer.innerHTML = "";
-      try {
-        renderSpinner(productsContainer);
-        const response = await fetch(
-          "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
-        );
-        if (!response.ok) {
-          throw new Error(`Something went wrong! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(Object.values(data)[0]);
+const eventListening = async () => {
+  const searchFieldValue = String(searchField.value);
+  const dropdownValue = dropdownComponent.value;
+  if (searchFieldValue || dropdownValue !== "none") {
+    productsContainer.innerHTML = "";
+    try {
+      renderSpinner(productsContainer);
+      const response = await fetch(
+        "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
+      );
+      if (!response.ok) {
+        throw new Error(`Something went wrong! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (dropdownValue === "none" && searchFieldValue) {
         const arrOfProducts = Object.values(data)[0]
           .filter((product) =>
-            product.name.toLowerCase().includes(searchField.value.toLowerCase())
+            product.name.toLowerCase().includes(searchFieldValue.toLowerCase())
           )
           .map((product) => {
             return {
@@ -443,16 +454,60 @@ const renderSearchResults = () => {
               id: product.productId,
             };
           });
-        console.log(arrOfProducts);
+        productsContainer.innerHTML = "";
+        arrOfProducts.length > 0
+          ? renderProducts(arrOfProducts)
+          : renderMessage(productsContainer, searchFieldValue);
+      }
+      if (dropdownValue !== "none" && !searchFieldValue) {
+        const arrOfProducts = Object.values(data)[0]
+          .filter((product) => product.category.toLowerCase() === dropdownValue)
+          .map((product) => {
+            return {
+              category: product.category,
+              name: product.name,
+              price: product.price,
+              weight: product.weight,
+              imgSrc: `${images[product.imgIdentifier]}`,
+              id: product.productId,
+            };
+          });
         productsContainer.innerHTML = "";
         renderProducts(arrOfProducts);
-      } catch (err) {
-        alert(err);
       }
-    } else {
-      await showProducts();
+      if (dropdownValue !== "none" && searchFieldValue) {
+        const arrOfProducts = Object.values(data)[0]
+          .filter(
+            (product) =>
+              product.name
+                .toLowerCase()
+                .includes(searchFieldValue.toLowerCase()) &&
+              product.category.toLowerCase() === dropdownValue
+          )
+          .map((product) => {
+            return {
+              category: product.category,
+              name: product.name,
+              price: product.price,
+              weight: product.weight,
+              imgSrc: `${images[product.imgIdentifier]}`,
+              id: product.productId,
+            };
+          });
+        productsContainer.innerHTML = "";
+        arrOfProducts.length > 0
+          ? renderProducts(arrOfProducts)
+          : renderMessage(productsContainer, searchFieldValue);
+      }
+    } catch (err) {
+      alert(err);
     }
-  });
+  } else {
+    await showProducts();
+  }
 };
+searchField.addEventListener("input", () => {
+  debounce(eventListening, 500);
+});
 
-renderSearchResults();
+dropdownComponent.addEventListener("change", eventListening);
