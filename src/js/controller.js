@@ -1,10 +1,11 @@
 import * as bootstrap from "bootstrap";
 import * as images from "../img/products_imgs/*.png";
+import * as icons from "../img/weight_price_icons/*.png";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import { HASH_ARR } from "./config.js";
+import { URL_ARR } from "./config.js";
 import { async } from "regenerator-runtime";
-// import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -13,6 +14,14 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "roller",
 //     productId: uuidv4(),
+//     content: [
+//       "Crispy chicken tenders",
+//       "Iceberg",
+//       "Tomatoes",
+//       "Mayonnaise",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 
 //   {
@@ -22,6 +31,15 @@ import { async } from "regenerator-runtime";
 //     weight: 250,
 //     imgIdentifier: "chicken_light",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "Cabbage",
+//       "Lettuce",
+//       "Tomatoes",
+//       "Cucumbers",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -30,6 +48,14 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "chicken_classic",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "French fries",
+//       "Tomatoes",
+//       "Pickles",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -38,6 +64,14 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "chicken_grand",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "French fries",
+//       "Tomatoes",
+//       "Pickles",
+//       "Garlic sauce",
+//       "Pita bread GRAND",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -46,6 +80,16 @@ import { async } from "regenerator-runtime";
 //     weight: 400,
 //     imgIdentifier: "box",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "French fries",
+//       "Tomatoes",
+//       "Cucumber",
+//       "Lettuce",
+//       "Red cabbage",
+//       "Pickles",
+//       "Garlic sauce",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -54,6 +98,17 @@ import { async } from "regenerator-runtime";
 //     weight: 600,
 //     imgIdentifier: "chicken_doner_portion",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "French fries",
+//       "Tomatoes",
+//       "Pickles",
+//       "Lettuce",
+//       "Cabbage",
+//       "Pickles",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -62,6 +117,17 @@ import { async } from "regenerator-runtime";
 //     weight: 700,
 //     imgIdentifier: "chicken_doner_portion_with_rice",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "Rice with vegetables",
+//       "Tomatoes",
+//       "Pickles",
+//       "Lettuce",
+//       "Cabbage",
+//       "Pickles",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -70,6 +136,16 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "veggie_doner",
 //     productId: uuidv4(),
+//     content: [
+//       "3 x falafel",
+//       "French fries",
+//       "Tomatoes",
+//       "Cucumber",
+//       "Cabbage",
+//       "Lettuce",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -78,6 +154,15 @@ import { async } from "regenerator-runtime";
 //     weight: 250,
 //     imgIdentifier: "beef_doner_light",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Tomatoes",
+//       "Pickles",
+//       "Red onion",
+//       "Parsley",
+//       "Milk sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -86,6 +171,15 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "beef_doner_classic",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Tomatoes",
+//       "Pickles",
+//       "Red onion",
+//       "Parsley",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -94,6 +188,15 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "beef_doner_grand",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Tomatoes",
+//       "Pickles",
+//       "Red onion",
+//       "Parsley",
+//       "Garlic sauce",
+//       "Pita bread GRAND",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -102,6 +205,15 @@ import { async } from "regenerator-runtime";
 //     weight: 600,
 //     imgIdentifier: "beef_doner_portion",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Lettuce",
+//       "Tomatoes",
+//       "Red onion",
+//       "Parsley",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -110,6 +222,16 @@ import { async } from "regenerator-runtime";
 //     weight: 700,
 //     imgIdentifier: "beef_doner_portion_with_rice",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Rice",
+//       "Lettuce",
+//       "Tomatoes",
+//       "Red onion",
+//       "Parsley",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -118,6 +240,16 @@ import { async } from "regenerator-runtime";
 //     weight: 700,
 //     imgIdentifier: "beef_doner_portion_with_fries",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Fries",
+//       "Lettuce",
+//       "Tomatoes",
+//       "Red onion",
+//       "Parsley",
+//       "Garlic sauce",
+//       "Pita bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Doner",
@@ -126,6 +258,16 @@ import { async } from "regenerator-runtime";
 //     weight: 400,
 //     imgIdentifier: "sudju",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken mince - spicy",
+//       "Fries",
+//       "Iceberg",
+//       "Tomatoes",
+//       "Pickles",
+//       "Ketchup",
+//       "Garlic sauce",
+//       "Arabic bread CLASSIC",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -134,6 +276,17 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "burger_chicken_doner_meat_with_fries",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken doner meat",
+//       "French fries",
+//       "Cabbage",
+//       "Lettuce",
+//       "Pickles",
+//       "Tomatoes",
+//       "Garlic sauce",
+//       "Ketchup",
+//       "Sesame bun",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -142,6 +295,17 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "burger_beef_doner_meat_with_fries",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef doner meat",
+//       "Iceberg",
+//       "Fresh red onion",
+//       "Lettuce",
+//       "Pickles",
+//       "Tomatoes",
+//       "Garlic sauce",
+//       "Mayonnaise",
+//       "Sesame bun",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -150,6 +314,7 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "hard_burger",
 //     productId: uuidv4(),
+//     content: ["Chicken fillet", "Tomatoes", "Iceberg", "Mayonnaise"],
 //   },
 //   {
 //     category: "Burger",
@@ -158,6 +323,16 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "beef_burger",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef patty",
+//       "Iceberg",
+//       "Fresh red onion",
+//       "Pickles",
+//       "Tomatoes",
+//       "Garlic sauce",
+//       "Mayonnaise",
+//       "Sesame bun",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -166,6 +341,17 @@ import { async } from "regenerator-runtime";
 //     weight: 450,
 //     imgIdentifier: "chicken_burger_double",
 //     productId: uuidv4(),
+//     content: [
+//       "2 x Chicken patty",
+//       "Fries",
+//       "Lettuce",
+//       "Cabbage",
+//       "Cucumber",
+//       "Tomatoes",
+//       "Garlic sauce",
+//       "Ketchup",
+//       "Sesame bun",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -174,6 +360,17 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "chicken_burger_classic",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken patty",
+//       "Fries",
+//       "Lettuce",
+//       "Cabbage",
+//       "Cucumber",
+//       "Tomatoes",
+//       "Garlic sauce",
+//       "Ketchup",
+//       "Sesame bun",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -182,6 +379,19 @@ import { async } from "regenerator-runtime";
 //     weight: 350,
 //     imgIdentifier: "veggie_burger",
 //     productId: uuidv4(),
+//     content: [
+//       "Fried egg",
+//       "Cheese toast",
+//       "Fries",
+//       "Lettuce",
+//       "Cabbage",
+//       "Cucumber",
+//       "Tomatoes",
+//       "Pickles",
+//       "Garlic sauce",
+//       "Ketchup",
+//       "Sesame bun",
+//     ],
 //   },
 //   {
 //     category: "Burger",
@@ -190,6 +400,14 @@ import { async } from "regenerator-runtime";
 //     weight: 200,
 //     imgIdentifier: "pop_burger",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken patty",
+//       "Pickles",
+//       "Baked onion",
+//       "Garlic sauce",
+//       "Ketchup",
+//       "Bun",
+//     ],
 //   },
 //   {
 //     category: "Pizza",
@@ -198,14 +416,7 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "margarita",
 //     productId: uuidv4(),
-//   },
-//   {
-//     category: "Pizza",
-//     name: "Pizza Napolitana",
-//     price: 10.99,
-//     weight: 500,
-//     imgIdentifier: "napolitana",
-//     productId: uuidv4(),
+//     content: ["Cheese", "Tomato sauce", "Tomatoes", "Savory"],
 //   },
 //   {
 //     category: "Pizza",
@@ -214,6 +425,18 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "assorti",
 //     productId: uuidv4(),
+//     content: [
+//       "Beef Sausage",
+//       "Beef Salami",
+//       "Chicken fillet",
+//       "Cheese",
+//       "Melted cheese",
+//       "Mushrooms",
+//       "Chopped tomatoes",
+//       "Olives",
+//       "Tomato sauce",
+//       "Savory",
+//     ],
 //   },
 //   {
 //     category: "Pizza",
@@ -222,6 +445,13 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "hot-dog",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken Hot-Dog sausage",
+//       "Cheese",
+//       "Melted cheese",
+//       "Tomato sauce",
+//       "Savory",
+//     ],
 //   },
 //   {
 //     category: "Pizza",
@@ -230,6 +460,7 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "peperoni",
 //     productId: uuidv4(),
+//     content: ["Pepperoni", "Cheese", "Melted cheese", "Tomato sauce", "Savory"],
 //   },
 //   {
 //     category: "Pizza",
@@ -238,6 +469,13 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "carbonarra",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken Ham",
+//       "Cheese",
+//       "Melted cheese",
+//       "Tomato sauce",
+//       "Savory",
+//     ],
 //   },
 //   {
 //     category: "Pizza",
@@ -246,6 +484,15 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "polo",
 //     productId: uuidv4(),
+//     content: [
+//       "Chicken Ham",
+//       "Corn",
+//       "Pickles",
+//       "Peppers",
+//       "Cheese",
+//       "Tomato sauce",
+//       "Savory",
+//     ],
 //   },
 //   {
 //     category: "Pizza",
@@ -254,6 +501,7 @@ import { async } from "regenerator-runtime";
 //     weight: 500,
 //     imgIdentifier: "caprichoza",
 //     productId: uuidv4(),
+//     content: ["Chicken fillet", "Cheese", "Tomato sauce", "Savory"],
 //   },
 //   {
 //     category: "Drink",
@@ -261,6 +509,7 @@ import { async } from "regenerator-runtime";
 //     price: 3.99,
 //     imgIdentifier: "pepsi_2l",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 //   {
 //     category: "Drink",
@@ -268,6 +517,7 @@ import { async } from "regenerator-runtime";
 //     price: 2.19,
 //     imgIdentifier: "pepsi_500ml",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 //   {
 //     category: "Drink",
@@ -275,6 +525,7 @@ import { async } from "regenerator-runtime";
 //     price: 2.19,
 //     imgIdentifier: "mirinda_500ml",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 //   {
 //     category: "Drink",
@@ -282,6 +533,7 @@ import { async } from "regenerator-runtime";
 //     price: 3.99,
 //     imgIdentifier: "mirinda_2l",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 //   {
 //     category: "Drink",
@@ -289,6 +541,7 @@ import { async } from "regenerator-runtime";
 //     price: 2.19,
 //     imgIdentifier: "ayryan_500ml",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 //   {
 //     category: "Drink",
@@ -296,6 +549,7 @@ import { async } from "regenerator-runtime";
 //     price: 1.5,
 //     imgIdentifier: "ayryan_250ml",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 //   {
 //     category: "Drink",
@@ -303,6 +557,7 @@ import { async } from "regenerator-runtime";
 //     price: 1.2,
 //     imgIdentifier: "min_water_500ml",
 //     productId: uuidv4(),
+//     content: [],
 //   },
 // ];
 
@@ -326,6 +581,7 @@ let debounceTimer;
 const productsContainer = document.querySelector(".products-container");
 const searchField = document.querySelector(".search-input-field");
 const dropdownComponent = document.getElementById("category");
+const productDetailsContainer = document.querySelector(".product-details");
 
 const debounce = (callback, time) => {
   window.clearTimeout(debounceTimer);
@@ -343,15 +599,127 @@ const renderMessage = (parentEl, searchQuote) => {
   parentEl.innerHTML = "";
   parentEl.insertAdjacentHTML("afterbegin", markup);
 };
+
+const renderProductDetails = async (productId) => {
+  try {
+    renderSpinner(productDetailsContainer);
+    const response = await fetch(
+      "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
+    );
+    if (!response.ok) {
+      throw new Error(`Something went wrong! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    const productObj = Object.values(data)[0].find(
+      (product) => product.productId === productId
+    );
+    productDetailsContainer.innerHTML = "";
+    const productImageNameDivEl = document.createElement("div");
+    const figDetailsEl = document.createElement("figure");
+    const imageDetailsEl = document.createElement("img");
+    const nameDetailsEl = document.createElement("h4");
+    const productAllDetailsDivEl = document.createElement("div");
+    const weightVolumeDetailsDivEl = document.createElement("div");
+    const weightVolumeIcon = document.createElement("img");
+    const weightVolumeSpan = document.createElement("span");
+    const priceDetailsDivEl = document.createElement("div");
+    const priceIcon = document.createElement("img");
+    const priceSpan = document.createElement("span");
+
+    const addBtnDetailsEl = document.createElement("button");
+
+    nameDetailsEl.innerText =
+      productObj.category !== "Drink"
+        ? productObj.name
+        : productObj.name.split("(")[0];
+    // nameDetailsEl.innerText = productObj.name;
+    nameDetailsEl.classList.add("product-details-name", "card-body");
+    if (productObj.content) {
+      const productContentDivEl = document.createElement("div");
+      const productContentListEl = document.createElement("ul");
+      productContentListEl.classList.add(
+        "list-group-numbered",
+        "product-details-content"
+      );
+      const contentTitle = document.createElement("h5");
+      contentTitle.innerText = "Content:";
+      contentTitle.classList.add("product-details-font");
+      productContentDivEl.append(contentTitle);
+      productObj.content.forEach((ingredient) => {
+        const ingredientItem = document.createElement("li");
+        ingredientItem.innerText = ingredient;
+        ingredientItem.classList.add("list-group-item");
+        productContentListEl.append(ingredientItem);
+        productContentDivEl.append(productContentListEl);
+      });
+      productAllDetailsDivEl.append(productContentDivEl);
+    }
+
+    imageDetailsEl.classList.add(
+      "product-details-image",
+      "loading",
+      "card-img-top"
+    );
+    figDetailsEl.classList.add("product-details-figure");
+    imageDetailsEl.src = `${images[productObj.imgIdentifier]}.png`;
+    renderSpinner(figDetailsEl);
+
+    imageDetailsEl.addEventListener("load", function () {
+      figDetailsEl.innerHTML = "";
+      figDetailsEl.append(imageDetailsEl, nameDetailsEl);
+      imageDetailsEl.classList.remove("loading");
+    });
+
+    weightVolumeDetailsDivEl.classList.add("product-details-weight");
+    priceDetailsDivEl.classList.add("product-details-price");
+    weightVolumeIcon.src =
+      productObj.category !== "Drink"
+        ? `${icons.weight_gram_icon}.png`
+        : `${icons.litre_volume}.png`;
+    weightVolumeIcon.classList.add("icon_weight", "icon");
+    weightVolumeSpan.innerText =
+      productObj.category !== "Drink"
+        ? `${productObj.weight} gr`
+        : productObj.name.split("(")[1].slice(0, -1);
+    weightVolumeSpan.classList.add("product-details-font");
+    priceIcon.classList.add("icon_price", "icon");
+    priceIcon.src = `${icons.price_icon}.png`;
+    priceSpan.innerText = `${Number(productObj.price).toFixed(2)} BGN`;
+    priceSpan.classList.add("product-details-font");
+    productImageNameDivEl.classList.add("card", "w-50", "text-center");
+    productAllDetailsDivEl.classList.add("product-details-body");
+    addBtnDetailsEl.innerText = "Add to Cart";
+    addBtnDetailsEl.classList.add("doner_app_button");
+
+    productImageNameDivEl.append(figDetailsEl);
+    weightVolumeDetailsDivEl.append(weightVolumeIcon, weightVolumeSpan);
+    priceDetailsDivEl.append(priceIcon, priceSpan);
+    productAllDetailsDivEl.append(
+      weightVolumeDetailsDivEl,
+      priceDetailsDivEl,
+      addBtnDetailsEl
+    );
+    productDetailsContainer.append(
+      productImageNameDivEl,
+      productAllDetailsDivEl
+    );
+  } catch (err) {
+    alert(err);
+  }
+};
+
 const renderProducts = (arrOfProducts) => {
   arrOfProducts.forEach((product) => {
     const productDivEl = document.createElement("div");
+
     const figEl = document.createElement("figure");
     const imageEl = document.createElement("img");
     const nameEl = document.createElement("h5");
+
     const productBodyDivEl = document.createElement("div");
     const weightParaEl = document.createElement("p");
     const categoryParaEl = document.createElement("p");
+    const priceParaEl = document.createElement("p");
     const productFooterDivEl = document.createElement("div");
     const inputQtyEl = document.createElement("input");
     const addBtnEl = document.createElement("button");
@@ -375,6 +743,7 @@ const renderProducts = (arrOfProducts) => {
       ? `Weight(gr): ${product.weight}`
       : "";
     categoryParaEl.innerText = `Category: ${product.category}`;
+    priceParaEl.innerText = `Price: ${Number(product.price).toFixed(2)} BGN`;
     productBodyDivEl.classList.add("card-body", "product_card_body");
     inputQtyEl.setAttribute("type", "number");
     inputQtyEl.setAttribute("placeholder", "count...");
@@ -386,11 +755,11 @@ const renderProducts = (arrOfProducts) => {
     detailsBtnEl.classList.add("doner_app_button");
     productFooterDivEl.classList.add("card-footer", "product_card_footer");
 
-    detailsBtnEl.addEventListener("click", function () {
-      location.hash = product.id;
+    detailsBtnEl.addEventListener("click", async function () {
+      window.location.pathname = `/details-page/${product.id}`;
     });
 
-    productBodyDivEl.append(weightParaEl, categoryParaEl);
+    productBodyDivEl.append(weightParaEl, categoryParaEl, priceParaEl);
     productFooterDivEl.append(inputQtyEl, addBtnEl, detailsBtnEl);
     productDivEl.append(figEl, productBodyDivEl, productFooterDivEl);
     productsContainer.append(productDivEl);
@@ -423,7 +792,32 @@ const showProducts = async () => {
     alert(err);
   }
 };
-window.addEventListener("load", showProducts);
+
+const urlChangeHandler = () => {
+  const pathname = window.location.pathname;
+  if (
+    URL_ARR.every((path) => path !== pathname) &&
+    !pathname.includes("details-page")
+  ) {
+    window.location.href += "menu-page";
+  }
+  if (URL_ARR.some((path) => path === pathname)) {
+    const currentPage = document.getElementById(
+      pathname.split("/").join("").trim()
+    );
+    currentPage.classList.remove("hidden");
+    if (pathname === "/menu-page") {
+      showProducts();
+    }
+  }
+  if (pathname.includes("details-page")) {
+    const detailsPage = document.getElementById("details-page");
+    detailsPage.classList.remove("hidden");
+    renderProductDetails(pathname.replace("/details-page/", ""));
+  }
+};
+
+window.addEventListener("load", urlChangeHandler);
 
 const eventListening = async () => {
   const searchFieldValue = String(searchField.value);
