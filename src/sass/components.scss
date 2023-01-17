@@ -1,3 +1,11 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+footer {
+  margin-top: auto;
+}
 .product_card {
   width: 20rem;
   margin: 1.87rem;
@@ -63,8 +71,7 @@
   animation: rotate 2s infinite linear;
 }
 
-.loading,
-.hidden {
+.loading {
   display: none;
 }
 
@@ -75,5 +82,14 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.icon {
+  margin-right: 1rem;
+  &_price,
+  &_weight {
+    background-color: $color-secondary;
+    border-radius: 20%;
   }
 }
