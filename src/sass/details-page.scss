@@ -1,0 +1,49 @@
+#details-page {
+  min-height: 80vh;
+  background-color: $violet-color;
+  display: flex;
+  justify-content: center;
+  .product-details {
+    margin: 14rem;
+    display: flex;
+    justify-content: space-between;
+    &-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    &-price,
+    &-weight {
+      display: flex;
+      justify-content: space-between;
+      width: 10rem;
+    }
+    &-figure {
+      $card-bg: $color-secondary;
+    }
+    &-image {
+      background-color: $color-secondary;
+      border-radius: 5%;
+    }
+    &-name {
+      background-color: $color-primary;
+    }
+    &-content {
+      height: 14rem;
+      padding-left: 0;
+      color: $color-primary;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 18px;
+    }
+    &-font {
+      color: $dark-green-color;
+      font-weight: bold;
+    }
+  }
+}
+.card {
+  --bs-card-bg: $violet-color;
+  border: none;
+}
