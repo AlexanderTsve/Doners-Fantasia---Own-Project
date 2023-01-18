@@ -1,11 +1,14 @@
+import * as model from "./model.js";
+import productDetailsView from "./Views/productDetailsView.js";
+import productsView from "./Views/productsView.js";
 import * as bootstrap from "bootstrap";
 import * as images from "../img/products_imgs/*.png";
-import * as icons from "../img/weight_price_icons/*.png";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { URL_ARR } from "./config.js";
 import { async } from "regenerator-runtime";
 import { v4 as uuidv4 } from "uuid";
+import { makeApiCall } from "./helpers.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -581,7 +584,6 @@ let debounceTimer;
 const productsContainer = document.querySelector(".products-container");
 const searchField = document.querySelector(".search-input-field");
 const dropdownComponent = document.getElementById("category");
-const productDetailsContainer = document.querySelector(".product-details");
 
 const debounce = (callback, time) => {
   window.clearTimeout(debounceTimer);
@@ -600,109 +602,11 @@ const renderMessage = (parentEl, searchQuote) => {
   parentEl.insertAdjacentHTML("afterbegin", markup);
 };
 
-const renderProductDetails = async (productId) => {
+const controlProductDetails = async (productId) => {
   try {
-    renderSpinner(productDetailsContainer);
-    const response = await fetch(
-      "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
-    );
-    if (!response.ok) {
-      throw new Error(`Something went wrong! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    const productObj = Object.values(data)[0].find(
-      (product) => product.productId === productId
-    );
-    productDetailsContainer.innerHTML = "";
-    const productImageNameDivEl = document.createElement("div");
-    const figDetailsEl = document.createElement("figure");
-    const imageDetailsEl = document.createElement("img");
-    const nameDetailsEl = document.createElement("h4");
-    const productAllDetailsDivEl = document.createElement("div");
-    const weightVolumeDetailsDivEl = document.createElement("div");
-    const weightVolumeIcon = document.createElement("img");
-    const weightVolumeSpan = document.createElement("span");
-    const priceDetailsDivEl = document.createElement("div");
-    const priceIcon = document.createElement("img");
-    const priceSpan = document.createElement("span");
-
-    const addBtnDetailsEl = document.createElement("button");
-
-    nameDetailsEl.innerText =
-      productObj.category !== "Drink"
-        ? productObj.name
-        : productObj.name.split("(")[0];
-    // nameDetailsEl.innerText = productObj.name;
-    nameDetailsEl.classList.add("product-details-name", "card-body");
-    if (productObj.content) {
-      const productContentDivEl = document.createElement("div");
-      const productContentListEl = document.createElement("ul");
-      productContentListEl.classList.add(
-        "list-group-numbered",
-        "product-details-content"
-      );
-      const contentTitle = document.createElement("h5");
-      contentTitle.innerText = "Content:";
-      contentTitle.classList.add("product-details-font");
-      productContentDivEl.append(contentTitle);
-      productObj.content.forEach((ingredient) => {
-        const ingredientItem = document.createElement("li");
-        ingredientItem.innerText = ingredient;
-        ingredientItem.classList.add("list-group-item");
-        productContentListEl.append(ingredientItem);
-        productContentDivEl.append(productContentListEl);
-      });
-      productAllDetailsDivEl.append(productContentDivEl);
-    }
-
-    imageDetailsEl.classList.add(
-      "product-details-image",
-      "loading",
-      "card-img-top"
-    );
-    figDetailsEl.classList.add("product-details-figure");
-    imageDetailsEl.src = `${images[productObj.imgIdentifier]}.png`;
-    renderSpinner(figDetailsEl);
-
-    imageDetailsEl.addEventListener("load", function () {
-      figDetailsEl.innerHTML = "";
-      figDetailsEl.append(imageDetailsEl, nameDetailsEl);
-      imageDetailsEl.classList.remove("loading");
-    });
-
-    weightVolumeDetailsDivEl.classList.add("product-details-weight");
-    priceDetailsDivEl.classList.add("product-details-price");
-    weightVolumeIcon.src =
-      productObj.category !== "Drink"
-        ? `${icons.weight_gram_icon}.png`
-        : `${icons.litre_volume}.png`;
-    weightVolumeIcon.classList.add("icon_weight", "icon");
-    weightVolumeSpan.innerText =
-      productObj.category !== "Drink"
-        ? `${productObj.weight} gr`
-        : productObj.name.split("(")[1].slice(0, -1);
-    weightVolumeSpan.classList.add("product-details-font");
-    priceIcon.classList.add("icon_price", "icon");
-    priceIcon.src = `${icons.price_icon}.png`;
-    priceSpan.innerText = `${Number(productObj.price).toFixed(2)} BGN`;
-    priceSpan.classList.add("product-details-font");
-    productImageNameDivEl.classList.add("card", "w-50", "text-center");
-    productAllDetailsDivEl.classList.add("product-details-body");
-    addBtnDetailsEl.innerText = "Add to Cart";
-    addBtnDetailsEl.classList.add("doner_app_button");
-
-    productImageNameDivEl.append(figDetailsEl);
-    weightVolumeDetailsDivEl.append(weightVolumeIcon, weightVolumeSpan);
-    priceDetailsDivEl.append(priceIcon, priceSpan);
-    productAllDetailsDivEl.append(
-      weightVolumeDetailsDivEl,
-      priceDetailsDivEl,
-      addBtnDetailsEl
-    );
-    productDetailsContainer.append(
-      productImageNameDivEl,
-      productAllDetailsDivEl
-    );
+    productDetailsView.renderSpinner();
+    await model.loadProductDetails(productId);
+    productDetailsView.render(model.state.productDetails);
   } catch (err) {
     alert(err);
   }
@@ -766,28 +670,11 @@ const renderProducts = (arrOfProducts) => {
   });
 };
 
-const showProducts = async () => {
+const controlProducts = async () => {
   try {
-    renderSpinner(productsContainer);
-    const response = await fetch(
-      "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
-    );
-    if (!response.ok) {
-      throw new Error(`Something went wrong! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    const arrOfProducts = Object.values(data)[0].map((product) => {
-      return {
-        category: product.category,
-        name: product.name,
-        price: product.price,
-        weight: product.weight,
-        imgSrc: `${images[product.imgIdentifier]}`,
-        id: product.productId,
-      };
-    });
-    productsContainer.innerHTML = "";
-    renderProducts(arrOfProducts);
+    productsView.renderSpinner();
+    await model.loadProducts();
+    productsView.render(model.state.products);
   } catch (err) {
     alert(err);
   }
@@ -807,13 +694,13 @@ const urlChangeHandler = () => {
     );
     currentPage.classList.remove("hidden");
     if (pathname === "/menu-page") {
-      showProducts();
+      controlProducts();
     }
   }
   if (pathname.includes("details-page")) {
     const detailsPage = document.getElementById("details-page");
     detailsPage.classList.remove("hidden");
-    renderProductDetails(pathname.replace("/details-page/", ""));
+    controlProductDetails(pathname.replace("/details-page/", ""));
   }
 };
 
@@ -826,13 +713,7 @@ const eventListening = async () => {
     productsContainer.innerHTML = "";
     try {
       renderSpinner(productsContainer);
-      const response = await fetch(
-        "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json"
-      );
-      if (!response.ok) {
-        throw new Error(`Something went wrong! Status: ${response.status}`);
-      }
-      const data = await response.json();
+      const data = await makeApiCall();
       if (dropdownValue === "none" && searchFieldValue) {
         const arrOfProducts = Object.values(data)[0]
           .filter((product) =>
@@ -897,7 +778,7 @@ const eventListening = async () => {
       alert(err);
     }
   } else {
-    await showProducts();
+    await controlProducts();
   }
 };
 searchField.addEventListener("input", () => {
