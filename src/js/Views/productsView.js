@@ -12,16 +12,17 @@ class ProductsView {
     this._parentElement.innerHTML = "";
   }
 
-  renderSpinner = () => {
+  renderSpinner() {
     const markup = `<div class='spinner'></div>`;
     this._parentElement.innerHTML = "";
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  };
-  _renderInternalSpinner = (parentEl) => {
+  }
+  _renderInternalSpinner(parentEl) {
     const markup = `<div class='spinner'></div>`;
     parentEl.innerHTML = "";
     parentEl.insertAdjacentHTML("afterbegin", markup);
-  };
+  }
+
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product) => {
       const productDivEl = document.createElement("div");

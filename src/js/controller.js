@@ -9,6 +9,7 @@ import { URL_ARR } from "./config.js";
 import { async } from "regenerator-runtime";
 import { v4 as uuidv4 } from "uuid";
 import { makeApiCall } from "./helpers.js";
+import urlView from "./Views/urlView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -680,7 +681,7 @@ const controlProducts = async () => {
   }
 };
 
-const urlChangeHandler = () => {
+const controlUrlChange = () => {
   const pathname = window.location.pathname;
   if (
     URL_ARR.every((path) => path !== pathname) &&
@@ -704,7 +705,11 @@ const urlChangeHandler = () => {
   }
 };
 
-window.addEventListener("load", urlChangeHandler);
+const init = () => {
+  urlView.urlChangeHandler(controlUrlChange);
+};
+
+init();
 
 const eventListening = async () => {
   const searchFieldValue = String(searchField.value);
