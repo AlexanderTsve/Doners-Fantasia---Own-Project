@@ -1,5 +1,6 @@
 import * as images from "../../img/products_imgs/*.png";
 import * as icons from "../../img/weight_price_icons/*.png";
+import * as alertIcon from "../../img/icons/*.png";
 class ProductDetailsView {
   _parentElement = document.querySelector(".product-details");
   _data;
@@ -15,14 +16,29 @@ class ProductDetailsView {
 
   renderSpinner = () => {
     const markup = `<div class='spinner'></div>`;
-    this._parentElement.innerHTML = "";
+    this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   };
+  renderError(message) {
+    const divIconEl = document.createElement("div");
+    const iconAlertEl = document.createElement("img");
+    const paraErrorMessage = document.createElement("p");
+    const markup = document.createElement("div");
+
+    iconAlertEl.src = `${alertIcon.error}.png`;
+    paraErrorMessage.innerText = message;
+    markup.classList.add("error");
+    divIconEl.append(iconAlertEl);
+    markup.append(divIconEl, paraErrorMessage);
+    this._clear();
+    this._parentElement.append(markup);
+  }
   _renderInternalSpinner = (parentEl) => {
     const markup = `<div class='spinner'></div>`;
     parentEl.innerHTML = "";
     parentEl.insertAdjacentHTML("afterbegin", markup);
   };
+
   _generateMarkupArr() {
     const productImageNameDivEl = document.createElement("div");
     const figDetailsEl = document.createElement("figure");

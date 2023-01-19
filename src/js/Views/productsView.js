@@ -1,3 +1,4 @@
+import * as alertIcon from "../../img/icons/*.png";
 class ProductsView {
   _parentElement = document.querySelector(".products-container");
   _data;
@@ -17,12 +18,25 @@ class ProductsView {
     this._parentElement.innerHTML = "";
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
+  renderError(message) {
+    const divIconEl = document.createElement("div");
+    const iconAlertEl = document.createElement("img");
+    const paraErrorMessage = document.createElement("p");
+    const markup = document.createElement("div");
+
+    iconAlertEl.src = `${alertIcon.error}.png`;
+    paraErrorMessage.innerText = message;
+    markup.classList.add("error");
+    divIconEl.append(iconAlertEl);
+    markup.append(divIconEl, paraErrorMessage);
+    this._clear();
+    this._parentElement.append(markup);
+  }
   _renderInternalSpinner(parentEl) {
     const markup = `<div class='spinner'></div>`;
     parentEl.innerHTML = "";
     parentEl.insertAdjacentHTML("afterbegin", markup);
   }
-
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product) => {
       const productDivEl = document.createElement("div");

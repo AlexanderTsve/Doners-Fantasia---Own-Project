@@ -10,6 +10,8 @@ import { async } from "regenerator-runtime";
 import { v4 as uuidv4 } from "uuid";
 import { makeApiCall } from "./helpers.js";
 import urlView from "./Views/urlView.js";
+import searchView from "./Views/searchView.js";
+import dropdownFilterView from "./Views/dropdownFilterView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -581,103 +583,45 @@ import urlView from "./Views/urlView.js";
 // sendProducts();
 
 // ---------------
-let debounceTimer;
-const productsContainer = document.querySelector(".products-container");
-const searchField = document.querySelector(".search-input-field");
-const dropdownComponent = document.getElementById("category");
 
-const debounce = (callback, time) => {
-  window.clearTimeout(debounceTimer);
-  debounceTimer = window.setTimeout(callback, time);
-};
+// const renderSpinner = (parentEl) => {
+//   const markup = `<div class='spinner'></div>`;
+//   parentEl.innerHTML = "";
+//   parentEl.insertAdjacentHTML("afterbegin", markup);
+// };
 
-const renderSpinner = (parentEl) => {
-  const markup = `<div class='spinner'></div>`;
-  parentEl.innerHTML = "";
-  parentEl.insertAdjacentHTML("afterbegin", markup);
-};
-
-const renderMessage = (parentEl, searchQuote) => {
-  const markup = `<p>There are no products with "${searchQuote}" in their name!</p>`;
-  parentEl.innerHTML = "";
-  parentEl.insertAdjacentHTML("afterbegin", markup);
-};
+// const renderMessage = (parentEl, searchQuote) => {
+//   const markup = `<p>There are no products with "${searchQuote}" in their name!</p>`;
+//   parentEl.innerHTML = "";
+//   parentEl.insertAdjacentHTML("afterbegin", markup);
+// };
 
 const controlProductDetails = async (productId) => {
   try {
     productDetailsView.renderSpinner();
     await model.loadProductDetails(productId);
+    if (!model.state.productDetails) {
+      throw new Error("There is no existing product with such ID!");
+    }
     productDetailsView.render(model.state.productDetails);
   } catch (err) {
-    alert(err);
+    productDetailsView.renderError(err.message);
   }
-};
-
-const renderProducts = (arrOfProducts) => {
-  arrOfProducts.forEach((product) => {
-    const productDivEl = document.createElement("div");
-
-    const figEl = document.createElement("figure");
-    const imageEl = document.createElement("img");
-    const nameEl = document.createElement("h5");
-
-    const productBodyDivEl = document.createElement("div");
-    const weightParaEl = document.createElement("p");
-    const categoryParaEl = document.createElement("p");
-    const priceParaEl = document.createElement("p");
-    const productFooterDivEl = document.createElement("div");
-    const inputQtyEl = document.createElement("input");
-    const addBtnEl = document.createElement("button");
-    const detailsBtnEl = document.createElement("button");
-
-    productDivEl.classList.add("card", "text-center");
-    productDivEl.classList.add("product_card");
-    figEl.classList.add("product_card_header");
-    imageEl.classList.add("loading", "card-img-top", "product_card_img");
-    imageEl.src = product.imgSrc;
-    renderSpinner(figEl);
-
-    imageEl.addEventListener("load", function () {
-      figEl.innerHTML = "";
-      figEl.append(imageEl, nameEl);
-      imageEl.classList.remove("loading");
-    });
-    nameEl.innerText = `${product.name}`;
-    nameEl.classList.add("card-title");
-    weightParaEl.innerText = product.weight
-      ? `Weight(gr): ${product.weight}`
-      : "";
-    categoryParaEl.innerText = `Category: ${product.category}`;
-    priceParaEl.innerText = `Price: ${Number(product.price).toFixed(2)} BGN`;
-    productBodyDivEl.classList.add("card-body", "product_card_body");
-    inputQtyEl.setAttribute("type", "number");
-    inputQtyEl.setAttribute("placeholder", "count...");
-    inputQtyEl.classList.add("product_card_qty_input");
-    addBtnEl.setAttribute("type", "submit");
-    addBtnEl.innerText = "Add to Cart";
-    addBtnEl.classList.add("doner_app_button");
-    detailsBtnEl.innerText = "Details";
-    detailsBtnEl.classList.add("doner_app_button");
-    productFooterDivEl.classList.add("card-footer", "product_card_footer");
-
-    detailsBtnEl.addEventListener("click", async function () {
-      window.location.pathname = `/details-page/${product.id}`;
-    });
-
-    productBodyDivEl.append(weightParaEl, categoryParaEl, priceParaEl);
-    productFooterDivEl.append(inputQtyEl, addBtnEl, detailsBtnEl);
-    productDivEl.append(figEl, productBodyDivEl, productFooterDivEl);
-    productsContainer.append(productDivEl);
-  });
 };
 
 const controlProducts = async () => {
   try {
     productsView.renderSpinner();
     await model.loadProducts();
+    if (
+      !model.state.products.every(Boolean) ||
+      model.state.products.length === 0
+    ) {
+      throw new Error("One or more of the products do not exist!");
+    }
     productsView.render(model.state.products);
   } catch (err) {
-    alert(err);
+    productsView.renderError(err.message);
   }
 };
 
@@ -705,89 +649,30 @@ const controlUrlChange = () => {
   }
 };
 
+const controlSearchResults = async () => {
+  try {
+    const query = searchView.getQuery();
+    const dropdownValue = dropdownFilterView.getDropdownValue();
+    productsView.renderSpinner();
+    await model.loadSearchResults(query, dropdownValue);
+    if (
+      !model.state.products.every(Boolean) ||
+      model.state.products.length === 0
+    ) {
+      throw new Error(
+        `There is no existing product with ${query} in its name!`
+      );
+    }
+    productsView.render(model.state.products);
+  } catch (err) {
+    productsView.renderError(err.message);
+  }
+};
+
 const init = () => {
-  urlView.urlChangeHandler(controlUrlChange);
+  urlView.addUrlChangeHandler(controlUrlChange);
+  searchView.addHandlerSearch(controlSearchResults);
+  dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
 };
 
 init();
-
-const eventListening = async () => {
-  const searchFieldValue = String(searchField.value);
-  const dropdownValue = dropdownComponent.value;
-  if (searchFieldValue || dropdownValue !== "none") {
-    productsContainer.innerHTML = "";
-    try {
-      renderSpinner(productsContainer);
-      const data = await makeApiCall();
-      if (dropdownValue === "none" && searchFieldValue) {
-        const arrOfProducts = Object.values(data)[0]
-          .filter((product) =>
-            product.name.toLowerCase().includes(searchFieldValue.toLowerCase())
-          )
-          .map((product) => {
-            return {
-              category: product.category,
-              name: product.name,
-              price: product.price,
-              weight: product.weight,
-              imgSrc: `${images[product.imgIdentifier]}`,
-              id: product.productId,
-            };
-          });
-        productsContainer.innerHTML = "";
-        arrOfProducts.length > 0
-          ? renderProducts(arrOfProducts)
-          : renderMessage(productsContainer, searchFieldValue);
-      }
-      if (dropdownValue !== "none" && !searchFieldValue) {
-        const arrOfProducts = Object.values(data)[0]
-          .filter((product) => product.category.toLowerCase() === dropdownValue)
-          .map((product) => {
-            return {
-              category: product.category,
-              name: product.name,
-              price: product.price,
-              weight: product.weight,
-              imgSrc: `${images[product.imgIdentifier]}`,
-              id: product.productId,
-            };
-          });
-        productsContainer.innerHTML = "";
-        renderProducts(arrOfProducts);
-      }
-      if (dropdownValue !== "none" && searchFieldValue) {
-        const arrOfProducts = Object.values(data)[0]
-          .filter(
-            (product) =>
-              product.name
-                .toLowerCase()
-                .includes(searchFieldValue.toLowerCase()) &&
-              product.category.toLowerCase() === dropdownValue
-          )
-          .map((product) => {
-            return {
-              category: product.category,
-              name: product.name,
-              price: product.price,
-              weight: product.weight,
-              imgSrc: `${images[product.imgIdentifier]}`,
-              id: product.productId,
-            };
-          });
-        productsContainer.innerHTML = "";
-        arrOfProducts.length > 0
-          ? renderProducts(arrOfProducts)
-          : renderMessage(productsContainer, searchFieldValue);
-      }
-    } catch (err) {
-      alert(err);
-    }
-  } else {
-    await controlProducts();
-  }
-};
-searchField.addEventListener("input", () => {
-  debounce(eventListening, 500);
-});
-
-dropdownComponent.addEventListener("change", eventListening);

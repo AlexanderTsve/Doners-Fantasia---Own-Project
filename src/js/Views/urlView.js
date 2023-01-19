@@ -1,5 +1,5 @@
 class UrlView {
-  urlChangeHandler(handler) {
+  addUrlChangeHandler(handler) {
     window.addEventListener("load", handler);
   }
 }

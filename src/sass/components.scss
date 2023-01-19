@@ -46,7 +46,6 @@ footer {
     color: $orange-color;
   }
 }
-
 .header-footer-items {
   cursor: pointer;
   text-decoration: underline;
@@ -59,7 +58,6 @@ footer {
     color: $violet-color;
   }
 }
-
 .spinner {
   margin: 5rem auto;
   text-align: center;
@@ -70,26 +68,39 @@ footer {
   height: 6rem;
   animation: rotate 2s infinite linear;
 }
-
 .loading {
   display: none;
 }
-
 @keyframes rotate {
   0% {
     transform: rotate(0);
   }
-
   100% {
     transform: rotate(360deg);
   }
 }
-
 .icon {
   margin-right: 1rem;
   &_price,
   &_weight {
     background-color: $color-secondary;
     border-radius: 20%;
+  }
+}
+.error {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  display: flex;
+  img {
+    height: 3rem;
+    width: 3rem;
+  }
+  p {
+    margin-left: 1.5rem;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    font-weight: 600;
+    color: $color-secondary;
   }
 }
