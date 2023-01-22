@@ -2,13 +2,11 @@ import * as model from "./model.js";
 import productDetailsView from "./Views/productDetailsView.js";
 import productsView from "./Views/productsView.js";
 import * as bootstrap from "bootstrap";
-import * as images from "../img/products_imgs/*.png";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { URL_ARR } from "./config.js";
 import { async } from "regenerator-runtime";
 import { v4 as uuidv4 } from "uuid";
-import { makeApiCall } from "./helpers.js";
 import urlView from "./Views/urlView.js";
 import searchView from "./Views/searchView.js";
 import dropdownFilterView from "./Views/dropdownFilterView.js";
@@ -584,18 +582,10 @@ import dropdownFilterView from "./Views/dropdownFilterView.js";
 
 // ---------------
 
-// const renderSpinner = (parentEl) => {
-//   const markup = `<div class='spinner'></div>`;
-//   parentEl.innerHTML = "";
-//   parentEl.insertAdjacentHTML("afterbegin", markup);
-// };
-
-// const renderMessage = (parentEl, searchQuote) => {
-//   const markup = `<p>There are no products with "${searchQuote}" in their name!</p>`;
-//   parentEl.innerHTML = "";
-//   parentEl.insertAdjacentHTML("afterbegin", markup);
-// };
-
+const clearDropdownAndSearchField = () => {
+  dropdownFilterView.clearValue();
+  searchView.clearSearchValue();
+};
 const controlProductDetails = async (productId) => {
   try {
     productDetailsView.renderSpinner();
@@ -620,12 +610,14 @@ const controlProducts = async () => {
       throw new Error("One or more of the products do not exist!");
     }
     productsView.render(model.state.products);
+    // productsView.render(model.getProductsPage());
   } catch (err) {
     productsView.renderError(err.message);
   }
 };
 
 const controlUrlChange = () => {
+  clearDropdownAndSearchField();
   const pathname = window.location.pathname;
   if (
     URL_ARR.every((path) => path !== pathname) &&
@@ -649,6 +641,10 @@ const controlUrlChange = () => {
   }
 };
 
+const controlUrlChangeToMain = () => {
+  window.location.pathname = "/menu-page";
+};
+
 const controlSearchResults = async () => {
   try {
     const query = searchView.getQuery();
@@ -663,6 +659,7 @@ const controlSearchResults = async () => {
         `There is no existing product with ${query} in its name!`
       );
     }
+    // productsView.render(model.getProductsPage());
     productsView.render(model.state.products);
   } catch (err) {
     productsView.renderError(err.message);
@@ -670,7 +667,7 @@ const controlSearchResults = async () => {
 };
 
 const init = () => {
-  urlView.addUrlChangeHandler(controlUrlChange);
+  urlView.addUrlChangeHandler(controlUrlChange, controlUrlChangeToMain);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
 };

@@ -8,6 +8,9 @@ class DropdownFilterView {
   addHandlerDropdownFilter(handler) {
     this._parentElement.addEventListener("change", handler);
   }
+  clearValue() {
+    this._parentElement.selectedIndex = 0;
+  }
 }
 
 export default new DropdownFilterView();

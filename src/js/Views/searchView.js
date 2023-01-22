@@ -1,4 +1,3 @@
-import * as alertIcon from "../../img/icons/*.png";
 class SearchView {
   _parentElement = document.querySelector(".search_input");
   _errorMessage = "There is no such product!";
@@ -21,6 +20,9 @@ class SearchView {
       "input",
       this._debounce(handler, 500)
     );
+  }
+  clearSearchValue() {
+    this._parentElement.lastElementChild.value = "";
   }
 }
 
