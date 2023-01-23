@@ -11,3 +11,5 @@ export const URL_ARR = [
 ];
 export const GET_URL =
   "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json";
+
+export const RES_PER_PAGE = 10;

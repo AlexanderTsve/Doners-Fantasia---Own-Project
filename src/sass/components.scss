@@ -104,3 +104,28 @@ footer {
     color: $color-secondary;
   }
 }
+
+.btn--inline {
+  font-weight: 600;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 2rem;
+  background-color: $color-primary;
+  color: $dark-green-color;
+  span {
+    margin: 0 0.4rem;
+  }
+
+  &:hover {
+    color: $color-secondary;
+    background-color: $orange-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

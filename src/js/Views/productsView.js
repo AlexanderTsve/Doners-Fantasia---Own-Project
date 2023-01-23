@@ -82,7 +82,7 @@ class ProductsView {
       detailsBtnEl.classList.add("doner_app_button");
       productFooterDivEl.classList.add("card-footer", "product_card_footer");
 
-      detailsBtnEl.addEventListener("click", async function () {
+      detailsBtnEl.addEventListener("click", function () {
         window.location.pathname = `/details-page/${product.id}`;
       });
 

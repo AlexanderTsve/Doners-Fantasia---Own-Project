@@ -1,8 +1,11 @@
 import { async } from "regenerator-runtime";
 import { makeApiCall, returnProductObjects } from "./helpers.js";
+import { RES_PER_PAGE } from "./config.js";
 export const state = {
   productDetails: {},
   products: [],
+  productsPerPage: RES_PER_PAGE,
+  productsPageNumber: 1,
   search: {
     query: "",
     results: [],
@@ -77,4 +80,10 @@ export const loadSearchResults = async (query, dropdownValue) => {
   } catch (err) {
     throw err;
   }
+};
+export const getProductsPage = (page = state.productsPageNumber) => {
+  state.productsPageNumber = page;
+  const start = (page - 1) * state.productsPerPage;
+  const end = page * state.productsPerPage;
+  return state.products.slice(start, end);
 };

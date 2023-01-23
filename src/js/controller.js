@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import urlView from "./Views/urlView.js";
 import searchView from "./Views/searchView.js";
 import dropdownFilterView from "./Views/dropdownFilterView.js";
+import paginationView from "./Views/paginationView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -581,7 +582,6 @@ import dropdownFilterView from "./Views/dropdownFilterView.js";
 // sendProducts();
 
 // ---------------
-
 const clearDropdownAndSearchField = () => {
   dropdownFilterView.clearValue();
   searchView.clearSearchValue();
@@ -609,8 +609,8 @@ const controlProducts = async () => {
     ) {
       throw new Error("One or more of the products do not exist!");
     }
-    productsView.render(model.state.products);
-    // productsView.render(model.getProductsPage());
+    productsView.render(model.getProductsPage());
+    paginationView.render(model.state);
   } catch (err) {
     productsView.renderError(err.message);
   }
@@ -659,17 +659,23 @@ const controlSearchResults = async () => {
         `There is no existing product with ${query} in its name!`
       );
     }
-    // productsView.render(model.getProductsPage());
-    productsView.render(model.state.products);
+    productsView.render(model.getProductsPage());
+    paginationView.render(model.state);
   } catch (err) {
     productsView.renderError(err.message);
   }
+};
+
+const controlPagination = function (goToPage) {
+  productsView.render(model.getProductsPage(goToPage));
+  paginationView.render(model.state);
 };
 
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange, controlUrlChangeToMain);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
+  paginationView.addHandlerClickBtn(controlPagination);
 };
 
 init();

@@ -33,3 +33,11 @@
     }
   }
 }
+.pagination_menu_page {
+  display: flex;
+  justify-content: center;
+}
+.para_current-page {
+  margin: 2.75rem;
+  color: $color-secondary;
+}
