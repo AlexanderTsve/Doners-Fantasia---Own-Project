@@ -125,6 +125,11 @@ footer {
     background-color: $orange-color;
   }
 
+  &:active {
+    color: $orange-color;
+    background-color: $color-secondary;
+  }
+
   &:focus {
     outline: none;
   }
