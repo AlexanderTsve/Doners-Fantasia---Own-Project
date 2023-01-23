@@ -1,7 +1,7 @@
-class PaginationView {
-  _parentElement = document.querySelector(".pagination_menu_page");
-  _data;
+import View from "./View.js";
 
+class PaginationView extends View {
+  _parentElement = document.querySelector(".pagination_menu_page");
   render(data) {
     this._data = data;
     const markup = this._generateMarkup();
@@ -19,9 +19,7 @@ class PaginationView {
       handler(goToPage);
     });
   }
-  _clear() {
-    this._parentElement.innerHTML = "";
-  }
+
   _generateBtnMarkup(direction, currentPage) {
     return `<button data-goto="${
       direction === "prev" ? currentPage - 1 : currentPage + 1

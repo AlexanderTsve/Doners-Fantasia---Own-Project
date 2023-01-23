@@ -1,43 +1,17 @@
 import * as images from "../../img/products_imgs/*.png";
 import * as icons from "../../img/weight_price_icons/*.png";
-import * as alertIcon from "../../img/icons/*.png";
-class ProductDetailsView {
+import View from "./View.js";
+class ProductDetailsView extends View {
   _parentElement = document.querySelector(".product-details");
-  _data;
   render(data) {
+    if (!data) {
+      return this.renderError();
+    }
     this._data = data;
     const markupArr = this._generateMarkupArr();
     this._clear();
-    this._parentElement.append(markupArr[0], markupArr[1]);
+    markupArr.forEach((markup) => this._parentElement.append(markup));
   }
-  _clear() {
-    this._parentElement.innerHTML = "";
-  }
-
-  renderSpinner = () => {
-    const markup = `<div class='spinner'></div>`;
-    this._clear();
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  };
-  renderError(message) {
-    const divIconEl = document.createElement("div");
-    const iconAlertEl = document.createElement("img");
-    const paraErrorMessage = document.createElement("p");
-    const markup = document.createElement("div");
-
-    iconAlertEl.src = `${alertIcon.error}.png`;
-    paraErrorMessage.innerText = message;
-    markup.classList.add("error");
-    divIconEl.append(iconAlertEl);
-    markup.append(divIconEl, paraErrorMessage);
-    this._clear();
-    this._parentElement.append(markup);
-  }
-  _renderInternalSpinner = (parentEl) => {
-    const markup = `<div class='spinner'></div>`;
-    parentEl.innerHTML = "";
-    parentEl.insertAdjacentHTML("afterbegin", markup);
-  };
 
   _generateMarkupArr() {
     const productImageNameDivEl = document.createElement("div");
