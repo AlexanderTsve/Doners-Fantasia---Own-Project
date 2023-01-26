@@ -1,10 +1,9 @@
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
-import { GET_URL } from "./config.js";
 import * as images from "../img/products_imgs/*.png";
 
-export const makeApiCall = async () => {
-  const response = await fetch(GET_URL);
+export const makeApiCall = async (url) => {
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(
       `There is something wrong with the request! Request status: ${response.status}`

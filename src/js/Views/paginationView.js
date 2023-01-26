@@ -23,7 +23,9 @@ class PaginationView extends View {
   _generateBtnMarkup(direction, currentPage) {
     return `<button data-goto="${
       direction === "prev" ? currentPage - 1 : currentPage + 1
-    }" class='btn--inline pagination__btn--${direction}'><span>Page ${
+    }" class='btn--inline pagination__btn--${direction}'><span>${
+      direction === "prev" ? "<<--" : "-->>"
+    }</span><span>Page ${
       direction === "prev" ? currentPage - 1 : currentPage + 1
     }</span></button>`;
   }

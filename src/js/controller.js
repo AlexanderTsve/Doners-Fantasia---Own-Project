@@ -11,6 +11,7 @@ import urlView from "./Views/urlView.js";
 import searchView from "./Views/searchView.js";
 import dropdownFilterView from "./Views/dropdownFilterView.js";
 import paginationView from "./Views/paginationView.js";
+import restaurantsView from "./Views/restaurantsView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -582,10 +583,89 @@ import paginationView from "./Views/paginationView.js";
 // sendProducts();
 
 // ---------------
+// const restaurants = [
+//   {
+//     name: "Sofia Center",
+//     address: "bul. Aleksandar Stamboliyski 41",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0888 88 88 88",
+//   },
+//   {
+//     name: "Sofia Lyulin",
+//     address: "ul. Pancho Vladigerov 21",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 88 88 88",
+//   },
+//   {
+//     name: "Sofia Mladost",
+//     address: "bul. Aleksandar Malinov 78",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 86 86 86",
+//   },
+//   {
+//     name: "Sofia Pavlovo",
+//     address: "ul. Alexander Pushkin 38",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 83 83 83",
+//   },
+//   {
+//     name: "Plovdiv Trakia",
+//     address: "ul. Georgi Danchov 16",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 84 84 84",
+//   },
+//   {
+//     name: "Plovdiv Center",
+//     address: "ul. Ivan Andonov 5",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 85 85 85",
+//   },
+//   {
+//     name: "Burgas Central Park",
+//     address: "ul. Dame Gruev 8",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 82 82 82",
+//   },
+//   {
+//     name: "Varna Center",
+//     address: "ul. General Kolev 3",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 81 81 81",
+//   },
+//   {
+//     name: "Varna Planet Mall",
+//     address: "bul. Slivnitsa 185",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 81 81 81",
+//   },
+//   {
+//     name: "Varna Levski",
+//     address: "ul. Dimitar Ikonomov 36",
+//     workingHours: "10.00 - 21.30",
+//     phone: "0887 80 80 80",
+//   },
+// ];
+// const sendRestaurants = async () => {
+//   const sendData = await fetch(
+//     "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-restaurants.json",
+//     {
+//       method: "POST",
+//       body: JSON.stringify(restaurants),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     }
+//   );
+//   await sendData();
+// };
+// sendRestaurants();
+
+// ---------------
 const clearDropdownAndSearchField = () => {
   dropdownFilterView.clearValue();
   searchView.clearSearchValue();
 };
+
 const controlProductDetails = async (productId) => {
   try {
     productDetailsView.renderSpinner();
@@ -616,6 +696,22 @@ const controlProducts = async () => {
   }
 };
 
+const controlRestaurants = async () => {
+  try {
+    restaurantsView.renderSpinner();
+    await model.loadRestaurants();
+    if (
+      !model.state.restaurants.every(Boolean) ||
+      model.state.restaurants.length === 0
+    ) {
+      throw new Error("One or more of the restaurants do not exist!");
+    }
+    restaurantsView.render(model.state.restaurants);
+  } catch (err) {
+    restaurantsView.renderError(err.message);
+  }
+};
+
 const controlUrlChange = () => {
   clearDropdownAndSearchField();
   const pathname = window.location.pathname;
@@ -633,6 +729,9 @@ const controlUrlChange = () => {
     if (pathname === "/menu-page") {
       controlProducts();
     }
+    if (pathname === "/restaurants-page") {
+      controlRestaurants();
+    }
   }
   if (pathname.includes("details-page")) {
     const detailsPage = document.getElementById("details-page");
@@ -643,6 +742,10 @@ const controlUrlChange = () => {
 
 const controlUrlChangeToMain = () => {
   window.location.pathname = "/menu-page";
+};
+
+const controlUrlChangeToRestaurants = () => {
+  window.location.pathname = "/restaurants-page";
 };
 
 const controlSearchResults = async () => {
@@ -672,7 +775,9 @@ const controlPagination = function (goToPage) {
 };
 
 const init = () => {
-  urlView.addUrlChangeHandler(controlUrlChange, controlUrlChangeToMain);
+  urlView.addUrlChangeHandler(controlUrlChange);
+  urlView.addUrlChangeHandlerToMain(controlUrlChangeToMain);
+  urlView.addUrlChangeHandlerToRestaurants(controlUrlChangeToRestaurants);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);

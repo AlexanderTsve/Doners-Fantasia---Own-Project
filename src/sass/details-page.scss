@@ -17,6 +17,7 @@
       display: flex;
       justify-content: space-between;
       width: 10rem;
+      margin: 1rem;
     }
     &-figure {
       $card-bg: $color-secondary;
@@ -29,7 +30,7 @@
       background-color: $color-primary;
     }
     &-content {
-      height: 14rem;
+      height: 17rem;
       padding-left: 0;
       color: $color-primary;
       display: flex;

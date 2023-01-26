@@ -6,6 +6,7 @@ body {
 footer {
   margin-top: auto;
 }
+
 .product_card {
   width: 20rem;
   margin: 1.87rem;
@@ -31,6 +32,18 @@ footer {
   &_qty_input {
     width: 5rem;
     border-radius: 5px;
+  }
+}
+.restaurant_card {
+  width: 20rem;
+  margin: 1.87rem;
+  background-color: $color-primary;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    .restaurant_card_name {
+      animation: move 2s infinite linear;
+    }
   }
 }
 .doner_app_button {
@@ -77,6 +90,17 @@ footer {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@keyframes move {
+  0% {
+    transform: translateX(-40px);
+  }
+  50% {
+    transform: translateX(40px);
+  }
+  100% {
+    transform: translateX(-40px);
   }
 }
 .icon {
