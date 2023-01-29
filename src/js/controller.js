@@ -789,8 +789,12 @@ const controlFeedbackFormValidation = async () => {
     model.state.feedbackFormData.phoneContentIsOk
   ) {
     feedbackPageView.clearInputs();
-    await model.sendFeedback();
+    const response = await model.sendFeedback();
+    feedbackPageView.showModal(response);
   }
+};
+const controlModalHiding = () => {
+  feedbackPageView.hideModal();
 };
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
@@ -801,5 +805,6 @@ const init = () => {
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
   feedbackPageView.addSubmitFormHandler(controlFeedbackFormValidation);
+  feedbackPageView.addHideModalHandler(controlModalHiding);
 };
 init();

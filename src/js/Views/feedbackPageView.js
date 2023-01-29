@@ -1,5 +1,4 @@
 import View from "./View.js";
-
 class FeedbackPageView extends View {
   _errorElements = [
     ...document.querySelectorAll(".feedback-form-error-message"),
@@ -24,6 +23,17 @@ class FeedbackPageView extends View {
     const inputFields = [...document.querySelectorAll(".form-field_input")];
     inputFields.forEach((field) => (field.value = ""));
   }
+  addHideModalHandler(handlerModalHiding) {
+    document.addEventListener("click", function (e) {
+      if (
+        e.target.matches(".modal-content_close") ||
+        e.target.matches(".cancel_btn") ||
+        e.target.closest(".modal")
+      ) {
+        handlerModalHiding();
+      }
+    });
+  }
   addSubmitFormHandler(handlerFormValidation) {
     document
       .querySelector(".feedback_form_submit")
@@ -31,6 +41,13 @@ class FeedbackPageView extends View {
         e.preventDefault();
         handlerFormValidation();
       });
+  }
+  hideModal() {
+    document.querySelector(".modal").style.display = "none";
+  }
+  showModal(text) {
+    document.querySelector(".modal-content_container_para").innerText = text;
+    document.querySelector(".modal").style.display = "block";
   }
   getFeedbackFormInputsContent(validationFn) {
     const nameContent = document.getElementById("feedback_name_input").value;
@@ -46,5 +63,4 @@ class FeedbackPageView extends View {
     validationFn(feedback);
   }
 }
-
 export default new FeedbackPageView();

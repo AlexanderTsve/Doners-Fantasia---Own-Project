@@ -11,14 +11,24 @@ export const makeApiCall = async (url) => {
   const data = await response.json();
   return data;
 };
-export const sendDataRequest = async (url) => {
-  const response = await fetch(url);
+export const sendDataRequest = async (url, data) => {
+  const initObj = {
+    method: "POST",
+    body: JSON.stringify({
+      clientName: data.nameContent,
+      clientEmail: data.emailContent,
+      clientPhone: data.phoneContent,
+      clientFeedback: data.feedbackContent,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch(url, initObj);
   if (!response.ok) {
-    throw new Error(
-      `There is something wrong with the request! No data has been sent!`
-    );
+    return "There is something wrong with the request! No data has been sent!";
   }
-  return "The feedback has been sent successfully! Thank you!";
+  return "Your feedback has been sent successfully! Thank you!";
 };
 export const returnProductObjects = (arrOfProducts) => {
   return arrOfProducts.map((product) => {

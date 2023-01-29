@@ -116,25 +116,8 @@ export const loadRestaurants = async () => {
     throw err;
   }
 };
-
 export const sendFeedback = async () => {
-  try {
-    const initObj = {
-      method: "POST",
-      body: JSON.stringify({
-        clientName: state.feedbackFormData.nameContent,
-        clientEmail: state.feedbackFormData.emailContent,
-        clientPhone: state.feedbackFormData.phoneContent,
-        clientFeedback: state.feedbackFormData.feedbackContent,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    await fetch(POST_FEEDBACKS_URL, initObj);
-  } catch (err) {
-    throw err;
-  }
+  return await sendDataRequest(POST_FEEDBACKS_URL, state.feedbackFormData);
 };
 export const validateFeedbackName = (dataObj) => {
   try {
