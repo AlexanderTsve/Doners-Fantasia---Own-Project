@@ -72,11 +72,75 @@
       <div id="order-history-page" class="hidden">Orders</div>
       <div id="cart-page" class="hidden">Cart</div>
       <div id="news-page" class="hidden">News</div>
-      <div id="feedback-page" class="hidden">Feedback</div>
+      <div id="feedback-page" class="hidden">
+        <form class="w-25 feedback-form">
+          <div class="mb-3 form-field">
+            <label for="feedback_name_input" class="form-label form-field_label"
+              >First and last name</label
+            >
+            <input
+              required
+              type="text"
+              class="form-control form-field_input form-field_input-name"
+              id="feedback_name_input"
+              placeholder="First and last name..."
+            />
+            <div class="feedback-form-error-message feedback-error-name"></div>
+          </div>
+          <div class="mb-3 form-field">
+            <label
+              for="feedback_email_input"
+              class="form-label form-field_label"
+              >Email</label
+            >
+            <input
+              required
+              type="email"
+              class="form-control form-field_input form-field_input-email"
+              id="feedback_email_input"
+              placeholder="Email..."
+            />
+            <div class="feedback-form-error-message feedback-error-email"></div>
+          </div>
+          <div class="mb-3 form-field">
+            <label
+              for="feedback_phone_input"
+              class="form-label form-field_label"
+              >Phone</label
+            >
+            <input
+              required
+              type="tel"
+              class="form-control form-field_input form-field_input-phone"
+              id="feedback_phone_input"
+              placeholder="Phone..."
+            />
+            <div class="feedback-form-error-message feedback-error-phone"></div>
+          </div>
+          <div class="mb-3 form-field">
+            <label for="feedback-area" class="form-label form-field_label"
+              >Your feedback</label
+            >
+            <textarea
+              required
+              class="form-control form-field_input form-field_input-text"
+              id="feedback-area"
+              rows="3"
+              placeholder="Your feedback..."
+            ></textarea>
+            <div class="feedback-form-error-message feedback-error-text"></div>
+          </div>
+          <div class="form-field">
+            <button type="submit" class="doner_app_button feedback_form_submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
       <div id="error-page" class="hidden">Error</div>
     </main>
     <footer class="footer">
-      <p class="footer_item header-footer-items">
+      <p class="footer_item header-footer-items footer_item_feedback">
         Feedback and Recommendations
       </p>
       <p class="footer_item header-footer-items footer_item_restaurants">

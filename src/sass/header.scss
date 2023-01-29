@@ -1,23 +1,19 @@
 .header {
   background-color: $color-primary;
-
   &__logo {
     margin: 1rem;
     height: 6.6rem;
   }
 }
-
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   &__list {
     list-style: none;
     display: flex;
     align-items: center;
   }
-
   &__item {
     position: relative;
     margin-right: 1rem;

@@ -1,5 +1,4 @@
 import View from "./View.js";
-
 class PaginationView extends View {
   _parentElement = document.querySelector(".pagination_menu_page");
   render(data) {
@@ -8,7 +7,6 @@ class PaginationView extends View {
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
-
   addHandlerClickBtn(handler) {
     this._parentElement.addEventListener("click", function (e) {
       const btn = e.target.closest(".btn--inline");
@@ -19,7 +17,6 @@ class PaginationView extends View {
       handler(goToPage);
     });
   }
-
   _generateBtnMarkup(direction, currentPage) {
     return `<button data-goto="${
       direction === "prev" ? currentPage - 1 : currentPage + 1
@@ -29,7 +26,6 @@ class PaginationView extends View {
       direction === "prev" ? currentPage - 1 : currentPage + 1
     }</span></button>`;
   }
-
   _generateParaMarkup(currentPage, numPages) {
     return `<p class='para_current-page'>Page ${currentPage} of ${numPages}</p>`;
   }
@@ -38,7 +34,6 @@ class PaginationView extends View {
     const numPages = Math.ceil(
       this._data.products.length / this._data.productsPerPage
     );
-
     if (numPages > 1 && currentPage === 1) {
       return `${this._generateParaMarkup(
         currentPage,
@@ -65,5 +60,4 @@ class PaginationView extends View {
     }
   }
 }
-
 export default new PaginationView();

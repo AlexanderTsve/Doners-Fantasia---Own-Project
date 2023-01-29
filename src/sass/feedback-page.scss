@@ -1,0 +1,29 @@
+#feedback-page {
+  display: flex;
+  justify-content: center;
+  background-color: $violet-color;
+  min-height: 81vh;
+  .feedback-form {
+    margin: 5rem;
+    border: solid $dark-green-color 3px;
+    border-radius: 5%;
+    background-color: $color-secondary;
+    &-error-message {
+      display: flex;
+      justify-content: center;
+    }
+    &-error {
+      padding-top: 1rem;
+      color: $dark-yellow-color;
+    }
+  }
+  .form-field {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem;
+    &_label {
+      color: $dark-yellow-color;
+    }
+  }
+}

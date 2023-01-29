@@ -2,7 +2,6 @@ import View from "./View.js";
 import * as icons from "../../img/icons/*.png";
 class RestaurantsView extends View {
   _parentElement = document.querySelector(".restaurants-container");
-
   render(data) {
     if (!data) {
       return this.renderError();
@@ -22,12 +21,10 @@ class RestaurantsView extends View {
       const workingHoursParaEl = document.createElement("p");
       const openCloseImgEl = document.createElement("img");
       const phoneParaEl = document.createElement("p");
-
       restaurantDivEl.classList.add("card", "text-center", "restaurant_card");
       nameRestaurantEl.innerText = restaurant.name;
       nameRestaurantEl.classList.add("card-title", "restaurant_card_name");
       addressParaEl.innerText = `Address: ${restaurant.address}`;
-
       const currentDate = new Date();
       const hour = currentDate.getHours();
       const minutes = currentDate.getMinutes();
@@ -53,7 +50,6 @@ class RestaurantsView extends View {
       workingHoursParaEl.innerText = `Working Hours: ${restaurant.workingHours}`;
       phoneParaEl.innerText = `Phone: ${restaurant.phone}`;
       restaurantBodyDivEl.classList.add("card-body");
-
       workingHoursDivEl.append(workingHoursParaEl, openCloseImgEl);
       restaurantBodyDivEl.append(addressParaEl, phoneParaEl, workingHoursDivEl);
       restaurantDivEl.append(nameRestaurantEl, restaurantBodyDivEl);
@@ -61,5 +57,4 @@ class RestaurantsView extends View {
     });
   }
 }
-
 export default new RestaurantsView();

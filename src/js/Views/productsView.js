@@ -1,7 +1,6 @@
 import View from "./View.js";
 class ProductsView extends View {
   _parentElement = document.querySelector(".products-container");
-
   render(data) {
     if (!data) {
       return this.renderError();
@@ -25,14 +24,12 @@ class ProductsView extends View {
       const inputQtyEl = document.createElement("input");
       const addBtnEl = document.createElement("button");
       const detailsBtnEl = document.createElement("button");
-
       productDivEl.classList.add("card", "text-center");
       productDivEl.classList.add("product_card");
       figEl.classList.add("product_card_header");
       imageEl.classList.add("loading", "card-img-top", "product_card_img");
       imageEl.src = product.imgSrc;
       this._renderInternalSpinner(figEl);
-
       imageEl.addEventListener("load", function () {
         figEl.innerHTML = "";
         figEl.append(imageEl, nameEl);
@@ -55,11 +52,9 @@ class ProductsView extends View {
       detailsBtnEl.innerText = "Details";
       detailsBtnEl.classList.add("doner_app_button");
       productFooterDivEl.classList.add("card-footer", "product_card_footer");
-
       detailsBtnEl.addEventListener("click", function () {
         window.location.pathname = `/details-page/${product.id}`;
       });
-
       productBodyDivEl.append(weightParaEl, categoryParaEl, priceParaEl);
       productFooterDivEl.append(inputQtyEl, addBtnEl, detailsBtnEl);
       productDivEl.append(figEl, productBodyDivEl, productFooterDivEl);

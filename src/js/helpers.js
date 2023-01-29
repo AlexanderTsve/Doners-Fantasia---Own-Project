@@ -1,7 +1,6 @@
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
 import * as images from "../img/products_imgs/*.png";
-
 export const makeApiCall = async (url) => {
   const response = await fetch(url);
   if (!response.ok) {
@@ -12,7 +11,15 @@ export const makeApiCall = async (url) => {
   const data = await response.json();
   return data;
 };
-
+export const sendDataRequest = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(
+      `There is something wrong with the request! No data has been sent!`
+    );
+  }
+  return "The feedback has been sent successfully! Thank you!";
+};
 export const returnProductObjects = (arrOfProducts) => {
   return arrOfProducts.map((product) => {
     return {

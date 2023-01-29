@@ -12,7 +12,6 @@ class ProductDetailsView extends View {
     this._clear();
     markupArr.forEach((markup) => this._parentElement.append(markup));
   }
-
   _generateMarkupArr() {
     const productImageNameDivEl = document.createElement("div");
     const figDetailsEl = document.createElement("figure");
@@ -26,7 +25,6 @@ class ProductDetailsView extends View {
     const priceIcon = document.createElement("img");
     const priceSpan = document.createElement("span");
     const addBtnDetailsEl = document.createElement("button");
-
     nameDetailsEl.innerText =
       this._data.category !== "Drink"
         ? this._data.name
@@ -52,7 +50,6 @@ class ProductDetailsView extends View {
       });
       productAllDetailsDivEl.append(productContentDivEl);
     }
-
     imageDetailsEl.classList.add(
       "product-details-image",
       "loading",
@@ -61,13 +58,11 @@ class ProductDetailsView extends View {
     figDetailsEl.classList.add("product-details-figure");
     imageDetailsEl.src = `${images[this._data.imgIdentifier]}.png`;
     this._renderInternalSpinner(figDetailsEl);
-
     imageDetailsEl.addEventListener("load", function () {
       figDetailsEl.innerHTML = "";
       figDetailsEl.append(imageDetailsEl, nameDetailsEl);
       imageDetailsEl.classList.remove("loading");
     });
-
     weightVolumeDetailsDivEl.classList.add("product-details-weight");
     priceDetailsDivEl.classList.add("product-details-price");
     weightVolumeIcon.src =
@@ -88,7 +83,6 @@ class ProductDetailsView extends View {
     productAllDetailsDivEl.classList.add("product-details-body");
     addBtnDetailsEl.innerText = "Add to Cart";
     addBtnDetailsEl.classList.add("doner_app_button");
-
     productImageNameDivEl.append(figDetailsEl);
     weightVolumeDetailsDivEl.append(weightVolumeIcon, weightVolumeSpan);
     priceDetailsDivEl.append(priceIcon, priceSpan);

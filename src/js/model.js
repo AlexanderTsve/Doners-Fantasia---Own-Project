@@ -1,7 +1,15 @@
 import { async } from "regenerator-runtime";
-import { makeApiCall, returnProductObjects } from "./helpers.js";
+import {
+  makeApiCall,
+  returnProductObjects,
+  sendDataRequest,
+} from "./helpers.js";
 import { RES_PER_PAGE } from "./config.js";
-import { GET_PRODUCTS_URL, GET_RESTAURANTS_URL } from "./config.js";
+import {
+  GET_PRODUCTS_URL,
+  GET_RESTAURANTS_URL,
+  POST_FEEDBACKS_URL,
+} from "./config.js";
 export const state = {
   productDetails: {},
   products: [],
@@ -16,8 +24,17 @@ export const state = {
     results: [],
   },
   restaurants: [],
+  feedbackFormData: {
+    nameContent: "",
+    emailContent: "",
+    phoneContent: "",
+    feedbackContent: "",
+    nameContentIsOk: false,
+    emailContentIsOk: false,
+    phoneContentIsOk: false,
+    feedbackContentIsOk: false,
+  },
 };
-
 export const loadProductDetails = async (productId) => {
   try {
     const data = await makeApiCall(GET_PRODUCTS_URL);
@@ -28,7 +45,6 @@ export const loadProductDetails = async (productId) => {
     throw err;
   }
 };
-
 export const loadProducts = async () => {
   try {
     const data = await makeApiCall(GET_PRODUCTS_URL);
@@ -37,7 +53,6 @@ export const loadProducts = async () => {
     throw err;
   }
 };
-
 export const loadSearchResults = async (query, dropdownValue) => {
   try {
     const data = await makeApiCall(GET_PRODUCTS_URL);
@@ -93,11 +108,82 @@ export const getProductsPage = (page = state.productsPageNumber) => {
   state.productsPageNumber = page;
   return state.products.slice(start, end);
 };
-
 export const loadRestaurants = async () => {
   try {
     const data = await makeApiCall(GET_RESTAURANTS_URL);
     state.restaurants = Object.values(data)[0];
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const sendFeedback = async () => {
+  try {
+    const initObj = {
+      method: "POST",
+      body: JSON.stringify({
+        clientName: state.feedbackFormData.nameContent,
+        clientEmail: state.feedbackFormData.emailContent,
+        clientPhone: state.feedbackFormData.phoneContent,
+        clientFeedback: state.feedbackFormData.feedbackContent,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await fetch(POST_FEEDBACKS_URL, initObj);
+  } catch (err) {
+    throw err;
+  }
+};
+export const validateFeedbackName = (dataObj) => {
+  try {
+    const { nameContent } = dataObj;
+    state.feedbackFormData.nameContent = nameContent;
+    const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (!regName.test(nameContent) || !nameContent) {
+      throw new Error("Please, fill in valid names!");
+    }
+    state.feedbackFormData.nameContentIsOk = true;
+  } catch (err) {
+    throw err;
+  }
+};
+export const validateFeedbackEmail = (dataObj) => {
+  try {
+    const { emailContent } = dataObj;
+    state.feedbackFormData.emailContent = emailContent;
+    const regEmail =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!regEmail.test(emailContent) || !emailContent) {
+      throw new Error("Please, fill in valid email address!");
+    }
+    state.feedbackFormData.emailContentIsOk = true;
+  } catch (err) {
+    throw err;
+  }
+};
+export const validateFeedbackPhone = (dataObj) => {
+  try {
+    const { phoneContent } = dataObj;
+    state.feedbackFormData.phoneContent = phoneContent;
+    const regPhone = /^\d{10}$/;
+    if (!regPhone.test(phoneContent) || !phoneContent) {
+      throw new Error("Please, fill in valid phone!");
+    }
+    state.feedbackFormData.phoneContentIsOk = true;
+  } catch (err) {
+    throw err;
+  }
+};
+export const validateFeedbackFieldInput = (dataObj) => {
+  try {
+    const { feedbackContent } = dataObj;
+    state.feedbackFormData.feedbackContent = feedbackContent;
+    if (!feedbackContent) {
+      throw new Error("Please, fill in the feedback field!");
+    }
+    state.feedbackFormData.feedbackContentIsOk = true;
   } catch (err) {
     throw err;
   }

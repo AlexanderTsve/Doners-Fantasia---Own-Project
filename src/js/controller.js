@@ -12,6 +12,7 @@ import searchView from "./Views/searchView.js";
 import dropdownFilterView from "./Views/dropdownFilterView.js";
 import paginationView from "./Views/paginationView.js";
 import restaurantsView from "./Views/restaurantsView.js";
+import feedbackPageView from "./Views/feedbackPageView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -665,7 +666,6 @@ const clearDropdownAndSearchField = () => {
   dropdownFilterView.clearValue();
   searchView.clearSearchValue();
 };
-
 const controlProductDetails = async (productId) => {
   try {
     productDetailsView.renderSpinner();
@@ -678,7 +678,6 @@ const controlProductDetails = async (productId) => {
     productDetailsView.renderError(err.message);
   }
 };
-
 const controlProducts = async () => {
   try {
     productsView.renderSpinner();
@@ -695,7 +694,6 @@ const controlProducts = async () => {
     productsView.renderError(err.message);
   }
 };
-
 const controlRestaurants = async () => {
   try {
     restaurantsView.renderSpinner();
@@ -711,7 +709,6 @@ const controlRestaurants = async () => {
     restaurantsView.renderError(err.message);
   }
 };
-
 const controlUrlChange = () => {
   clearDropdownAndSearchField();
   const pathname = window.location.pathname;
@@ -739,15 +736,12 @@ const controlUrlChange = () => {
     controlProductDetails(pathname.replace("/details-page/", ""));
   }
 };
-
 const controlUrlChangeToMain = () => {
   window.location.pathname = "/menu-page";
 };
-
 const controlUrlChangeToRestaurants = () => {
   window.location.pathname = "/restaurants-page";
 };
-
 const controlSearchResults = async () => {
   try {
     const query = searchView.getQuery();
@@ -768,19 +762,44 @@ const controlSearchResults = async () => {
     productsView.renderError(err.message);
   }
 };
-
 const controlPagination = function (goToPage) {
   productsView.render(model.getProductsPage(goToPage));
   paginationView.render(model.state);
 };
-
+const controlChangeHandlerToFeedback = () => {
+  window.location.pathname = "/feedback-page";
+};
+const validationFeedbackController = (validationFn, classEnd) => {
+  try {
+    feedbackPageView.getFeedbackFormInputsContent(validationFn);
+    feedbackPageView.clearError(classEnd);
+  } catch (err) {
+    feedbackPageView.renderError(err.message, classEnd);
+  }
+};
+const controlFeedbackFormValidation = async () => {
+  validationFeedbackController(model.validateFeedbackName, "name");
+  validationFeedbackController(model.validateFeedbackEmail, "email");
+  validationFeedbackController(model.validateFeedbackPhone, "phone");
+  validationFeedbackController(model.validateFeedbackFieldInput, "text");
+  if (
+    model.state.feedbackFormData.emailContentIsOk &&
+    model.state.feedbackFormData.nameContentIsOk &&
+    model.state.feedbackFormData.feedbackContentIsOk &&
+    model.state.feedbackFormData.phoneContentIsOk
+  ) {
+    feedbackPageView.clearInputs();
+    await model.sendFeedback();
+  }
+};
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
   urlView.addUrlChangeHandlerToMain(controlUrlChangeToMain);
   urlView.addUrlChangeHandlerToRestaurants(controlUrlChangeToRestaurants);
+  urlView.addUrlChangeHandlerToFeedback(controlChangeHandlerToFeedback);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
+  feedbackPageView.addSubmitFormHandler(controlFeedbackFormValidation);
 };
-
 init();

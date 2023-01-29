@@ -12,5 +12,10 @@ class UrlView {
       .querySelector(".footer_item_restaurants")
       .addEventListener("click", handlerUrlChangeToRestaurants);
   }
+  addUrlChangeHandlerToFeedback(handlerUrlChangeToFeedback) {
+    document
+      .querySelector(".footer_item_feedback")
+      .addEventListener("click", handlerUrlChangeToFeedback);
+  }
 }
 export default new UrlView();
