@@ -1,0 +1,67 @@
+.modal_registration {
+  display: none;
+  padding-top: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $grey-color;
+  opacity: 0.95;
+  &-content {
+    background-color: $violet-color;
+    height: 60rem;
+    width: 30%;
+    margin: 5% auto 15% auto;
+    border: 3px solid $dark-green-color;
+    img {
+      width: 20%;
+      align-self: center;
+      border-radius: 3%;
+      margin: 1rem 0 1rem 0;
+    }
+    &_container {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      &_form-field {
+        padding: 0.75rem;
+        margin: 0 2rem 0 1rem;
+        &_label {
+          color: $dark-yellow-color;
+        }
+      }
+    }
+  }
+}
+.registration_btns {
+  margin: 1.5rem;
+  &:disabled {
+    background-color: $grey-color;
+    color: $white;
+    opacity: 1;
+  }
+}
+.login_para {
+  color: $orange-color;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color: $color-secondary;
+  }
+  &:active {
+    color: $dark-green-color;
+  }
+}
+.para_register {
+  &_email,
+  &_password,
+  &_phone,
+  &_password_confirm,
+  &_address {
+    margin: 0.25rem 0 0 0;
+    color: $color-secondary;
+  }
+}

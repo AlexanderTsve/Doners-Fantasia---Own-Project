@@ -18,7 +18,9 @@
         <ul class="nav__list">
           <li class="nav__item header-footer-items">Login</li>
           <li class="nav__item header-footer-items">Logout</li>
-          <li class="nav__item header-footer-items">Sign Up</li>
+          <li class="nav__item nav__item_register header-footer-items">
+            Sign Up
+          </li>
           <li class="nav__item">
             <img src="src/img/cart/cart.png" alt="Cart" />
           </li>
@@ -26,6 +28,152 @@
       </nav>
     </header>
     <main>
+      <div id="modal_reg"></div>
+      <div class="modal modal_registration">
+        <form class="modal-content modal_registration-content">
+          <img src="src/img/logo/logo1.jpg" alt="Logo" class="header__logo" />
+          <div
+            class="modal-content_container modal_registration-content_container"
+          >
+            <div
+              class="form-field modal_registration-content_container_form-field"
+            >
+              <label
+                for="registration_email_input"
+                class="form-label form-field_label modal_registration-content_container_form-field_label"
+                >Please, enter your email:</label
+              >
+              <input
+                required
+                type="email"
+                class="form-control form-field_input"
+                id="registration_email_input"
+                placeholder="Email..."
+              />
+              <div
+                class="registration-form-error-message registration-error-email"
+              >
+                <p class="para_register_email para_register not_visible">
+                  Fill in a valid email!
+                </p>
+              </div>
+            </div>
+            <div
+              class="form-field modal_registration-content_container_form-field"
+            >
+              <label
+                for="registration_phone_input"
+                class="form-label form-field_label modal_registration-content_container_form-field_label"
+                >Please, enter your phone:
+              </label>
+              <input
+                required
+                type="tel"
+                class="form-control form-field_input"
+                id="registration_phone_input"
+                placeholder="Phone..."
+              />
+              <div
+                class="registration-form-error-message registration-error-phone"
+              >
+                <p class="para_register_phone para_register not_visible">
+                  Fill in a valid phone!
+                </p>
+              </div>
+            </div>
+            <div
+              class="form-field modal_registration-content_container_form-field"
+            >
+              <label
+                for="registration_password_input"
+                class="form-label form-field_label modal_registration-content_container_form-field_label"
+                >Please, enter your password:</label
+              >
+              <input
+                required
+                type="password"
+                class="form-control form-field_input"
+                id="registration_password_input"
+                placeholder="Password..."
+              />
+              <div
+                class="registration-form-error-message registration-error-password"
+              >
+                <p class="para_register_password para_register not_visible">
+                  Password must be at least 7 characters long and contain 1
+                  capital letter and 1 symbol or number!
+                </p>
+              </div>
+            </div>
+            <div
+              class="form-field modal_registration-content_container_form-field"
+            >
+              <label
+                for="registration_password_confirm"
+                class="form-label form-field_label modal_registration-content_container_form-field_label"
+                >Please, confirm your password:
+              </label>
+              <input
+                required
+                type="password"
+                class="form-control form-field_input"
+                id="registration_password_confirm"
+                placeholder="Confirm password..."
+              />
+              <div
+                class="registration-form-error-message registration-error-confirm-password"
+              >
+                <p
+                  class="para_register_password_confirm para_register not_visible"
+                >
+                  Confirm your password!
+                </p>
+              </div>
+            </div>
+            <div
+              class="form-field modal_registration-content_container_form-field"
+            >
+              <label
+                for="registration_address_input"
+                class="form-label form-field_label modal_registration-content_container_form-field_label"
+                >Please, enter your address:</label
+              >
+              <textarea
+                required
+                class="form-control form-field_input"
+                id="registration_address_input"
+                rows="3"
+                placeholder="Your address..."
+              ></textarea>
+              <div
+                class="registration-form-error-message registration-error-text"
+              >
+                <p class="para_register_address para_register not_visible">
+                  Enter a valid address!
+                </p>
+              </div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="doner_app_button cancel_registration_btn registration_btns"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled
+                class="doner_app_button register_btn registration_btns"
+              >
+                Sign up
+              </button>
+            </div>
+            <div>
+              <p class="login_para">Have an account already? Login here ->></p>
+            </div>
+          </div>
+        </form>
+      </div>
       <div id="menu-page" class="hidden">
         <div class="search_dropdown_container">
           <div class="input-group input-group-sm mb-3 p-3 search_input">
@@ -73,20 +221,6 @@
       <div id="cart-page" class="hidden">Cart</div>
       <div id="news-page" class="hidden">News</div>
       <div id="feedback-page" class="hidden">
-        <div id="feedback-modal" class="modal">
-          <form class="modal-content">
-            <span class="modal-content_close">&times;</span>
-            <br />
-            <div class="modal-content_container">
-              <p class="modal-content_container_para"></p>
-              <div class="clearfix">
-                <button type="button" class="doner_app_button cancel_btn">
-                  Ok
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
         <form class="w-25 feedback-form">
           <div class="mb-3 form-field">
             <label for="feedback_name_input" class="form-label form-field_label"
@@ -95,7 +229,7 @@
             <input
               required
               type="text"
-              class="form-control form-field_input"
+              class="form-control feedback-form-field_input"
               id="feedback_name_input"
               placeholder="First and last name..."
             />
@@ -110,7 +244,7 @@
             <input
               required
               type="email"
-              class="form-control form-field_input"
+              class="form-control form-field_input feedback-form-field_input"
               id="feedback_email_input"
               placeholder="Email..."
             />
@@ -125,7 +259,7 @@
             <input
               required
               type="tel"
-              class="form-control form-field_input"
+              class="form-control form-field_input feedback-form-field_input"
               id="feedback_phone_input"
               placeholder="Phone..."
             />
@@ -137,7 +271,7 @@
             >
             <textarea
               required
-              class="form-control form-field_input"
+              class="form-control form-field_input feedback-form-field_input"
               id="feedback-area"
               rows="3"
               placeholder="Your feedback..."

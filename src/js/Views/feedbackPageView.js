@@ -20,19 +20,10 @@ class FeedbackPageView extends View {
     parentElement.innerHTML = "";
   }
   clearInputs() {
-    const inputFields = [...document.querySelectorAll(".form-field_input")];
+    const inputFields = [
+      ...document.querySelectorAll(".feedback-form-field_input"),
+    ];
     inputFields.forEach((field) => (field.value = ""));
-  }
-  addHideModalHandler(handlerModalHiding) {
-    document.addEventListener("click", function (e) {
-      if (
-        e.target.matches(".modal-content_close") ||
-        e.target.matches(".cancel_btn") ||
-        e.target.closest(".modal")
-      ) {
-        handlerModalHiding();
-      }
-    });
   }
   addSubmitFormHandler(handlerFormValidation) {
     document
@@ -41,13 +32,6 @@ class FeedbackPageView extends View {
         e.preventDefault();
         handlerFormValidation();
       });
-  }
-  hideModal() {
-    document.querySelector(".modal").style.display = "none";
-  }
-  showModal(text) {
-    document.querySelector(".modal-content_container_para").innerText = text;
-    document.querySelector(".modal").style.display = "block";
   }
   getFeedbackFormInputsContent(validationFn) {
     const nameContent = document.getElementById("feedback_name_input").value;

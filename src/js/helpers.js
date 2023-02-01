@@ -30,6 +30,53 @@ export const sendDataRequest = async (url, data) => {
   }
   return "Your feedback has been sent successfully! Thank you!";
 };
+export const sendRegistrationAuthData = async (url, data) => {
+  try {
+    const initObj = {
+      method: "POST",
+      body: JSON.stringify({
+        email: data.emailContent,
+        password: data.passwordContent,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, initObj);
+    if (!response.ok) {
+      throw new Error(
+        "Please, check if the email has been used already for registration in the site or try again later!"
+      );
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+export const sendRegistrationData = async (url, data) => {
+  try {
+    const initObj = {
+      method: "POST",
+      body: JSON.stringify({
+        email: data.emailContent,
+        phone: data.phoneContent,
+        address: data.addressContent,
+        orderHistory: [],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, initObj);
+    if (!response.ok) {
+      throw new Error(
+        "Something went wrong with the request! No data has been sent! Please, try again later!"
+      );
+    }
+  } catch (err) {
+    throw err;
+  }
+};
 export const returnProductObjects = (arrOfProducts) => {
   return arrOfProducts.map((product) => {
     return {

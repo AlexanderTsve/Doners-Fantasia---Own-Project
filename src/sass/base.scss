@@ -4,6 +4,11 @@ $dark-green-color: #263d2f;
 $orange-color: #d98837;
 $violet-color: #707cc0;
 $dark-yellow-color: #d8af02;
+$grey-color: #474e5d;
+$white: linen;
 .hidden {
   display: none !important;
+}
+.not_visible {
+  visibility: hidden;
 }

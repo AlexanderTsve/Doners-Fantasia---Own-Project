@@ -3,12 +3,16 @@ import {
   makeApiCall,
   returnProductObjects,
   sendDataRequest,
+  sendRegistrationAuthData,
+  sendRegistrationData,
 } from "./helpers.js";
-import { RES_PER_PAGE } from "./config.js";
 import {
+  RES_PER_PAGE,
   GET_PRODUCTS_URL,
   GET_RESTAURANTS_URL,
   POST_FEEDBACKS_URL,
+  POST_REGISTRATION_AUTH_URL,
+  POST_REGISTRATION_URL,
 } from "./config.js";
 export const state = {
   productDetails: {},
@@ -33,6 +37,18 @@ export const state = {
     emailContentIsOk: false,
     phoneContentIsOk: false,
     feedbackContentIsOk: false,
+  },
+  registrationFormData: {
+    emailContent: "",
+    phoneContent: "",
+    passwordContent: "",
+    confirmPasswordContent: "",
+    addressContent: "",
+    emailContentIsOk: false,
+    phoneContentIsOk: false,
+    passwordContentIsOk: false,
+    confirmPasswordContentIsOk: false,
+    addressContentIsOk: false,
   },
 };
 export const loadProductDetails = async (productId) => {
@@ -125,7 +141,7 @@ export const validateFeedbackName = (dataObj) => {
     state.feedbackFormData.nameContent = nameContent;
     const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if (!regName.test(nameContent) || !nameContent) {
-      throw new Error("Please, fill in valid names!");
+      throw new Error("Fill in valid names!");
     }
     state.feedbackFormData.nameContentIsOk = true;
   } catch (err) {
@@ -137,9 +153,9 @@ export const validateFeedbackEmail = (dataObj) => {
     const { emailContent } = dataObj;
     state.feedbackFormData.emailContent = emailContent;
     const regEmail =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     if (!regEmail.test(emailContent) || !emailContent) {
-      throw new Error("Please, fill in valid email address!");
+      throw new Error("Fill in a valid email address!");
     }
     state.feedbackFormData.emailContentIsOk = true;
   } catch (err) {
@@ -150,9 +166,11 @@ export const validateFeedbackPhone = (dataObj) => {
   try {
     const { phoneContent } = dataObj;
     state.feedbackFormData.phoneContent = phoneContent;
-    const regPhone = /^\d{10}$/;
+    const regPhone = /(\+)?(359|0)8[789]\d{1}(|-| )\d{3}(|-| )\d{3}/;
     if (!regPhone.test(phoneContent) || !phoneContent) {
-      throw new Error("Please, fill in valid phone!");
+      throw new Error(
+        "Fill in a valid gsm number - starting with +3598... or 08...!"
+      );
     }
     state.feedbackFormData.phoneContentIsOk = true;
   } catch (err) {
@@ -164,10 +182,72 @@ export const validateFeedbackFieldInput = (dataObj) => {
     const { feedbackContent } = dataObj;
     state.feedbackFormData.feedbackContent = feedbackContent;
     if (!feedbackContent) {
-      throw new Error("Please, fill in the feedback field!");
+      throw new Error("Fill in the feedback field!");
     }
     state.feedbackFormData.feedbackContentIsOk = true;
   } catch (err) {
     throw err;
+  }
+};
+export const validateRegistrationEmail = (dataObj) => {
+  const { emailContent } = dataObj;
+  state.registrationFormData.emailContent = emailContent;
+  const regEmail =
+    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+  state.registrationFormData.emailContentIsOk =
+    !regEmail.test(emailContent) || !emailContent ? false : true;
+};
+export const validateRegistrationPhone = (dataObj) => {
+  const { phoneContent } = dataObj;
+  state.registrationFormData.phoneContent = phoneContent;
+  const regPhone = /(\+)?(359|0)8[789]\d{1}(|-| )\d{3}(|-| )\d{3}/;
+  state.registrationFormData.phoneContentIsOk =
+    !regPhone.test(phoneContent) || !phoneContent ? false : true;
+};
+export const validateRegistrationPassword = (dataObj) => {
+  const { passwordContent } = dataObj;
+  state.registrationFormData.passwordContent = passwordContent;
+  const regPassword =
+    /^((?=.*[\d])(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s])|(?=.*[\d])(?=.*[A-Z])(?=.*[^\w\d\s])|(?=.*[\d])(?=.*[a-z])(?=.*[^\w\d\s])).{7,30}$/gm;
+  state.registrationFormData.passwordContentIsOk =
+    !regPassword.test(passwordContent) || !passwordContent ? false : true;
+};
+export const validateRegistrationConfirmPassword = (dataObj) => {
+  const { passwordConfirmContent } = dataObj;
+  state.registrationFormData.confirmPasswordContent = passwordConfirmContent;
+  state.registrationFormData.confirmPasswordContentIsOk =
+    state.registrationFormData.passwordContent !== passwordConfirmContent ||
+    !passwordConfirmContent
+      ? false
+      : true;
+};
+export const validateRegistrationAddress = (dataObj) => {
+  const { addressContent } = dataObj;
+  state.registrationFormData.addressContent = addressContent;
+  state.registrationFormData.addressContentIsOk =
+    addressContent.length < 20 ? false : true;
+};
+export const validateRegistrationForm = () => {
+  return (
+    state.registrationFormData.addressContentIsOk &&
+    state.registrationFormData.confirmPasswordContentIsOk &&
+    state.registrationFormData.emailContentIsOk &&
+    state.registrationFormData.passwordContentIsOk &&
+    state.registrationFormData.phoneContentIsOk
+  );
+};
+export const submitRegistrationForm = async () => {
+  try {
+    await sendRegistrationAuthData(
+      POST_REGISTRATION_AUTH_URL,
+      state.registrationFormData
+    );
+    await sendRegistrationData(
+      POST_REGISTRATION_URL,
+      state.registrationFormData
+    );
+    return "Your registration has been successful!";
+  } catch (err) {
+    return err.message;
   }
 };

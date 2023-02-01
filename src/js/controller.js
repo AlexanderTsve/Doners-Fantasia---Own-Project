@@ -13,6 +13,7 @@ import dropdownFilterView from "./Views/dropdownFilterView.js";
 import paginationView from "./Views/paginationView.js";
 import restaurantsView from "./Views/restaurantsView.js";
 import feedbackPageView from "./Views/feedbackPageView.js";
+import registrationView from "./Views/registrationView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -790,11 +791,67 @@ const controlFeedbackFormValidation = async () => {
   ) {
     feedbackPageView.clearInputs();
     const response = await model.sendFeedback();
-    feedbackPageView.showModal(response);
+    feedbackPageView.showModal(response, "feedback-page");
   }
 };
-const controlModalHiding = () => {
+const controlFeedbackModalHiding = () => {
   feedbackPageView.hideModal();
+};
+const controlRegisterModalShowing = () => {
+  registrationView.showRegistrationModal();
+};
+const controlRegisterModalHiding = () => {
+  registrationView.hideRegistrationModal();
+};
+const controlRegisterErrorParaEmail = () => {
+  registrationView.getRegistrationFormInputs(model.validateRegistrationEmail);
+  model.state.registrationFormData.emailContentIsOk ||
+  !model.state.registrationFormData.emailContent
+    ? registrationView.hidePara("email")
+    : registrationView.showPara("email");
+  registrationView.disabledHandler(model.validateRegistrationForm());
+};
+const controlRegisterErrorParaPhone = () => {
+  registrationView.getRegistrationFormInputs(model.validateRegistrationPhone);
+  model.state.registrationFormData.phoneContentIsOk ||
+  !model.state.registrationFormData.phoneContent
+    ? registrationView.hidePara("phone")
+    : registrationView.showPara("phone");
+  registrationView.disabledHandler(model.validateRegistrationForm());
+};
+const controlRegisterErrorParaPassword = () => {
+  registrationView.getRegistrationFormInputs(
+    model.validateRegistrationPassword
+  );
+  model.state.registrationFormData.passwordContentIsOk ||
+  !model.state.registrationFormData.passwordContent
+    ? registrationView.hidePara("password")
+    : registrationView.showPara("password");
+  registrationView.disabledHandler(model.validateRegistrationForm());
+};
+const controlRegisterErrorParaConfirmPassword = () => {
+  registrationView.getRegistrationFormInputs(
+    model.validateRegistrationConfirmPassword
+  );
+  model.state.registrationFormData.confirmPasswordContentIsOk ||
+  (!model.state.registrationFormData.passwordContent &&
+    !model.state.registrationFormData.confirmPasswordContent)
+    ? registrationView.hidePara("password_confirm")
+    : registrationView.showPara("password_confirm");
+  registrationView.disabledHandler(model.validateRegistrationForm());
+};
+const controlRegisterErrorParaAddress = () => {
+  registrationView.getRegistrationFormInputs(model.validateRegistrationAddress);
+  model.state.registrationFormData.addressContentIsOk ||
+  !model.state.registrationFormData.addressContent
+    ? registrationView.hidePara("address")
+    : registrationView.showPara("address");
+  registrationView.disabledHandler(model.validateRegistrationForm());
+};
+const controlRegistrationFormSubmission = async () => {
+  const response = await model.submitRegistrationForm();
+  registrationView.hideRegistrationModal();
+  registrationView.showModal(response, "modal_reg");
 };
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
@@ -805,6 +862,33 @@ const init = () => {
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
   feedbackPageView.addSubmitFormHandler(controlFeedbackFormValidation);
-  feedbackPageView.addHideModalHandler(controlModalHiding);
+  feedbackPageView.addHideModalHandler(controlFeedbackModalHiding);
+  registrationView.addShowModalHandler(controlRegisterModalShowing);
+  registrationView.addHideRegisterModalHandler(controlRegisterModalHiding);
+  registrationView.addInputFieldHandler(
+    controlRegisterErrorParaEmail,
+    "registration_email_input"
+  );
+  registrationView.addInputFieldHandler(
+    controlRegisterErrorParaPassword,
+    "registration_password_input"
+  );
+  registrationView.addInputFieldHandler(
+    controlRegisterErrorParaConfirmPassword,
+    "registration_password_confirm"
+  );
+  registrationView.addInputFieldHandler(
+    controlRegisterErrorParaConfirmPassword,
+    "registration_password_input"
+  );
+  registrationView.addInputFieldHandler(
+    controlRegisterErrorParaPhone,
+    "registration_phone_input"
+  );
+  registrationView.addInputFieldHandler(
+    controlRegisterErrorParaAddress,
+    "registration_address_input"
+  );
+  registrationView.addSignUpBtnHandler(controlRegistrationFormSubmission);
 };
 init();
