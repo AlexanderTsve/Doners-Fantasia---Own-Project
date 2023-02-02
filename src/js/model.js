@@ -3,8 +3,9 @@ import {
   makeApiCall,
   returnProductObjects,
   sendDataRequest,
-  sendRegistrationAuthData,
+  sendAuthData,
   sendRegistrationData,
+  getUsers,
 } from "./helpers.js";
 import {
   RES_PER_PAGE,
@@ -12,7 +13,14 @@ import {
   GET_RESTAURANTS_URL,
   POST_FEEDBACKS_URL,
   POST_REGISTRATION_AUTH_URL,
-  POST_REGISTRATION_URL,
+  USERS_URL,
+  POST_LOGIN_URL,
+  REGEX_EMAIL,
+  REGEX_PASSWORD,
+  REGEX_NAME,
+  REGEX_PHONE,
+  REGISTRATION_AUTH_ERROR,
+  LOGIN_AUTH_ERROR,
 } from "./config.js";
 export const state = {
   productDetails: {},
@@ -50,6 +58,13 @@ export const state = {
     confirmPasswordContentIsOk: false,
     addressContentIsOk: false,
   },
+  loginFormData: {
+    emailContent: "",
+    passwordContent: "",
+  },
+  loginFormDataIsOk: false,
+  loggedUser: {},
+  isLogged: false,
 };
 export const loadProductDetails = async (productId) => {
   try {
@@ -139,7 +154,7 @@ export const validateFeedbackName = (dataObj) => {
   try {
     const { nameContent } = dataObj;
     state.feedbackFormData.nameContent = nameContent;
-    const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    const regName = REGEX_NAME;
     if (!regName.test(nameContent) || !nameContent) {
       throw new Error("Fill in valid names!");
     }
@@ -152,8 +167,7 @@ export const validateFeedbackEmail = (dataObj) => {
   try {
     const { emailContent } = dataObj;
     state.feedbackFormData.emailContent = emailContent;
-    const regEmail =
-      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+    const regEmail = REGEX_EMAIL;
     if (!regEmail.test(emailContent) || !emailContent) {
       throw new Error("Fill in a valid email address!");
     }
@@ -166,7 +180,7 @@ export const validateFeedbackPhone = (dataObj) => {
   try {
     const { phoneContent } = dataObj;
     state.feedbackFormData.phoneContent = phoneContent;
-    const regPhone = /(\+)?(359|0)8[789]\d{1}(|-| )\d{3}(|-| )\d{3}/;
+    const regPhone = REGEX_PHONE;
     if (!regPhone.test(phoneContent) || !phoneContent) {
       throw new Error(
         "Fill in a valid gsm number - starting with +3598... or 08...!"
@@ -192,23 +206,21 @@ export const validateFeedbackFieldInput = (dataObj) => {
 export const validateRegistrationEmail = (dataObj) => {
   const { emailContent } = dataObj;
   state.registrationFormData.emailContent = emailContent;
-  const regEmail =
-    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+  const regEmail = REGEX_EMAIL;
   state.registrationFormData.emailContentIsOk =
     !regEmail.test(emailContent) || !emailContent ? false : true;
 };
 export const validateRegistrationPhone = (dataObj) => {
   const { phoneContent } = dataObj;
   state.registrationFormData.phoneContent = phoneContent;
-  const regPhone = /(\+)?(359|0)8[789]\d{1}(|-| )\d{3}(|-| )\d{3}/;
+  const regPhone = REGEX_PHONE;
   state.registrationFormData.phoneContentIsOk =
     !regPhone.test(phoneContent) || !phoneContent ? false : true;
 };
 export const validateRegistrationPassword = (dataObj) => {
   const { passwordContent } = dataObj;
   state.registrationFormData.passwordContent = passwordContent;
-  const regPassword =
-    /^((?=.*[\d])(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s])|(?=.*[\d])(?=.*[A-Z])(?=.*[^\w\d\s])|(?=.*[\d])(?=.*[a-z])(?=.*[^\w\d\s])).{7,30}$/gm;
+  const regPassword = REGEX_PASSWORD;
   state.registrationFormData.passwordContentIsOk =
     !regPassword.test(passwordContent) || !passwordContent ? false : true;
 };
@@ -238,16 +250,62 @@ export const validateRegistrationForm = () => {
 };
 export const submitRegistrationForm = async () => {
   try {
-    await sendRegistrationAuthData(
+    await sendAuthData(
       POST_REGISTRATION_AUTH_URL,
-      state.registrationFormData
+      state.registrationFormData,
+      REGISTRATION_AUTH_ERROR
     );
-    await sendRegistrationData(
-      POST_REGISTRATION_URL,
-      state.registrationFormData
-    );
+    await sendRegistrationData(USERS_URL, state.registrationFormData);
     return "Your registration has been successful!";
   } catch (err) {
     return err.message;
   }
+};
+export const clearRegistrationState = () => {
+  state.registrationFormData = {
+    emailContent: "",
+    phoneContent: "",
+    passwordContent: "",
+    confirmPasswordContent: "",
+    addressContent: "",
+    emailContentIsOk: false,
+    phoneContentIsOk: false,
+    passwordContentIsOk: false,
+    confirmPasswordContentIsOk: false,
+    addressContentIsOk: false,
+  };
+};
+export const validateLoginForm = (dataObj) => {
+  const { emailContent } = dataObj;
+  const { passwordContent } = dataObj;
+  state.loginFormData.emailContent = emailContent;
+  state.loginFormData.passwordContent = passwordContent;
+  const regEmail = REGEX_EMAIL;
+  const regPassword = REGEX_PASSWORD;
+  state.loginFormDataIsOk =
+    emailContent.length > 0 &&
+    passwordContent.length > 0 &&
+    regEmail.test(emailContent) &&
+    regPassword.test(passwordContent)
+      ? true
+      : false;
+};
+export const submitLoginForm = async () => {
+  try {
+    await sendAuthData(POST_LOGIN_URL, state.loginFormData, LOGIN_AUTH_ERROR);
+    const dataArr = await getUsers(USERS_URL);
+    state.loggedUser = Object.values(dataArr).find(
+      (user) => user.email === state.loginFormData.emailContent
+    );
+    state.isLogged = true;
+  } catch (err) {
+    throw err;
+  }
+};
+export const clearLoginState = () => {
+  state.loginFormData = {
+    emailContent: "",
+    passwordContent: "",
+  };
+  state.loginFormDataIsOk = false;
 };

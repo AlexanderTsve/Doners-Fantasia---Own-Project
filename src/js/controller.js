@@ -14,6 +14,7 @@ import paginationView from "./Views/paginationView.js";
 import restaurantsView from "./Views/restaurantsView.js";
 import feedbackPageView from "./Views/feedbackPageView.js";
 import registrationView from "./Views/registrationView.js";
+import loginView from "./Views/loginView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -791,17 +792,20 @@ const controlFeedbackFormValidation = async () => {
   ) {
     feedbackPageView.clearInputs();
     const response = await model.sendFeedback();
-    feedbackPageView.showModal(response, "feedback-page");
+    feedbackPageView.showMessageModal(response, "feedback-page");
   }
 };
 const controlFeedbackModalHiding = () => {
-  feedbackPageView.hideModal();
+  feedbackPageView.hideMessageModal();
 };
 const controlRegisterModalShowing = () => {
-  registrationView.showRegistrationModal();
+  registrationView.showMainModal("registration");
 };
 const controlRegisterModalHiding = () => {
-  registrationView.hideRegistrationModal();
+  registrationView.hideMainModal("registration");
+  registrationView.clearInputs();
+  model.clearRegistrationState();
+  registrationView.clearParas();
 };
 const controlRegisterErrorParaEmail = () => {
   registrationView.getRegistrationFormInputs(model.validateRegistrationEmail);
@@ -850,8 +854,55 @@ const controlRegisterErrorParaAddress = () => {
 };
 const controlRegistrationFormSubmission = async () => {
   const response = await model.submitRegistrationForm();
-  registrationView.hideRegistrationModal();
-  registrationView.showModal(response, "modal_reg");
+  registrationView.hideMainModal("registration");
+  registrationView.clearInputs();
+  registrationView.showMessageModal(response, "modal_reg");
+  model.clearRegistrationState();
+  registrationView.clearParas();
+};
+const controlClickLoginParaRegForm = () => {
+  registrationView.hideMainModal("registration");
+  registrationView.clearInputs();
+  loginView.showMainModal("login");
+  model.clearRegistrationState();
+  registrationView.clearParas();
+};
+const controlShowLoginModal = () => {
+  loginView.showMainModal("login");
+};
+const controlHideLoginModal = () => {
+  loginView.hideMainModal("login");
+  loginView.clearInputs();
+  model.clearLoginState();
+};
+const controlClickRegistrationParaLoginForm = () => {
+  loginView.hideMainModal("login");
+  loginView.clearInputs();
+  registrationView.showMainModal("registration");
+  model.clearLoginState();
+};
+const controlLoginParaError = () => {
+  loginView.getLoginFormInputs(model.validateLoginForm);
+  if (!model.state.loginFormDataIsOk) {
+    loginView.showLoginErrorPara();
+    return;
+  }
+  loginView.hideLoginErrorPara();
+};
+const controlLoginSubmission = async () => {
+  try {
+    if (!model.state.loginFormDataIsOk) {
+      return;
+    }
+    await model.submitLoginForm();
+  } catch (err) {
+    loginView.showMessageModal(err.message, "modal_log_error");
+  } finally {
+    loginView.hideMainModal("login");
+    loginView.clearInputs();
+    model.clearLoginState();
+    loginView.showLoginErrorPara();
+  }
 };
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
@@ -862,9 +913,15 @@ const init = () => {
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
   feedbackPageView.addSubmitFormHandler(controlFeedbackFormValidation);
-  feedbackPageView.addHideModalHandler(controlFeedbackModalHiding);
-  registrationView.addShowModalHandler(controlRegisterModalShowing);
-  registrationView.addHideRegisterModalHandler(controlRegisterModalHiding);
+  feedbackPageView.addHideMessageModalHandler(controlFeedbackModalHiding);
+  registrationView.addShowMainModalHandler(
+    controlRegisterModalShowing,
+    "register"
+  );
+  registrationView.addHideMainModalHandler(
+    controlRegisterModalHiding,
+    "registration"
+  );
   registrationView.addInputFieldHandler(
     controlRegisterErrorParaEmail,
     "registration_email_input"
@@ -890,5 +947,14 @@ const init = () => {
     "registration_address_input"
   );
   registrationView.addSignUpBtnHandler(controlRegistrationFormSubmission);
+  registrationView.addParaHandler(controlClickLoginParaRegForm, "login_para");
+  loginView.addShowMainModalHandler(controlShowLoginModal, "login");
+  loginView.addHideMainModalHandler(controlHideLoginModal, "login");
+  loginView.addParaHandler(
+    controlClickRegistrationParaLoginForm,
+    "register_paragraph"
+  );
+  loginView.addInputFieldsHandler(controlLoginParaError);
+  loginView.addLoginBtnHandler(controlLoginSubmission);
 };
 init();

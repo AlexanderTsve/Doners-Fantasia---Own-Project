@@ -16,7 +16,7 @@
           <li class="nav__item header-footer-items menu-item">Menu</li>
         </ul>
         <ul class="nav__list">
-          <li class="nav__item header-footer-items">Login</li>
+          <li class="nav__item nav__item_login header-footer-items">Login</li>
           <li class="nav__item header-footer-items">Logout</li>
           <li class="nav__item nav__item_register header-footer-items">
             Sign Up
@@ -100,8 +100,8 @@
                 class="registration-form-error-message registration-error-password"
               >
                 <p class="para_register_password para_register not_visible">
-                  Password must be at least 7 characters long and contain 1
-                  capital letter and 1 symbol or number!
+                  Password must be 6 to 20 characters long and contain 1 capital
+                  letter, 1 lowercase letter and 1 number!
                 </p>
               </div>
             </div>
@@ -170,6 +170,66 @@
             </div>
             <div>
               <p class="login_para">Have an account already? Login here ->></p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="modal_log_error"></div>
+      <div class="modal modal_login">
+        <form class="modal-content modal_login-content">
+          <img src="src/img/logo/logo1.jpg" alt="Logo" class="header__logo" />
+          <div class="login-form-error-message">
+            <p class="para_login">
+              Please, fill in both fields with valid data!
+            </p>
+          </div>
+          <div class="modal-content_container modal_login-content_container">
+            <div class="form-field modal_login-content_container_form-field">
+              <label
+                for="login_email_input"
+                class="form-label form-field_label modal_login-content_container_form-field_label"
+                >Please, enter your email:</label
+              >
+              <input
+                required
+                type="email"
+                class="form-control form-field_input"
+                id="login_email_input"
+                placeholder="Email..."
+              />
+            </div>
+            <div class="form-field modal_login-content_container_form-field">
+              <label
+                for="login_password_input"
+                class="form-label form-field_label modal_login-content_container_form-field_label"
+                >Please, enter your password:</label
+              >
+              <input
+                required
+                type="password"
+                class="form-control form-field_input"
+                id="login_password_input"
+                placeholder="Password..."
+              />
+            </div>
+            <div>
+              <button
+                type="button"
+                class="doner_app_button cancel_login_btn login_btns"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="doner_app_button login_btn login_btns"
+              >
+                Login
+              </button>
+            </div>
+            <div>
+              <p class="register_paragraph">
+                Do not have an account yet? Register here ->>
+              </p>
             </div>
           </div>
         </form>

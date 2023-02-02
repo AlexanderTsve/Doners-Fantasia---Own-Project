@@ -19,7 +19,7 @@ export default class View {
     this._clear();
     this._parentElement.append(markup);
   }
-  addHideModalHandler(handlerModalHiding) {
+  addHideMessageModalHandler(handlerModalHiding) {
     document.addEventListener("click", function (e) {
       if (
         e.target.matches(".modal_message-content_close") ||
@@ -30,11 +30,33 @@ export default class View {
       }
     });
   }
-  hideModal() {
+  addInputFieldHandler(handler, elementId) {
+    document.getElementById(elementId).addEventListener("input", handler);
+  }
+  addParaHandler(handler, elClass) {
+    document.querySelector(`.${elClass}`).addEventListener("click", handler);
+  }
+  addShowMainModalHandler(showModalHandler, elClassEnd) {
+    document
+      .querySelector(`.nav__item_${elClassEnd}`)
+      .addEventListener("click", showModalHandler);
+  }
+  addHideMainModalHandler(hideModalHandler, modalType) {
+    document
+      .querySelector(`.cancel_${modalType}_btn`)
+      .addEventListener("click", hideModalHandler);
+  }
+  showMainModal(classEnd) {
+    document.querySelector(`.modal_${classEnd}`).style.display = "block";
+  }
+  hideMainModal(classEnd) {
+    document.querySelector(`.modal_${classEnd}`).style.display = "none";
+  }
+  hideMessageModal() {
     const modal = document.querySelector(".modal_message");
     modal.remove();
   }
-  showModal(text, divEl) {
+  showMessageModal(text, divEl) {
     const markup = this._generateMessageModalHtml(text);
     document.getElementById(divEl).append(markup);
   }

@@ -1,4 +1,13 @@
-.modal_registration {
+.modal_registration-content {
+  height: 60rem;
+  width: 30%;
+}
+.modal_login-content {
+  height: 30rem;
+  width: 23%;
+}
+.modal_registration,
+.modal_login {
   display: none;
   padding-top: 0;
   position: fixed;
@@ -11,8 +20,6 @@
   opacity: 0.95;
   &-content {
     background-color: $violet-color;
-    height: 60rem;
-    width: 30%;
     margin: 5% auto 15% auto;
     border: 3px solid $dark-green-color;
     img {
@@ -36,7 +43,8 @@
     }
   }
 }
-.registration_btns {
+.registration_btns,
+.login_btns {
   margin: 1.5rem;
   &:disabled {
     background-color: $grey-color;
@@ -44,7 +52,8 @@
     opacity: 1;
   }
 }
-.login_para {
+.login_para,
+.register_paragraph {
   color: $orange-color;
   text-decoration: underline;
   cursor: pointer;
@@ -64,4 +73,9 @@
     margin: 0.25rem 0 0 0;
     color: $color-secondary;
   }
+}
+.para_login {
+  margin: 0.25rem 0 0 0;
+  text-align: center;
+  color: $color-secondary;
 }

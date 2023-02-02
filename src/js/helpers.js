@@ -30,7 +30,7 @@ export const sendDataRequest = async (url, data) => {
   }
   return "Your feedback has been sent successfully! Thank you!";
 };
-export const sendRegistrationAuthData = async (url, data) => {
+export const sendAuthData = async (url, data, error) => {
   try {
     const initObj = {
       method: "POST",
@@ -45,9 +45,7 @@ export const sendRegistrationAuthData = async (url, data) => {
     };
     const response = await fetch(url, initObj);
     if (!response.ok) {
-      throw new Error(
-        "Please, check if the email has been used already for registration in the site or try again later!"
-      );
+      throw new Error(error);
     }
   } catch (err) {
     throw err;
@@ -73,6 +71,20 @@ export const sendRegistrationData = async (url, data) => {
         "Something went wrong with the request! No data has been sent! Please, try again later!"
       );
     }
+  } catch (err) {
+    throw err;
+  }
+};
+export const getUsers = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        "Something went wrong with the request! You have not been logged, try again later!"
+      );
+    }
+    const data = await response.json();
+    return data;
   } catch (err) {
     throw err;
   }
