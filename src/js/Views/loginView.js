@@ -34,5 +34,4 @@ class LoginView extends View {
     validationFn(loginFormContent);
   }
 }
-
 export default new LoginView();

@@ -1,4 +1,26 @@
-import * as model from "./model.js";
+// import * as model from "./model.js";
+import { state } from "./Model/state.js";
+import { loadProductDetails } from "./Model/loadProductDetails.js";
+import { loadProducts } from "./Model/loadProducts.js";
+import { loadSearchResults } from "./Model/loadSearchResults.js";
+import { getProductsPage } from "./Model/getProductsPage.js";
+import { loadRestaurants } from "./Model/loadRestaurants.js";
+import { sendFeedback } from "./Model/sendFeedback.js";
+import { validateFeedbackName } from "./Model/validateFeedbackName.js";
+import { validateFeedbackEmail } from "./Model/validateFeedbackEmail.js";
+import { validateFeedbackPhone } from "./Model/validateFeedbackPhone.js";
+import { validateFeedbackFieldInput } from "./Model/validateFeedbackFieldInput.js";
+import { validateRegistrationEmail } from "./Model/validateRegistrationEmail.js";
+import { validateRegistrationPhone } from "./Model/validateRegistrationPhone.js";
+import { validateRegistrationPassword } from "./Model/validateRegistrationPassword.js";
+import { validateRegistrationConfirmPassword } from "./Model/validateRegistrationConfirmPassword.js";
+import { validateRegistrationAddress } from "./Model/validateRegistrationAddress.js";
+import { validateRegistrationForm } from "./Model/validateRegistrationForm.js";
+import { submitRegistrationForm } from "./Model/submitRegistrationForm.js";
+import { clearRegistrationState } from "./Model/clearRegistrationState.js";
+import { validateLoginForm } from "./Model/validateLoginForm.js";
+import { submitLoginForm } from "./Model/submitLoginForm.js";
+import { clearLoginState } from "./Model/clearLoginState.js";
 import productDetailsView from "./Views/productDetailsView.js";
 import productsView from "./Views/productsView.js";
 import * as bootstrap from "bootstrap";
@@ -671,11 +693,11 @@ const clearDropdownAndSearchField = () => {
 const controlProductDetails = async (productId) => {
   try {
     productDetailsView.renderSpinner();
-    await model.loadProductDetails(productId);
-    if (!model.state.productDetails) {
+    await loadProductDetails(productId);
+    if (!state.productDetails) {
       throw new Error("There is no existing product with such ID!");
     }
-    productDetailsView.render(model.state.productDetails);
+    productDetailsView.render(state.productDetails);
   } catch (err) {
     productDetailsView.renderError(err.message);
   }
@@ -683,15 +705,12 @@ const controlProductDetails = async (productId) => {
 const controlProducts = async () => {
   try {
     productsView.renderSpinner();
-    await model.loadProducts();
-    if (
-      !model.state.products.every(Boolean) ||
-      model.state.products.length === 0
-    ) {
+    await loadProducts();
+    if (!state.products.every(Boolean) || state.products.length === 0) {
       throw new Error("One or more of the products do not exist!");
     }
-    productsView.render(model.getProductsPage());
-    paginationView.render(model.state);
+    productsView.render(getProductsPage());
+    paginationView.render(state);
   } catch (err) {
     productsView.renderError(err.message);
   }
@@ -699,14 +718,11 @@ const controlProducts = async () => {
 const controlRestaurants = async () => {
   try {
     restaurantsView.renderSpinner();
-    await model.loadRestaurants();
-    if (
-      !model.state.restaurants.every(Boolean) ||
-      model.state.restaurants.length === 0
-    ) {
+    await loadRestaurants();
+    if (!state.restaurants.every(Boolean) || state.restaurants.length === 0) {
       throw new Error("One or more of the restaurants do not exist!");
     }
-    restaurantsView.render(model.state.restaurants);
+    restaurantsView.render(state.restaurants);
   } catch (err) {
     restaurantsView.renderError(err.message);
   }
@@ -749,24 +765,21 @@ const controlSearchResults = async () => {
     const query = searchView.getQuery();
     const dropdownValue = dropdownFilterView.getDropdownValue();
     productsView.renderSpinner();
-    await model.loadSearchResults(query, dropdownValue);
-    if (
-      !model.state.products.every(Boolean) ||
-      model.state.products.length === 0
-    ) {
+    await loadSearchResults(query, dropdownValue);
+    if (!state.products.every(Boolean) || state.products.length === 0) {
       throw new Error(
         `There is no existing product with ${query} in its name!`
       );
     }
-    productsView.render(model.getProductsPage());
-    paginationView.render(model.state);
+    productsView.render(getProductsPage());
+    paginationView.render(state);
   } catch (err) {
     productsView.renderError(err.message);
   }
 };
 const controlPagination = function (goToPage) {
-  productsView.render(model.getProductsPage(goToPage));
-  paginationView.render(model.state);
+  productsView.render(getProductsPage(goToPage));
+  paginationView.render(state);
 };
 const controlChangeHandlerToFeedback = () => {
   window.location.pathname = "/feedback-page";
@@ -780,18 +793,18 @@ const validationFeedbackController = (validationFn, classEnd) => {
   }
 };
 const controlFeedbackFormValidation = async () => {
-  validationFeedbackController(model.validateFeedbackName, "name");
-  validationFeedbackController(model.validateFeedbackEmail, "email");
-  validationFeedbackController(model.validateFeedbackPhone, "phone");
-  validationFeedbackController(model.validateFeedbackFieldInput, "text");
+  validationFeedbackController(validateFeedbackName, "name");
+  validationFeedbackController(validateFeedbackEmail, "email");
+  validationFeedbackController(validateFeedbackPhone, "phone");
+  validationFeedbackController(validateFeedbackFieldInput, "text");
   if (
-    model.state.feedbackFormData.emailContentIsOk &&
-    model.state.feedbackFormData.nameContentIsOk &&
-    model.state.feedbackFormData.feedbackContentIsOk &&
-    model.state.feedbackFormData.phoneContentIsOk
+    state.feedbackFormData.emailContentIsOk &&
+    state.feedbackFormData.nameContentIsOk &&
+    state.feedbackFormData.feedbackContentIsOk &&
+    state.feedbackFormData.phoneContentIsOk
   ) {
     feedbackPageView.clearInputs();
-    const response = await model.sendFeedback();
+    const response = await sendFeedback();
     feedbackPageView.showMessageModal(response, "feedback-page");
   }
 };
@@ -804,67 +817,65 @@ const controlRegisterModalShowing = () => {
 const controlRegisterModalHiding = () => {
   registrationView.hideMainModal("registration");
   registrationView.clearInputs();
-  model.clearRegistrationState();
+  clearRegistrationState();
   registrationView.clearParas();
 };
 const controlRegisterErrorParaEmail = () => {
-  registrationView.getRegistrationFormInputs(model.validateRegistrationEmail);
-  model.state.registrationFormData.emailContentIsOk ||
-  !model.state.registrationFormData.emailContent
+  registrationView.getRegistrationFormInputs(validateRegistrationEmail);
+  state.registrationFormData.emailContentIsOk ||
+  !state.registrationFormData.emailContent
     ? registrationView.hidePara("email")
     : registrationView.showPara("email");
-  registrationView.disabledHandler(model.validateRegistrationForm());
+  registrationView.disabledHandler(validateRegistrationForm());
 };
 const controlRegisterErrorParaPhone = () => {
-  registrationView.getRegistrationFormInputs(model.validateRegistrationPhone);
-  model.state.registrationFormData.phoneContentIsOk ||
-  !model.state.registrationFormData.phoneContent
+  registrationView.getRegistrationFormInputs(validateRegistrationPhone);
+  state.registrationFormData.phoneContentIsOk ||
+  !state.registrationFormData.phoneContent
     ? registrationView.hidePara("phone")
     : registrationView.showPara("phone");
-  registrationView.disabledHandler(model.validateRegistrationForm());
+  registrationView.disabledHandler(validateRegistrationForm());
 };
 const controlRegisterErrorParaPassword = () => {
-  registrationView.getRegistrationFormInputs(
-    model.validateRegistrationPassword
-  );
-  model.state.registrationFormData.passwordContentIsOk ||
-  !model.state.registrationFormData.passwordContent
+  registrationView.getRegistrationFormInputs(validateRegistrationPassword);
+  state.registrationFormData.passwordContentIsOk ||
+  !state.registrationFormData.passwordContent
     ? registrationView.hidePara("password")
     : registrationView.showPara("password");
-  registrationView.disabledHandler(model.validateRegistrationForm());
+  registrationView.disabledHandler(validateRegistrationForm());
 };
 const controlRegisterErrorParaConfirmPassword = () => {
   registrationView.getRegistrationFormInputs(
-    model.validateRegistrationConfirmPassword
+    validateRegistrationConfirmPassword
   );
-  model.state.registrationFormData.confirmPasswordContentIsOk ||
-  (!model.state.registrationFormData.passwordContent &&
-    !model.state.registrationFormData.confirmPasswordContent)
+  state.registrationFormData.confirmPasswordContentIsOk ||
+  (!state.registrationFormData.passwordContent &&
+    !state.registrationFormData.confirmPasswordContent)
     ? registrationView.hidePara("password_confirm")
     : registrationView.showPara("password_confirm");
-  registrationView.disabledHandler(model.validateRegistrationForm());
+  registrationView.disabledHandler(validateRegistrationForm());
 };
 const controlRegisterErrorParaAddress = () => {
-  registrationView.getRegistrationFormInputs(model.validateRegistrationAddress);
-  model.state.registrationFormData.addressContentIsOk ||
-  !model.state.registrationFormData.addressContent
+  registrationView.getRegistrationFormInputs(validateRegistrationAddress);
+  state.registrationFormData.addressContentIsOk ||
+  !state.registrationFormData.addressContent
     ? registrationView.hidePara("address")
     : registrationView.showPara("address");
-  registrationView.disabledHandler(model.validateRegistrationForm());
+  registrationView.disabledHandler(validateRegistrationForm());
 };
 const controlRegistrationFormSubmission = async () => {
-  const response = await model.submitRegistrationForm();
+  const response = await submitRegistrationForm();
   registrationView.hideMainModal("registration");
   registrationView.clearInputs();
   registrationView.showMessageModal(response, "modal_reg");
-  model.clearRegistrationState();
+  clearRegistrationState();
   registrationView.clearParas();
 };
 const controlClickLoginParaRegForm = () => {
   registrationView.hideMainModal("registration");
   registrationView.clearInputs();
   loginView.showMainModal("login");
-  model.clearRegistrationState();
+  clearRegistrationState();
   registrationView.clearParas();
 };
 const controlShowLoginModal = () => {
@@ -873,17 +884,17 @@ const controlShowLoginModal = () => {
 const controlHideLoginModal = () => {
   loginView.hideMainModal("login");
   loginView.clearInputs();
-  model.clearLoginState();
+  clearLoginState();
 };
 const controlClickRegistrationParaLoginForm = () => {
   loginView.hideMainModal("login");
   loginView.clearInputs();
   registrationView.showMainModal("registration");
-  model.clearLoginState();
+  clearLoginState();
 };
 const controlLoginParaError = () => {
-  loginView.getLoginFormInputs(model.validateLoginForm);
-  if (!model.state.loginFormDataIsOk) {
+  loginView.getLoginFormInputs(validateLoginForm);
+  if (!state.loginFormDataIsOk) {
     loginView.showLoginErrorPara();
     return;
   }
@@ -891,16 +902,16 @@ const controlLoginParaError = () => {
 };
 const controlLoginSubmission = async () => {
   try {
-    if (!model.state.loginFormDataIsOk) {
+    if (!state.loginFormDataIsOk) {
       return;
     }
-    await model.submitLoginForm();
+    await submitLoginForm();
   } catch (err) {
     loginView.showMessageModal(err.message, "modal_log_error");
   } finally {
     loginView.hideMainModal("login");
     loginView.clearInputs();
-    model.clearLoginState();
+    clearLoginState();
     loginView.showLoginErrorPara();
   }
 };
