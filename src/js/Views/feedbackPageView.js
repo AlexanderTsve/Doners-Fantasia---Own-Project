@@ -1,5 +1,5 @@
-import View from "./View.js";
-class FeedbackPageView extends View {
+import Views from "./Views.js";
+class FeedbackPageView extends Views {
   _errorElements = [
     ...document.querySelectorAll(".feedback-form-error-message"),
   ];

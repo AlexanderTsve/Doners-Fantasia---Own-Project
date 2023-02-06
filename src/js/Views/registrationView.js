@@ -1,5 +1,5 @@
-import View from "./View.js";
-class RegistrationView extends View {
+import Views from "./Views.js";
+class RegistrationView extends Views {
   disabledHandler(boolean) {
     const regBtn = document.querySelector(".register_btn");
     regBtn.disabled = boolean ? false : true;

@@ -1,7 +1,7 @@
 import * as images from "../../img/products_imgs/*.png";
 import * as icons from "../../img/weight_price_icons/*.png";
-import View from "./View.js";
-class ProductDetailsView extends View {
+import Views from "./Views.js";
+class ProductDetailsView extends Views {
   _parentElement = document.querySelector(".product-details");
   render(data) {
     if (!data) {

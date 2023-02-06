@@ -612,61 +612,81 @@ import loginView from "./Views/loginView.js";
 //   {
 //     name: "Sofia Center",
 //     address: "bul. Aleksandar Stamboliyski 41",
+//     geoLocation: { lat: 42.69729077097609, lon: 23.317056955920172 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0888 88 88 88",
 //   },
 //   {
 //     name: "Sofia Lyulin",
 //     address: "ul. Pancho Vladigerov 21",
+//     geoLocation: { lat: 42.713264924349055, lon: 23.24888154242746 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 88 88 88",
 //   },
 //   {
 //     name: "Sofia Mladost",
 //     address: "bul. Aleksandar Malinov 78",
+//     geoLocation: { lat: 42.63632565792078, lon: 23.36977386941168 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 86 86 86",
 //   },
 //   {
 //     name: "Sofia Pavlovo",
 //     address: "ul. Alexander Pushkin 38",
+//     geoLocation: { lat: 42.66163252401128, lon: 23.264926969504085 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 83 83 83",
 //   },
 //   {
 //     name: "Plovdiv Trakia",
 //     address: "ul. Georgi Danchov 16",
+//     geoLocation: { lat: 42.13878058136747, lon: 24.787433525222482 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 84 84 84",
 //   },
 //   {
 //     name: "Plovdiv Center",
 //     address: "ul. Ivan Andonov 5",
+//     geoLocation: { lat: 42.141660340827904, lon: 24.739933484743627 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 85 85 85",
 //   },
 //   {
 //     name: "Burgas Central Park",
 //     address: "ul. Dame Gruev 8",
+//     geoLocation: { lat: 42.51408531283424, lon: 27.4501782559161 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 82 82 82",
 //   },
 //   {
 //     name: "Varna Center",
 //     address: "ul. General Kolev 3",
+//     geoLocation: { lat: 43.20793873871141, lon: 27.910629969424402 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 81 81 81",
 //   },
 //   {
 //     name: "Varna Planet Mall",
 //     address: "bul. Slivnitsa 185",
+//     geoLocation: { lat: 43.22703005778861, lon: 27.875800015313523 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 81 81 81",
 //   },
 //   {
 //     name: "Varna Levski",
 //     address: "ul. Dimitar Ikonomov 36",
+//     geoLocation: { lat: 43.22060153604811, lon: 27.936078298260362 },
 //     workingHours: "10.00 - 21.30",
+//     workDays: [1, 2, 3, 4, 5, 6],
 //     phone: "0887 80 80 80",
 //   },
 // ];
@@ -723,6 +743,7 @@ const controlRestaurants = async () => {
       throw new Error("One or more of the restaurants do not exist!");
     }
     restaurantsView.render(state.restaurants);
+    restaurantsView.generateMap(state.restaurants);
   } catch (err) {
     restaurantsView.renderError(err.message);
   }

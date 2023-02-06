@@ -1,5 +1,5 @@
-import View from "./View.js";
-class PaginationView extends View {
+import Views from "./Views.js";
+class PaginationView extends Views {
   _parentElement = document.querySelector(".pagination_menu_page");
   render(data) {
     this._data = data;

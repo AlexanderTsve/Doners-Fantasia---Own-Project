@@ -14,6 +14,7 @@
   background-color: $violet-color;
   width: 50rem;
   height: 35rem;
+  margin-bottom: 5rem;
   &-pane {
     height: 30rem;
     width: 80rem;
@@ -26,4 +27,20 @@
       width: 40rem;
     }
   }
+}
+.ol-attribution,
+.ol-rotate-reset {
+  display: none;
+}
+.ol-control {
+  position: absolute;
+  right: 1rem;
+  bottom: 2rem;
+}
+.ol-viewport {
+  border-radius: 3%;
+}
+.ol-zoom-in,
+.ol-zoom-out {
+  margin: 0.5rem;
 }

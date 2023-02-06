@@ -1,5 +1,5 @@
-import View from "./View.js";
-class ProductsView extends View {
+import Views from "./Views.js";
+class ProductsView extends Views {
   _parentElement = document.querySelector(".products-container");
   render(data) {
     if (!data) {

@@ -1,6 +1,6 @@
-import View from "./View.js";
+import Views from "./Views.js";
 
-class LoginView extends View {
+class LoginView extends Views {
   addInputFieldsHandler(handler) {
     document
       .getElementById("login_email_input")
