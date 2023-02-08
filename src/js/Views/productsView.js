@@ -10,6 +10,55 @@ class ProductsView extends Views {
     this._clear();
     markupArr.forEach((htmlEl) => this._parentElement.append(htmlEl));
   }
+  addToCartBtnHandler(validationFn) {
+    const arrOfBtns = [...document.querySelectorAll(".add_to_cart_btn")];
+    arrOfBtns.forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        const name =
+          e.target.parentElement.parentElement.firstChild.lastChild.innerText;
+        const pricePerUnit = Number(
+          e.target.parentElement.parentElement.children[1].lastChild.innerText.split(
+            " "
+          )[1]
+        );
+        const qty = Number(e.target.parentElement.firstChild.value);
+        const productObj = {
+          name,
+          price: pricePerUnit * qty,
+          qty,
+        };
+        validationFn(productObj);
+        e.target.parentElement.firstChild.value = "";
+      })
+    );
+  }
+  renderCartTooltip(data) {
+    const container = document.querySelector(".tooltip-container");
+    container.innerText = "";
+    data.forEach((item, index) => {
+      const paraNameEl = document.createElement("p");
+      const paraQtyEl = document.createElement("p");
+      const paraPriceEl = document.createElement("p");
+      paraNameEl.innerText = `${index + 1}). ${item.name}:`;
+      paraQtyEl.innerText = `Quantity: ${item.qty} units`;
+      paraPriceEl.innerText = `Price: ${item.price.toFixed(2)} BGN`;
+      container.append(paraNameEl, paraQtyEl, paraPriceEl);
+    });
+  }
+  _loadImageHandler(container, imageEl, nameEl) {
+    container.innerHTML = "";
+    container.append(imageEl, nameEl);
+    imageEl.classList.remove("loading");
+  }
+  _changeUrlToDetails(id) {
+    window.location.pathname = `/details-page/${id}`;
+  }
+  _increaseQtyHandler(qtyEl) {
+    qtyEl.value++;
+  }
+  _decreaseQtyHandler(qtyEl) {
+    qtyEl.value > 1 ? qtyEl.value-- : (qtyEl.value = "");
+  }
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product) => {
       const productDivEl = document.createElement("div");
@@ -22,6 +71,9 @@ class ProductsView extends Views {
       const priceParaEl = document.createElement("p");
       const productFooterDivEl = document.createElement("div");
       const inputQtyEl = document.createElement("input");
+      const changeQtyDivEl = document.createElement("div");
+      const increaseQty = document.createElement("button");
+      const decreaseQty = document.createElement("button");
       const addBtnEl = document.createElement("button");
       const detailsBtnEl = document.createElement("button");
       productDivEl.classList.add("card", "text-center");
@@ -30,10 +82,8 @@ class ProductsView extends Views {
       imageEl.classList.add("loading", "card-img-top", "product_card_img");
       imageEl.src = product.imgSrc;
       this._renderInternalSpinner(figEl);
-      imageEl.addEventListener("load", function () {
-        figEl.innerHTML = "";
-        figEl.append(imageEl, nameEl);
-        imageEl.classList.remove("loading");
+      imageEl.addEventListener("load", () => {
+        this._loadImageHandler(figEl, imageEl, nameEl);
       });
       nameEl.innerText = `${product.name}`;
       nameEl.classList.add("card-title");
@@ -45,18 +95,38 @@ class ProductsView extends Views {
       productBodyDivEl.classList.add("card-body", "product_card_body");
       inputQtyEl.setAttribute("type", "number");
       inputQtyEl.setAttribute("placeholder", "count...");
+      inputQtyEl.setAttribute("min", "1");
+      inputQtyEl.setAttribute("readonly", "true");
       inputQtyEl.classList.add("product_card_qty_input");
-      addBtnEl.setAttribute("type", "submit");
+      increaseQty.innerText = "+";
+      increaseQty.setAttribute("type", "button");
+      increaseQty.classList.add("doner_app_button", "change_qty_btn");
+      decreaseQty.innerText = "-";
+      decreaseQty.setAttribute("type", "button");
+      decreaseQty.classList.add("doner_app_button", "change_qty_btn");
+      addBtnEl.setAttribute("type", "button");
       addBtnEl.innerText = "Add to Cart";
-      addBtnEl.classList.add("doner_app_button");
+      addBtnEl.classList.add("doner_app_button", "add_to_cart_btn");
       detailsBtnEl.innerText = "Details";
-      detailsBtnEl.classList.add("doner_app_button");
+      detailsBtnEl.classList.add("doner_app_button", "product_details_btn");
       productFooterDivEl.classList.add("card-footer", "product_card_footer");
-      detailsBtnEl.addEventListener("click", function () {
-        window.location.pathname = `/details-page/${product.id}`;
+      increaseQty.addEventListener("click", () => {
+        this._increaseQtyHandler(inputQtyEl);
+      });
+      decreaseQty.addEventListener("click", () => {
+        this._decreaseQtyHandler(inputQtyEl);
+      });
+      detailsBtnEl.addEventListener("click", () => {
+        this._changeUrlToDetails(product.id);
       });
       productBodyDivEl.append(weightParaEl, categoryParaEl, priceParaEl);
-      productFooterDivEl.append(inputQtyEl, addBtnEl, detailsBtnEl);
+      changeQtyDivEl.append(increaseQty, decreaseQty);
+      productFooterDivEl.append(
+        inputQtyEl,
+        changeQtyDivEl,
+        addBtnEl,
+        detailsBtnEl
+      );
       productDivEl.append(figEl, productBodyDivEl, productFooterDivEl);
       return productDivEl;
     });

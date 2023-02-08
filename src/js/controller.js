@@ -20,7 +20,10 @@ import { submitRegistrationForm } from "./Model/submitRegistrationForm.js";
 import { clearRegistrationState } from "./Model/clearRegistrationState.js";
 import { validateLoginForm } from "./Model/validateLoginForm.js";
 import { submitLoginForm } from "./Model/submitLoginForm.js";
+import { clearLoginFormState } from "./Model/clearLoginFormState.js";
 import { clearLoginState } from "./Model/clearLoginState.js";
+import { validateAddToCartInput } from "./Model/validateAddToCartInput.js";
+import { fillCart } from "./Model/fillCart.js";
 import productDetailsView from "./Views/productDetailsView.js";
 import productsView from "./Views/productsView.js";
 import * as bootstrap from "bootstrap";
@@ -37,6 +40,8 @@ import restaurantsView from "./Views/restaurantsView.js";
 import feedbackPageView from "./Views/feedbackPageView.js";
 import registrationView from "./Views/registrationView.js";
 import loginView from "./Views/loginView.js";
+import logoutView from "./Views/logoutView.js";
+import navigationView from "./Views/navigationView.js";
 // const DATA = [
 //   {
 //     category: "Doner",
@@ -706,6 +711,14 @@ import loginView from "./Views/loginView.js";
 // sendRestaurants();
 
 // ---------------
+const controlAddingItemsToCart = (obj) => {
+  const validationResult = validateAddToCartInput(obj);
+  if (!validationResult) {
+    return;
+  }
+  fillCart(obj);
+  productsView.renderCartTooltip(state.cart);
+};
 const clearDropdownAndSearchField = () => {
   dropdownFilterView.clearValue();
   searchView.clearSearchValue();
@@ -731,6 +744,7 @@ const controlProducts = async () => {
     }
     productsView.render(getProductsPage());
     paginationView.render(state);
+    productsView.addToCartBtnHandler(controlAddingItemsToCart);
   } catch (err) {
     productsView.renderError(err.message);
   }
@@ -775,12 +789,6 @@ const controlUrlChange = () => {
     controlProductDetails(pathname.replace("/details-page/", ""));
   }
 };
-const controlUrlChangeToMain = () => {
-  window.location.pathname = "/menu-page";
-};
-const controlUrlChangeToRestaurants = () => {
-  window.location.pathname = "/restaurants-page";
-};
 const controlSearchResults = async () => {
   try {
     const query = searchView.getQuery();
@@ -794,6 +802,7 @@ const controlSearchResults = async () => {
     }
     productsView.render(getProductsPage());
     paginationView.render(state);
+    productsView.addToCartBtnHandler(controlAddingItemsToCart);
   } catch (err) {
     productsView.renderError(err.message);
   }
@@ -801,9 +810,10 @@ const controlSearchResults = async () => {
 const controlPagination = function (goToPage) {
   productsView.render(getProductsPage(goToPage));
   paginationView.render(state);
+  productsView.addToCartBtnHandler(controlAddingItemsToCart);
 };
-const controlChangeHandlerToFeedback = () => {
-  window.location.pathname = "/feedback-page";
+const controlChangePathname = (pathname) => {
+  window.location.pathname = pathname;
 };
 const validationFeedbackController = (validationFn, classEnd) => {
   try {
@@ -905,13 +915,13 @@ const controlShowLoginModal = () => {
 const controlHideLoginModal = () => {
   loginView.hideMainModal("login");
   loginView.clearInputs();
-  clearLoginState();
+  clearLoginFormState();
 };
 const controlClickRegistrationParaLoginForm = () => {
   loginView.hideMainModal("login");
   loginView.clearInputs();
   registrationView.showMainModal("registration");
-  clearLoginState();
+  clearLoginFormState();
 };
 const controlLoginParaError = () => {
   loginView.getLoginFormInputs(validateLoginForm);
@@ -921,26 +931,39 @@ const controlLoginParaError = () => {
   }
   loginView.hideLoginErrorPara();
 };
+const controlLogoutBtn = () => {
+  clearLoginState();
+  navigationView.toggleHideShowNavigationBtn(state.isLogged);
+  loginView.changeWelcomePara(state.isLogged);
+};
 const controlLoginSubmission = async () => {
   try {
     if (!state.loginFormDataIsOk) {
       return;
     }
     await submitLoginForm();
+    navigationView.toggleHideShowNavigationBtn(state.isLogged);
+    loginView.changeWelcomePara(state.isLogged, state.loggedUser.email);
   } catch (err) {
     loginView.showMessageModal(err.message, "modal_log_error");
   } finally {
     loginView.hideMainModal("login");
     loginView.clearInputs();
-    clearLoginState();
+    clearLoginFormState();
     loginView.showLoginErrorPara();
   }
 };
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
-  urlView.addUrlChangeHandlerToMain(controlUrlChangeToMain);
-  urlView.addUrlChangeHandlerToRestaurants(controlUrlChangeToRestaurants);
-  urlView.addUrlChangeHandlerToFeedback(controlChangeHandlerToFeedback);
+  urlView.addUrlChangeHandlerToMain(() => {
+    controlChangePathname("/menu-page");
+  });
+  urlView.addUrlChangeHandlerToRestaurants(() => {
+    controlChangePathname("/restaurants-page");
+  });
+  urlView.addUrlChangeHandlerToFeedback(() => {
+    controlChangePathname("/feedback-page");
+  });
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
@@ -988,5 +1011,7 @@ const init = () => {
   );
   loginView.addInputFieldsHandler(controlLoginParaError);
   loginView.addLoginBtnHandler(controlLoginSubmission);
+  logoutView.addLogoutHandler(controlLogoutBtn);
+  navigationView.toggleHideShowNavigationBtn(state.isLogged);
 };
 init();

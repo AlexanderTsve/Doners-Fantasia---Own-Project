@@ -9,8 +9,11 @@ footer {
 .product_card {
   width: 20rem;
   margin: 1.87rem;
-  border: $dark-green-color 5px;
   border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
   &_body,
   &_header {
     background-color: $color-primary;
@@ -23,13 +26,13 @@ footer {
   &_footer {
     background-color: $color-secondary;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   &_img {
     height: 14rem;
   }
   &_qty_input {
-    width: 5rem;
+    width: 4.8rem;
     border-radius: 5px;
   }
 }

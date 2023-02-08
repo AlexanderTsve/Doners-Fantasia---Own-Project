@@ -41,3 +41,31 @@
   margin: 2.75rem;
   color: $dark-green-color;
 }
+.welcome-para {
+  color: $color-primary;
+  margin: 1.5rem 0 0 14.5rem;
+}
+.change_qty_btn {
+  width: 2rem;
+  height: 2rem;
+}
+.cart-tooltip {
+  &-text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 11rem;
+    color: $color-primary;
+    font-size: 12px;
+    background-color: $color-secondary;
+    border-radius: 1rem;
+    padding: 5px;
+    top: 4rem;
+    left: -130%;
+  }
+  &:hover {
+    .cart-tooltip-text {
+      visibility: visible;
+    }
+  }
+}

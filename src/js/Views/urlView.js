@@ -1,21 +1,19 @@
 class UrlView {
-  addUrlChangeHandler(handlerUrlChange) {
-    window.addEventListener("load", handlerUrlChange);
+  addUrlChangeHandler(handler) {
+    window.addEventListener("load", handler);
   }
-  addUrlChangeHandlerToMain(handlerUrlChangeToMain) {
-    document
-      .querySelector(".menu-item")
-      .addEventListener("click", handlerUrlChangeToMain);
+  addUrlChangeHandlerToMain(handler) {
+    document.querySelector(".menu-item").addEventListener("click", handler);
   }
-  addUrlChangeHandlerToRestaurants(handlerUrlChangeToRestaurants) {
+  addUrlChangeHandlerToRestaurants(handler) {
     document
       .querySelector(".footer_item_restaurants")
-      .addEventListener("click", handlerUrlChangeToRestaurants);
+      .addEventListener("click", handler);
   }
-  addUrlChangeHandlerToFeedback(handlerUrlChangeToFeedback) {
+  addUrlChangeHandlerToFeedback(handler) {
     document
       .querySelector(".footer_item_feedback")
-      .addEventListener("click", handlerUrlChangeToFeedback);
+      .addEventListener("click", handler);
   }
 }
 export default new UrlView();

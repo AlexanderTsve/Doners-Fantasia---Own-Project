@@ -17,12 +17,17 @@
         </ul>
         <ul class="nav__list">
           <li class="nav__item nav__item_login header-footer-items">Login</li>
-          <li class="nav__item header-footer-items">Logout</li>
+          <li class="nav__item header-footer-items hidden nav__item_logout">
+            Logout
+          </li>
           <li class="nav__item nav__item_register header-footer-items">
             Sign Up
           </li>
-          <li class="nav__item">
+          <li class="nav__item cart-tooltip">
             <img src="src/img/cart/cart.png" alt="Cart" />
+            <div class="cart-tooltip-text tooltip-container">
+              No products in the cart!
+            </div>
           </li>
         </ul>
       </nav>
@@ -267,6 +272,7 @@
               <option value="drink">Drink</option>
             </select>
           </div>
+          <div class="welcome-para"><p>Welcome, guest!</p></div>
         </div>
         <div class="products-container"></div>
         <div class="pagination_menu_page"></div>

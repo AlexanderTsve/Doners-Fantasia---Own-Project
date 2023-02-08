@@ -22,6 +22,11 @@ class LoginView extends Views {
   hideLoginErrorPara() {
     document.querySelector(".para_login").classList.add("not_visible");
   }
+  changeWelcomePara(isLogged, name = null) {
+    const divEl = document.querySelector(".welcome-para");
+    divEl.firstChild.innerText =
+      "Welcome, " + (isLogged ? `${name}!` : "guest!");
+  }
   getLoginFormInputs(validationFn) {
     const emailContent = document.getElementById("login_email_input").value;
     const passwordContent = document.getElementById(

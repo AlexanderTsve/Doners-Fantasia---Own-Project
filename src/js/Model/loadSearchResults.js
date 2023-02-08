@@ -2,7 +2,6 @@ import { GET_PRODUCTS_URL } from "../config.js";
 import { makeApiCall, returnProductObjects } from "../helpers.js";
 import { state } from "./state.js";
 import { async } from "regenerator-runtime";
-
 export const loadSearchResults = async (query, dropdownValue) => {
   try {
     const data = await makeApiCall(GET_PRODUCTS_URL);

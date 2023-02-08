@@ -42,4 +42,5 @@ export const state = {
   loginFormDataIsOk: false,
   loggedUser: {},
   isLogged: false,
+  cart: [],
 };
