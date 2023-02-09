@@ -5,16 +5,8 @@ import { loadSearchResults } from "./Model/loadSearchResults.js";
 import { getProductsPage } from "./Model/getProductsPage.js";
 import { loadRestaurants } from "./Model/loadRestaurants.js";
 import { sendFeedback } from "./Model/sendFeedback.js";
-import { validateFeedbackName } from "./Model/validateFeedbackName.js";
-import { validateFeedbackEmail } from "./Model/validateFeedbackEmail.js";
-import { validateFeedbackPhone } from "./Model/validateFeedbackPhone.js";
-import { validateFeedbackFieldInput } from "./Model/validateFeedbackFieldInput.js";
-import { validateRegistrationEmail } from "./Model/validateRegistrationEmail.js";
-import { validateRegistrationPhone } from "./Model/validateRegistrationPhone.js";
-import { validateRegistrationPassword } from "./Model/validateRegistrationPassword.js";
-import { validateRegistrationConfirmPassword } from "./Model/validateRegistrationConfirmPassword.js";
-import { validateRegistrationAddress } from "./Model/validateRegistrationAddress.js";
-import { validateRegistrationForm } from "./Model/validateRegistrationForm.js";
+import * as validateFeedback from "./Model/validateFeedbackInputs.js";
+import * as validateRegistration from "./Model/validateRegistrationInputs.js";
 import { submitRegistrationForm } from "./Model/submitRegistrationForm.js";
 import { clearRegistrationState } from "./Model/clearRegistrationState.js";
 import { validateLoginForm } from "./Model/validateLoginForm.js";
@@ -824,10 +816,13 @@ const validationFeedbackController = (validationFn, classEnd) => {
   }
 };
 const controlFeedbackFormValidation = async () => {
-  validationFeedbackController(validateFeedbackName, "name");
-  validationFeedbackController(validateFeedbackEmail, "email");
-  validationFeedbackController(validateFeedbackPhone, "phone");
-  validationFeedbackController(validateFeedbackFieldInput, "text");
+  validationFeedbackController(validateFeedback.validateFeedbackName, "name");
+  validationFeedbackController(validateFeedback.validateFeedbackEmail, "email");
+  validationFeedbackController(validateFeedback.validateFeedbackPhone, "phone");
+  validationFeedbackController(
+    validateFeedback.validateFeedbackFieldInput,
+    "text"
+  );
   if (
     state.feedbackFormData.emailContentIsOk &&
     state.feedbackFormData.nameContentIsOk &&
@@ -852,47 +847,65 @@ const controlRegisterModalHiding = () => {
   registrationView.clearParas();
 };
 const controlRegisterErrorParaEmail = () => {
-  registrationView.getRegistrationFormInputs(validateRegistrationEmail);
+  registrationView.getRegistrationFormInputs(
+    validateRegistration.validateRegistrationEmail
+  );
   state.registrationFormData.emailContentIsOk ||
   !state.registrationFormData.emailContent
     ? registrationView.hidePara("email")
     : registrationView.showPara("email");
-  registrationView.disabledHandler(validateRegistrationForm());
+  registrationView.disabledHandler(
+    validateRegistration.validateRegistrationForm()
+  );
 };
 const controlRegisterErrorParaPhone = () => {
-  registrationView.getRegistrationFormInputs(validateRegistrationPhone);
+  registrationView.getRegistrationFormInputs(
+    validateRegistration.validateRegistrationPhone
+  );
   state.registrationFormData.phoneContentIsOk ||
   !state.registrationFormData.phoneContent
     ? registrationView.hidePara("phone")
     : registrationView.showPara("phone");
-  registrationView.disabledHandler(validateRegistrationForm());
+  registrationView.disabledHandler(
+    validateRegistration.validateRegistrationForm()
+  );
 };
 const controlRegisterErrorParaPassword = () => {
-  registrationView.getRegistrationFormInputs(validateRegistrationPassword);
+  registrationView.getRegistrationFormInputs(
+    validateRegistration.validateRegistrationPassword
+  );
   state.registrationFormData.passwordContentIsOk ||
   !state.registrationFormData.passwordContent
     ? registrationView.hidePara("password")
     : registrationView.showPara("password");
-  registrationView.disabledHandler(validateRegistrationForm());
+  registrationView.disabledHandler(
+    validateRegistration.validateRegistrationForm()
+  );
 };
 const controlRegisterErrorParaConfirmPassword = () => {
   registrationView.getRegistrationFormInputs(
-    validateRegistrationConfirmPassword
+    validateRegistration.validateRegistrationConfirmPassword
   );
   state.registrationFormData.confirmPasswordContentIsOk ||
   (!state.registrationFormData.passwordContent &&
     !state.registrationFormData.confirmPasswordContent)
     ? registrationView.hidePara("password_confirm")
     : registrationView.showPara("password_confirm");
-  registrationView.disabledHandler(validateRegistrationForm());
+  registrationView.disabledHandler(
+    validateRegistration.validateRegistrationForm()
+  );
 };
 const controlRegisterErrorParaAddress = () => {
-  registrationView.getRegistrationFormInputs(validateRegistrationAddress);
+  registrationView.getRegistrationFormInputs(
+    validateRegistration.validateRegistrationAddress
+  );
   state.registrationFormData.addressContentIsOk ||
   !state.registrationFormData.addressContent
     ? registrationView.hidePara("address")
     : registrationView.showPara("address");
-  registrationView.disabledHandler(validateRegistrationForm());
+  registrationView.disabledHandler(
+    validateRegistration.validateRegistrationForm()
+  );
 };
 const controlRegistrationFormSubmission = async () => {
   const response = await submitRegistrationForm();
