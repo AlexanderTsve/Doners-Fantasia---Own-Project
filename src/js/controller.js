@@ -1,34 +1,36 @@
 import { state } from "./Model/state.js";
-import { loadProductDetails } from "./Model/loadProductDetails.js";
-import { loadProducts } from "./Model/loadProducts.js";
-import { loadSearchResults } from "./Model/loadSearchResults.js";
-import { getProductsPage } from "./Model/getProductsPage.js";
-import { loadRestaurants } from "./Model/loadRestaurants.js";
-import { sendFeedback } from "./Model/sendFeedback.js";
-import * as validateFeedback from "./Model/validateFeedbackInputs.js";
-import * as validateRegistration from "./Model/validateRegistrationInputs.js";
-import { submitRegistrationForm } from "./Model/submitRegistrationForm.js";
-import { clearRegistrationState } from "./Model/clearRegistrationState.js";
-import { validateLoginForm } from "./Model/validateLoginForm.js";
-import { submitLoginForm } from "./Model/submitLoginForm.js";
-import { clearLoginFormState } from "./Model/clearLoginFormState.js";
-import { clearLoginState } from "./Model/clearLoginState.js";
-import { validateAddToCartInput } from "./Model/validateAddToCartInput.js";
-import { fillCart } from "./Model/fillCart.js";
 import { getChangedCart } from "./Model/getChangedCart.js";
-import productDetailsView from "./Views/productDetailsView.js";
-import productsView from "./Views/productsView.js";
+import { controlUrlChange } from "./Controller/controlUrlChange.js";
+import { controlSearchResults } from "./Controller/controlSearchResults.js";
+import { controlPagination } from "./Controller/controlPagination.js";
+import { controlChangePathname } from "./Controller/controlChangePathname.js";
+import { controlFeedbackFormValidation } from "./Controller/controlFeedbackFormValidation.js";
+import { controlFeedbackModalHiding } from "./Controller/controlFeedbackModalHiding.js";
+import { controlRegisterModalShowing } from "./Controller/controlRegisterModalShowing.js";
+import { controlRegisterModalHiding } from "./Controller/controlRegisterModalHiding.js";
+import { controlRegisterErrorParaEmail } from "./Controller/controlRegisterErrorParaEmail.js";
+import { controlRegisterErrorParaPhone } from "./Controller/controlRegisterErrorParaPhone.js";
+import { controlRegisterErrorParaPassword } from "./Controller/controlRegisterErrorParaPassword.js";
+import { controlRegisterErrorParaConfirmPassword } from "./Controller/controlRegisterErrorParaConfirmPassword.js";
+import { controlRegisterErrorParaAddress } from "./Controller/controlRegisterErrorParaAddress.js";
+import { controlRegistrationFormSubmission } from "./Controller/controlRegistrationFormSubmission.js";
+import { controlClickLoginParaRegForm } from "./Controller/controlClickLoginParaRegForm.js";
+import { controlShowLoginModal } from "./Controller/controlShowLoginModal.js";
+import { controlHideLoginModal } from "./Controller/controlHideLoginModal.js";
+import { controlClickRegistrationParaLoginForm } from "./Controller/controlClickRegistrationParaLoginForm.js";
+import { controlLoginParaError } from "./Controller/controlLoginParaError.js";
+import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
+import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import * as bootstrap from "bootstrap";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import { URL_ARR } from "./config.js";
 import { async } from "regenerator-runtime";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import urlView from "./Views/urlView.js";
+import productsView from "./Views/productsView.js";
 import searchView from "./Views/searchView.js";
 import dropdownFilterView from "./Views/dropdownFilterView.js";
 import paginationView from "./Views/paginationView.js";
-import restaurantsView from "./Views/restaurantsView.js";
 import feedbackPageView from "./Views/feedbackPageView.js";
 import registrationView from "./Views/registrationView.js";
 import loginView from "./Views/loginView.js";
@@ -703,269 +705,6 @@ import navigationView from "./Views/navigationView.js";
 // sendRestaurants();
 
 // ---------------
-const controlAddingItemsToCart = (obj) => {
-  const validationResult = validateAddToCartInput(obj);
-  if (!validationResult) {
-    return;
-  }
-  fillCart(obj);
-  productsView.renderCartTooltip(getChangedCart());
-};
-const clearDropdownAndSearchField = () => {
-  dropdownFilterView.clearValue();
-  searchView.clearSearchValue();
-};
-const controlProductDetails = async (productId) => {
-  try {
-    productDetailsView.renderSpinner();
-    await loadProductDetails(productId);
-    if (!state.productDetails) {
-      throw new Error("There is no existing product with such ID!");
-    }
-    productDetailsView.render(state.productDetails);
-  } catch (err) {
-    productDetailsView.renderError(err.message);
-  }
-};
-const controlProducts = async () => {
-  try {
-    productsView.renderSpinner();
-    await loadProducts();
-    if (!state.products.every(Boolean) || state.products.length === 0) {
-      throw new Error("One or more of the products do not exist!");
-    }
-    productsView.render(getProductsPage());
-    paginationView.render(state);
-    productsView.addToCartBtnHandler(controlAddingItemsToCart);
-  } catch (err) {
-    productsView.renderError(err.message);
-  }
-};
-const controlRestaurants = async () => {
-  try {
-    restaurantsView.renderSpinner();
-    await loadRestaurants();
-    if (!state.restaurants.every(Boolean) || state.restaurants.length === 0) {
-      throw new Error("One or more of the restaurants do not exist!");
-    }
-    restaurantsView.render(state.restaurants);
-    restaurantsView.generateMap(state.restaurants);
-  } catch (err) {
-    restaurantsView.renderError(err.message);
-  }
-};
-const controlUrlChange = () => {
-  clearDropdownAndSearchField();
-  const pathname = window.location.pathname;
-  if (
-    URL_ARR.every((path) => path !== pathname) &&
-    !pathname.includes("details-page")
-  ) {
-    window.location.href += "menu-page";
-  }
-  if (URL_ARR.some((path) => path === pathname)) {
-    const currentPage = document.getElementById(
-      pathname.split("/").join("").trim()
-    );
-    currentPage.classList.remove("hidden");
-    if (pathname === "/menu-page") {
-      controlProducts();
-    }
-    if (pathname === "/restaurants-page") {
-      controlRestaurants();
-    }
-  }
-  if (pathname.includes("details-page")) {
-    const detailsPage = document.getElementById("details-page");
-    detailsPage.classList.remove("hidden");
-    controlProductDetails(pathname.replace("/details-page/", ""));
-  }
-};
-const controlSearchResults = async () => {
-  try {
-    const query = searchView.getQuery();
-    const dropdownValue = dropdownFilterView.getDropdownValue();
-    productsView.renderSpinner();
-    await loadSearchResults(query, dropdownValue);
-    if (!state.products.every(Boolean) || state.products.length === 0) {
-      throw new Error(
-        `There is no existing product with ${query} in its name!`
-      );
-    }
-    productsView.render(getProductsPage());
-    paginationView.render(state);
-    productsView.addToCartBtnHandler(controlAddingItemsToCart);
-  } catch (err) {
-    productsView.renderError(err.message);
-  }
-};
-const controlPagination = function (goToPage) {
-  productsView.render(getProductsPage(goToPage));
-  paginationView.render(state);
-  productsView.addToCartBtnHandler(controlAddingItemsToCart);
-};
-const controlChangePathname = (pathname) => {
-  window.location.pathname = pathname;
-};
-const validationFeedbackController = (validationFn, classEnd) => {
-  try {
-    feedbackPageView.getFeedbackFormInputsContent(validationFn);
-    feedbackPageView.clearError(classEnd);
-  } catch (err) {
-    feedbackPageView.renderError(err.message, classEnd);
-  }
-};
-const controlFeedbackFormValidation = async () => {
-  validationFeedbackController(validateFeedback.validateFeedbackName, "name");
-  validationFeedbackController(validateFeedback.validateFeedbackEmail, "email");
-  validationFeedbackController(validateFeedback.validateFeedbackPhone, "phone");
-  validationFeedbackController(
-    validateFeedback.validateFeedbackFieldInput,
-    "text"
-  );
-  if (
-    state.feedbackFormData.emailContentIsOk &&
-    state.feedbackFormData.nameContentIsOk &&
-    state.feedbackFormData.feedbackContentIsOk &&
-    state.feedbackFormData.phoneContentIsOk
-  ) {
-    feedbackPageView.clearInputs();
-    const response = await sendFeedback();
-    feedbackPageView.showMessageModal(response, "feedback-page");
-  }
-};
-const controlFeedbackModalHiding = () => {
-  feedbackPageView.hideMessageModal();
-};
-const controlRegisterModalShowing = () => {
-  registrationView.showMainModal("registration");
-};
-const controlRegisterModalHiding = () => {
-  registrationView.hideMainModal("registration");
-  registrationView.clearInputs();
-  clearRegistrationState();
-  registrationView.clearParas();
-};
-const controlRegisterErrorParaEmail = () => {
-  registrationView.getRegistrationFormInputs(
-    validateRegistration.validateRegistrationEmail
-  );
-  state.registrationFormData.emailContentIsOk ||
-  !state.registrationFormData.emailContent
-    ? registrationView.hidePara("email")
-    : registrationView.showPara("email");
-  registrationView.disabledHandler(
-    validateRegistration.validateRegistrationForm()
-  );
-};
-const controlRegisterErrorParaPhone = () => {
-  registrationView.getRegistrationFormInputs(
-    validateRegistration.validateRegistrationPhone
-  );
-  state.registrationFormData.phoneContentIsOk ||
-  !state.registrationFormData.phoneContent
-    ? registrationView.hidePara("phone")
-    : registrationView.showPara("phone");
-  registrationView.disabledHandler(
-    validateRegistration.validateRegistrationForm()
-  );
-};
-const controlRegisterErrorParaPassword = () => {
-  registrationView.getRegistrationFormInputs(
-    validateRegistration.validateRegistrationPassword
-  );
-  state.registrationFormData.passwordContentIsOk ||
-  !state.registrationFormData.passwordContent
-    ? registrationView.hidePara("password")
-    : registrationView.showPara("password");
-  registrationView.disabledHandler(
-    validateRegistration.validateRegistrationForm()
-  );
-};
-const controlRegisterErrorParaConfirmPassword = () => {
-  registrationView.getRegistrationFormInputs(
-    validateRegistration.validateRegistrationConfirmPassword
-  );
-  state.registrationFormData.confirmPasswordContentIsOk ||
-  (!state.registrationFormData.passwordContent &&
-    !state.registrationFormData.confirmPasswordContent)
-    ? registrationView.hidePara("password_confirm")
-    : registrationView.showPara("password_confirm");
-  registrationView.disabledHandler(
-    validateRegistration.validateRegistrationForm()
-  );
-};
-const controlRegisterErrorParaAddress = () => {
-  registrationView.getRegistrationFormInputs(
-    validateRegistration.validateRegistrationAddress
-  );
-  state.registrationFormData.addressContentIsOk ||
-  !state.registrationFormData.addressContent
-    ? registrationView.hidePara("address")
-    : registrationView.showPara("address");
-  registrationView.disabledHandler(
-    validateRegistration.validateRegistrationForm()
-  );
-};
-const controlRegistrationFormSubmission = async () => {
-  const response = await submitRegistrationForm();
-  registrationView.hideMainModal("registration");
-  registrationView.clearInputs();
-  registrationView.showMessageModal(response, "modal_reg");
-  clearRegistrationState();
-  registrationView.clearParas();
-};
-const controlClickLoginParaRegForm = () => {
-  registrationView.hideMainModal("registration");
-  registrationView.clearInputs();
-  loginView.showMainModal("login");
-  clearRegistrationState();
-  registrationView.clearParas();
-};
-const controlShowLoginModal = () => {
-  loginView.showMainModal("login");
-};
-const controlHideLoginModal = () => {
-  loginView.hideMainModal("login");
-  loginView.clearInputs();
-  clearLoginFormState();
-};
-const controlClickRegistrationParaLoginForm = () => {
-  loginView.hideMainModal("login");
-  loginView.clearInputs();
-  registrationView.showMainModal("registration");
-  clearLoginFormState();
-};
-const controlLoginParaError = () => {
-  loginView.getLoginFormInputs(validateLoginForm);
-  if (!state.loginFormDataIsOk) {
-    loginView.showLoginErrorPara();
-    return;
-  }
-  loginView.hideLoginErrorPara();
-};
-const controlLogoutBtn = () => {
-  clearLoginState();
-  navigationView.toggleHideShowNavigationBtn(state.isLogged);
-  loginView.changeWelcomePara(state.isLogged);
-};
-const controlLoginSubmission = async () => {
-  try {
-    if (!state.loginFormDataIsOk) {
-      return;
-    }
-    await submitLoginForm();
-    navigationView.toggleHideShowNavigationBtn(state.isLogged);
-    loginView.changeWelcomePara(state.isLogged, state.loggedUser.email);
-  } catch (err) {
-    loginView.showMessageModal(err.message, "modal_log_error");
-  } finally {
-    loginView.hideMainModal("login");
-    loginView.clearInputs();
-    clearLoginFormState();
-    loginView.showLoginErrorPara();
-  }
-};
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
   urlView.addUrlChangeHandlerToMain(() => {
