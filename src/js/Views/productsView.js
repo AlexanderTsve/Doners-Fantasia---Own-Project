@@ -35,6 +35,10 @@ class ProductsView extends Views {
   renderCartTooltip(data) {
     const container = document.querySelector(".tooltip-container");
     container.innerText = "";
+    if (!data) {
+      container.innerText = "No products in the cart!";
+      return;
+    }
     data.forEach((item, index) => {
       const paraNameEl = document.createElement("p");
       const paraQtyEl = document.createElement("p");

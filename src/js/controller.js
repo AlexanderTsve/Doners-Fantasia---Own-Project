@@ -1,4 +1,3 @@
-// import * as model from "./model.js";
 import { state } from "./Model/state.js";
 import { loadProductDetails } from "./Model/loadProductDetails.js";
 import { loadProducts } from "./Model/loadProducts.js";
@@ -24,6 +23,7 @@ import { clearLoginFormState } from "./Model/clearLoginFormState.js";
 import { clearLoginState } from "./Model/clearLoginState.js";
 import { validateAddToCartInput } from "./Model/validateAddToCartInput.js";
 import { fillCart } from "./Model/fillCart.js";
+import { getChangedCart } from "./Model/getChangedCart.js";
 import productDetailsView from "./Views/productDetailsView.js";
 import productsView from "./Views/productsView.js";
 import * as bootstrap from "bootstrap";
@@ -717,7 +717,7 @@ const controlAddingItemsToCart = (obj) => {
     return;
   }
   fillCart(obj);
-  productsView.renderCartTooltip(state.cart);
+  productsView.renderCartTooltip(getChangedCart());
 };
 const clearDropdownAndSearchField = () => {
   dropdownFilterView.clearValue();
@@ -1013,5 +1013,6 @@ const init = () => {
   loginView.addLoginBtnHandler(controlLoginSubmission);
   logoutView.addLogoutHandler(controlLogoutBtn);
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
+  productsView.renderCartTooltip(getChangedCart());
 };
 init();
