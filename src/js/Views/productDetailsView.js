@@ -12,6 +12,23 @@ class ProductDetailsView extends Views {
     this._clear();
     markupArr.forEach((markup) => this._parentElement.append(markup));
   }
+  addToCartHandler(handler) {
+    document
+      .querySelector(".details_page_add_to_cart_btn")
+      .addEventListener("click", (e) => {
+        const name =
+          e.target.parentElement.parentElement.firstChild.lastChild.innerText;
+        const price = Number(
+          e.target.parentElement.children[2].lastChild.innerText.split(" ")[0]
+        );
+        const obj = {
+          name,
+          price,
+          qty: 1,
+        };
+        handler(obj);
+      });
+  }
   _generateMarkupArr() {
     const productImageNameDivEl = document.createElement("div");
     const figDetailsEl = document.createElement("figure");
@@ -81,8 +98,11 @@ class ProductDetailsView extends Views {
     priceSpan.classList.add("product-details-font");
     productImageNameDivEl.classList.add("card", "w-50", "text-center");
     productAllDetailsDivEl.classList.add("product-details-body");
-    addBtnDetailsEl.innerText = "Add to Cart";
-    addBtnDetailsEl.classList.add("doner_app_button");
+    addBtnDetailsEl.innerText = "Add 1 to Cart";
+    addBtnDetailsEl.classList.add(
+      "doner_app_button",
+      "details_page_add_to_cart_btn"
+    );
     productImageNameDivEl.append(figDetailsEl);
     weightVolumeDetailsDivEl.append(weightVolumeIcon, weightVolumeSpan);
     priceDetailsDivEl.append(priceIcon, priceSpan);

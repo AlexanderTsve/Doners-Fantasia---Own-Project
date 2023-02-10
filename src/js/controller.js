@@ -2,6 +2,9 @@ import { state } from "./Model/state.js";
 import { getChangedCart } from "./Model/getChangedCart.js";
 import { controlUrlChange } from "./Controller/controlUrlChange.js";
 import { controlSearchResults } from "./Controller/controlSearchResults.js";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import { async } from "regenerator-runtime";
 import { controlPagination } from "./Controller/controlPagination.js";
 import { controlChangePathname } from "./Controller/controlChangePathname.js";
 import { controlFeedbackFormValidation } from "./Controller/controlFeedbackFormValidation.js";
@@ -22,10 +25,6 @@ import { controlLoginParaError } from "./Controller/controlLoginParaError.js";
 import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import * as bootstrap from "bootstrap";
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-import { async } from "regenerator-runtime";
-// import { v4 as uuidv4 } from "uuid";
 import urlView from "./Views/urlView.js";
 import productsView from "./Views/productsView.js";
 import searchView from "./Views/searchView.js";
@@ -36,6 +35,8 @@ import registrationView from "./Views/registrationView.js";
 import loginView from "./Views/loginView.js";
 import logoutView from "./Views/logoutView.js";
 import navigationView from "./Views/navigationView.js";
+import productDetailsView from "./Views/productDetailsView.js";
+// import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
 //     category: "Doner",
