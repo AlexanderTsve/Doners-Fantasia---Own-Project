@@ -6,10 +6,14 @@ export const submitLoginForm = async () => {
   try {
     await sendAuthData(POST_LOGIN_URL, state.loginFormData, LOGIN_AUTH_ERROR);
     const dataArr = await getUsers(USERS_URL);
-    state.loggedUser = Object.values(dataArr).find(
-      (user) => user.email === state.loginFormData.emailContent
+    localStorage.setItem(
+      "donerFantasiaLoggedUser",
+      JSON.stringify(
+        Object.values(dataArr).find(
+          (user) => user.email === state.loginFormData.emailContent
+        )
+      )
     );
-    state.isLogged = true;
   } catch (err) {
     throw err;
   }

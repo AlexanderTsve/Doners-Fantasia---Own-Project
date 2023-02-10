@@ -2,6 +2,9 @@ class UrlView {
   addUrlChangeHandler(handler) {
     window.addEventListener("load", handler);
   }
+  addBeforeUnloadHandler(handler) {
+    window.addEventListener("beforeunload", handler);
+  }
   addUrlChangeHandlerToMain(handler) {
     document.querySelector(".menu-item").addEventListener("click", handler);
   }

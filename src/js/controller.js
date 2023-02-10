@@ -24,6 +24,8 @@ import { controlClickRegistrationParaLoginForm } from "./Controller/controlClick
 import { controlLoginParaError } from "./Controller/controlLoginParaError.js";
 import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
+import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
+import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
 import * as bootstrap from "bootstrap";
 import urlView from "./Views/urlView.js";
 import productsView from "./Views/productsView.js";
@@ -35,7 +37,6 @@ import registrationView from "./Views/registrationView.js";
 import loginView from "./Views/loginView.js";
 import logoutView from "./Views/logoutView.js";
 import navigationView from "./Views/navigationView.js";
-import productDetailsView from "./Views/productDetailsView.js";
 // import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
@@ -717,6 +718,7 @@ const init = () => {
   urlView.addUrlChangeHandlerToFeedback(() => {
     controlChangePathname("/feedback-page");
   });
+  urlView.addBeforeUnloadHandler(controlBeforeUnloadEvent);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
@@ -767,5 +769,6 @@ const init = () => {
   logoutView.addLogoutHandler(controlLogoutBtn);
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
   productsView.renderCartTooltip(getChangedCart());
+  controlIfUserIsLogged();
 };
 init();

@@ -59,7 +59,7 @@ export const sendRegistrationData = async (url, data) => {
         email: data.emailContent,
         phone: data.phoneContent,
         address: data.addressContent,
-        orderHistory: [],
+        orderHistory: JSON.stringify(data.orderHistory),
       }),
       headers: {
         "Content-Type": "application/json",

@@ -34,12 +34,12 @@ export const state = {
     passwordContentIsOk: false,
     confirmPasswordContentIsOk: false,
     addressContentIsOk: false,
+    orderHistory: [],
   },
   loginFormData: {
     emailContent: "",
     passwordContent: "",
   },
   loginFormDataIsOk: false,
-  loggedUser: {},
-  isLogged: false,
+  loggedUser: JSON.parse(localStorage.getItem("donerFantasiaLoggedUser")) || {},
 };

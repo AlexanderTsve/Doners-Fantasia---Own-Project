@@ -9,8 +9,17 @@ class LoginView extends Views {
       .getElementById("login_password_input")
       .addEventListener("input", handler);
   }
+  addRememberMeHandler(handler) {
+    const obj = {
+      checked: document.getElementById("remember-me-checkbox").checked,
+    };
+    handler(obj);
+  }
   addLoginBtnHandler(handler) {
     document.querySelector(".login_btn").addEventListener("click", handler);
+  }
+  clearRememberMe() {
+    document.getElementById("remember-me-checkbox").checked = false;
   }
   clearInputs() {
     document.getElementById("login_email_input").value = "";

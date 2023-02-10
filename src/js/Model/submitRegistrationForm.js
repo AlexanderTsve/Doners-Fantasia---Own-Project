@@ -4,7 +4,8 @@ import {
   REGISTRATION_AUTH_ERROR,
   USERS_URL,
 } from "../config.js";
-import { sendRegistrationData } from "../helpers";
+import { sendRegistrationData } from "../helpers.js";
+import { sendAuthData } from "../helpers.js";
 import { async } from "regenerator-runtime";
 export const submitRegistrationForm = async () => {
   try {

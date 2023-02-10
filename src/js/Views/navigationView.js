@@ -13,5 +13,4 @@ class NavigationView extends Views {
     }
   }
 }
-
 export default new NavigationView();
