@@ -1,21 +1,14 @@
 import { state } from "./Model/state.js";
 import { getChangedCart } from "./Model/getChangedCart.js";
-import { controlUrlChange } from "./Controller/controlUrlChange.js";
 import { controlSearchResults } from "./Controller/controlSearchResults.js";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { async } from "regenerator-runtime";
 import { controlPagination } from "./Controller/controlPagination.js";
-import { controlChangePathname } from "./Controller/controlChangePathname.js";
 import { controlFeedbackFormValidation } from "./Controller/controlFeedbackFormValidation.js";
 import { controlFeedbackModalHiding } from "./Controller/controlFeedbackModalHiding.js";
 import { controlRegisterModalShowing } from "./Controller/controlRegisterModalShowing.js";
 import { controlRegisterModalHiding } from "./Controller/controlRegisterModalHiding.js";
-import { controlRegisterErrorParaEmail } from "./Controller/controlRegisterErrorParaEmail.js";
-import { controlRegisterErrorParaPhone } from "./Controller/controlRegisterErrorParaPhone.js";
-import { controlRegisterErrorParaPassword } from "./Controller/controlRegisterErrorParaPassword.js";
-import { controlRegisterErrorParaConfirmPassword } from "./Controller/controlRegisterErrorParaConfirmPassword.js";
-import { controlRegisterErrorParaAddress } from "./Controller/controlRegisterErrorParaAddress.js";
 import { controlRegistrationFormSubmission } from "./Controller/controlRegistrationFormSubmission.js";
 import { controlClickLoginParaRegForm } from "./Controller/controlClickLoginParaRegForm.js";
 import { controlShowLoginModal } from "./Controller/controlShowLoginModal.js";
@@ -26,7 +19,8 @@ import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
 import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
-import { controlChangeHash } from "./Controller/controlChangeHash.js";
+import * as controlRouting from "./Controller/controlRouting.js";
+import * as controlErrorParas from "./Controller/controlErrorParas.js";
 import * as bootstrap from "bootstrap";
 import urlView from "./Views/urlView.js";
 import productsView from "./Views/productsView.js";
@@ -710,21 +704,21 @@ import cartPageView from "./Views/cartPageView.js";
 
 // ---------------
 const init = () => {
-  urlView.addUrlChangeHandler(controlUrlChange);
+  urlView.addUrlChangeHandler(controlRouting.controlUrlChange);
   urlView.addUrlChangeHandlerToMain(() => {
-    controlChangePathname("menu-page");
+    controlRouting.controlChangePathname("menu-page");
   });
   urlView.addUrlChangeHandlerToRestaurants(() => {
-    controlChangePathname("restaurants-page");
+    controlRouting.controlChangePathname("restaurants-page");
   });
   urlView.addUrlChangeHandlerToFeedback(() => {
-    controlChangePathname("feedback-page");
+    controlRouting.controlChangePathname("feedback-page");
   });
   urlView.addUrlChangeHandlerToCartPage(() => {
-    controlChangePathname("cart-page");
+    controlRouting.controlChangePathname("cart-page");
   });
   urlView.addBeforeUnloadHandler(controlBeforeUnloadEvent);
-  urlView.addHashChangeHandler(controlChangeHash);
+  urlView.addHashChangeHandler(controlRouting.controlChangeHash);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);
@@ -739,27 +733,27 @@ const init = () => {
     "registration"
   );
   registrationView.addInputFieldHandler(
-    controlRegisterErrorParaEmail,
+    controlErrorParas.controlRegisterErrorParaEmail,
     "registration_email_input"
   );
   registrationView.addInputFieldHandler(
-    controlRegisterErrorParaPassword,
+    controlErrorParas.controlRegisterErrorParaPassword,
     "registration_password_input"
   );
   registrationView.addInputFieldHandler(
-    controlRegisterErrorParaConfirmPassword,
+    controlErrorParas.controlRegisterErrorParaConfirmPassword,
     "registration_password_confirm"
   );
   registrationView.addInputFieldHandler(
-    controlRegisterErrorParaConfirmPassword,
+    controlErrorParas.controlRegisterErrorParaConfirmPassword,
     "registration_password_input"
   );
   registrationView.addInputFieldHandler(
-    controlRegisterErrorParaPhone,
+    controlErrorParas.controlRegisterErrorParaPhone,
     "registration_phone_input"
   );
   registrationView.addInputFieldHandler(
-    controlRegisterErrorParaAddress,
+    controlErrorParas.controlRegisterErrorParaAddress,
     "registration_address_input"
   );
   registrationView.addSignUpBtnHandler(controlRegistrationFormSubmission);
