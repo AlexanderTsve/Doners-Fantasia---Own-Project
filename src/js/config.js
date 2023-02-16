@@ -30,3 +30,4 @@ export const REGISTRATION_AUTH_ERROR =
   "Please, check if the email has been used already for registration in the site or try again later!";
 export const LOGIN_AUTH_ERROR =
   "Please, check the entered email/password, and try again with valid credentials!";
+export const MIN_QTY_OF_ITEM = 1;

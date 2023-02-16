@@ -6,5 +6,25 @@
   .cart-container {
     margin: 10rem;
     color: $color-primary;
+    &-product {
+      margin-bottom: 1rem;
+      width: 40rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $color-secondary;
+      border-radius: 15%;
+      border: solid 0.15rem $dark-green-color;
+      &-description {
+        width: 25rem;
+      }
+      &-description,
+      &-increase,
+      &-decrease,
+      &-remove {
+        padding: 0.15rem;
+        margin: 0.45rem;
+      }
+    }
   }
 }

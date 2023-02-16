@@ -773,6 +773,7 @@ const init = () => {
   logoutView.addLogoutHandler(controlLogoutBtn);
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
   productsView.renderCartTooltip(getChangedCart());
+  cartPageView.render(getChangedCart());
   controlIfUserIsLogged();
 };
 init();
