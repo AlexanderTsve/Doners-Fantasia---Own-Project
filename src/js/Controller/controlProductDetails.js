@@ -5,10 +5,10 @@ import { state } from "../Model/state.js";
 import { loadProductDetails } from "../Model/loadProductDetails.js";
 import productDetailsView from "../Views/productDetailsView.js";
 import { controlAddItemToCart } from "./controlAddItemToCart.js";
-export const controlProductDetails = async (productId) => {
+export const controlProductDetails = async () => {
   try {
     productDetailsView.renderSpinner();
-    await loadProductDetails(productId);
+    await loadProductDetails(location.hash.split("/")[1]);
     if (!state.productDetails) {
       throw new Error("There is no existing product with such ID!");
     }

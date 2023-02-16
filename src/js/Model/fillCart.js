@@ -1,4 +1,3 @@
-import { state } from "./state.js";
 export const fillCart = (obj) => {
   let cart = localStorage.getItem("doner-cart");
   if (!cart) {

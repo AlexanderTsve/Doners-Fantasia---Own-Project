@@ -26,6 +26,7 @@ import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
 import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
+import { controlChangeHash } from "./Controller/controlChangeHash.js";
 import * as bootstrap from "bootstrap";
 import urlView from "./Views/urlView.js";
 import productsView from "./Views/productsView.js";
@@ -37,6 +38,7 @@ import registrationView from "./Views/registrationView.js";
 import loginView from "./Views/loginView.js";
 import logoutView from "./Views/logoutView.js";
 import navigationView from "./Views/navigationView.js";
+import cartPageView from "./Views/cartPageView.js";
 // import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
@@ -710,15 +712,19 @@ import navigationView from "./Views/navigationView.js";
 const init = () => {
   urlView.addUrlChangeHandler(controlUrlChange);
   urlView.addUrlChangeHandlerToMain(() => {
-    controlChangePathname("/menu-page");
+    controlChangePathname("menu-page");
   });
   urlView.addUrlChangeHandlerToRestaurants(() => {
-    controlChangePathname("/restaurants-page");
+    controlChangePathname("restaurants-page");
   });
   urlView.addUrlChangeHandlerToFeedback(() => {
-    controlChangePathname("/feedback-page");
+    controlChangePathname("feedback-page");
+  });
+  urlView.addUrlChangeHandlerToCartPage(() => {
+    controlChangePathname("cart-page");
   });
   urlView.addBeforeUnloadHandler(controlBeforeUnloadEvent);
+  urlView.addHashChangeHandler(controlChangeHash);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);
   paginationView.addHandlerClickBtn(controlPagination);

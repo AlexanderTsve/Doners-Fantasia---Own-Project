@@ -63,15 +63,27 @@ footer {
   }
 }
 .header-footer-items {
+  color: $color-secondary;
   cursor: pointer;
   text-decoration: underline;
-  color: $color-secondary;
   font-weight: bold;
   &:hover {
     color: $dark-green-color;
   }
   &:active {
     color: $violet-color;
+  }
+  a {
+    color: $color-secondary;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+    &:hover {
+      color: $dark-green-color;
+    }
+    &:active {
+      color: $violet-color;
+    }
   }
 }
 .spinner {

@@ -60,6 +60,12 @@ export default class View {
     const markup = this._generateMessageModalHtml(text);
     document.getElementById(divEl).append(markup);
   }
+  _increaseQtyHandler(qtyEl) {
+    qtyEl.value++;
+  }
+  _decreaseQtyHandler(qtyEl) {
+    qtyEl.value > 1 ? qtyEl.value-- : (qtyEl.value = "");
+  }
   _clear() {
     this._parentElement.innerHTML = "";
   }

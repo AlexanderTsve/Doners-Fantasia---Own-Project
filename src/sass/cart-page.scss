@@ -1,0 +1,10 @@
+#cart-page {
+  min-height: 80vh;
+  background-color: $violet-color;
+  display: flex;
+  justify-content: center;
+  .cart-container {
+    margin: 10rem;
+    color: $color-primary;
+  }
+}

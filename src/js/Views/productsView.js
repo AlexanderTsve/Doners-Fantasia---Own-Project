@@ -55,13 +55,11 @@ class ProductsView extends Views {
     imageEl.classList.remove("loading");
   }
   _changeUrlToDetails(id) {
-    window.location.pathname = `/details-page/${id}`;
-  }
-  _increaseQtyHandler(qtyEl) {
-    qtyEl.value++;
-  }
-  _decreaseQtyHandler(qtyEl) {
-    qtyEl.value > 1 ? qtyEl.value-- : (qtyEl.value = "");
+    const previousPage = document.getElementById(location.hash.slice(1));
+    location.hash = `details-page/${id}`;
+    const currentPage = document.getElementById("details-page");
+    previousPage.classList.add("hidden");
+    currentPage.classList.remove("hidden");
   }
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product) => {

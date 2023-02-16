@@ -1,11 +1,10 @@
-import * as bootstrap from "bootstrap";
-import { controlProducts } from "./controlProducts.js";
-import { controlRestaurants } from "./controlRestaurants.js";
-import { toggleCorrectPage } from "../helpers.js";
 import { controlProductDetails } from "./controlProductDetails.js";
 import { clearDropdownAndSearchField } from "./clearDropdownAndSearchField.js";
 import { URL_ARR } from "../config.js";
-export const controlUrlChange = () => {
+import { controlProducts } from "./controlProducts.js";
+import { toggleCorrectPage } from "../helpers.js";
+import { controlRestaurants } from "./controlRestaurants.js";
+export const controlChangeHash = () => {
   clearDropdownAndSearchField();
   const hash = location.hash.slice(1);
   if (
@@ -25,5 +24,9 @@ export const controlUrlChange = () => {
     if (hash === "restaurants-page") {
       controlRestaurants();
     }
+  }
+  if (hash.includes("details-page")) {
+    toggleCorrectPage(hash.split("/")[0]);
+    controlProductDetails();
   }
 };

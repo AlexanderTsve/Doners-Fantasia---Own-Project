@@ -2,6 +2,9 @@ class UrlView {
   addUrlChangeHandler(handler) {
     window.addEventListener("load", handler);
   }
+  addHashChangeHandler(handler) {
+    window.addEventListener("hashchange", handler);
+  }
   addBeforeUnloadHandler(handler) {
     window.addEventListener("beforeunload", handler);
   }
@@ -17,6 +20,9 @@ class UrlView {
     document
       .querySelector(".footer_item_feedback")
       .addEventListener("click", handler);
+  }
+  addUrlChangeHandlerToCartPage(handler) {
+    document.querySelector(".cart-el").addEventListener("click", handler);
   }
 }
 export default new UrlView();

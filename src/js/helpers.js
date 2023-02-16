@@ -101,3 +101,11 @@ export const returnProductObjects = (arrOfProducts) => {
     };
   });
 };
+export const toggleCorrectPage = (hash) => {
+  const pages = [...document.querySelectorAll(`[id$="page"]`)];
+  pages.forEach((page) => {
+    page.classList.add("hidden");
+  });
+  const currentPage = document.getElementById(hash);
+  currentPage.classList.remove("hidden");
+};

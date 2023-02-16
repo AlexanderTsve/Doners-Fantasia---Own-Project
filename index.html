@@ -13,7 +13,9 @@
       <nav class="nav">
         <img src="src/img/logo/logo1.jpg" alt="Logo" class="header__logo" />
         <ul class="nav__list">
-          <li class="nav__item header-footer-items menu-item">Menu</li>
+          <li class="nav__item header-footer-items menu-item">
+            <a href="#menu-page">Menu</a>
+          </li>
         </ul>
         <ul class="nav__list">
           <li class="nav__item nav__item_login header-footer-items">Login</li>
@@ -23,7 +25,7 @@
           <li class="nav__item nav__item_register header-footer-items">
             Sign Up
           </li>
-          <li class="nav__item cart-tooltip">
+          <li class="nav__item cart-tooltip cart-el">
             <img src="src/img/cart/cart.png" alt="Cart" />
             <div class="cart-tooltip-text tooltip-container">
               No products in the cart!
@@ -286,10 +288,10 @@
           <div id="restaurants-map-pane" class="restaurants-map-pane"></div>
         </div>
       </div>
-      <div id="order-page" class="hidden">Order</div>
       <div id="order-history-page" class="hidden">Orders</div>
-      <div id="cart-page" class="hidden">Cart</div>
-      <div id="news-page" class="hidden">News</div>
+      <div id="cart-page" class="hidden">
+        <div class="cart-container">No products in the cart!</div>
+      </div>
       <div id="feedback-page" class="hidden">
         <form class="w-25 feedback-form">
           <div class="mb-3 form-field">
@@ -359,10 +361,10 @@
     </main>
     <footer class="footer">
       <p class="footer_item header-footer-items footer_item_feedback">
-        Feedback and Recommendations
+        <a href="#feedback-page">Feedback and Recommendations</a>
       </p>
       <p class="footer_item header-footer-items footer_item_restaurants">
-        Restaurants
+        <a href="#restaurants-page">Restaurants</a>
       </p>
     </footer>
   </body>
