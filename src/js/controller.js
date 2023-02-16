@@ -7,12 +7,8 @@ import { async } from "regenerator-runtime";
 import { controlPagination } from "./Controller/controlPagination.js";
 import { controlFeedbackFormValidation } from "./Controller/controlFeedbackFormValidation.js";
 import { controlFeedbackModalHiding } from "./Controller/controlFeedbackModalHiding.js";
-import { controlRegisterModalShowing } from "./Controller/controlRegisterModalShowing.js";
-import { controlRegisterModalHiding } from "./Controller/controlRegisterModalHiding.js";
 import { controlRegistrationFormSubmission } from "./Controller/controlRegistrationFormSubmission.js";
 import { controlClickLoginParaRegForm } from "./Controller/controlClickLoginParaRegForm.js";
-import { controlShowLoginModal } from "./Controller/controlShowLoginModal.js";
-import { controlHideLoginModal } from "./Controller/controlHideLoginModal.js";
 import { controlClickRegistrationParaLoginForm } from "./Controller/controlClickRegistrationParaLoginForm.js";
 import { controlLoginParaError } from "./Controller/controlLoginParaError.js";
 import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
@@ -21,6 +17,8 @@ import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
 import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
 import * as controlRouting from "./Controller/controlRouting.js";
 import * as controlErrorParas from "./Controller/controlErrorParas.js";
+import * as controlToggleRegistrationModal from "./Controller/controlToggleRegistrationModal.js";
+import * as controlToggleLoginModal from "./Controller/controlToggleLoginModal.js";
 import * as bootstrap from "bootstrap";
 import urlView from "./Views/urlView.js";
 import productsView from "./Views/productsView.js";
@@ -725,11 +723,11 @@ const init = () => {
   feedbackPageView.addSubmitFormHandler(controlFeedbackFormValidation);
   feedbackPageView.addHideMessageModalHandler(controlFeedbackModalHiding);
   registrationView.addShowMainModalHandler(
-    controlRegisterModalShowing,
+    controlToggleRegistrationModal.registerModalShowing,
     "register"
   );
   registrationView.addHideMainModalHandler(
-    controlRegisterModalHiding,
+    controlToggleRegistrationModal.registerModalHiding,
     "registration"
   );
   registrationView.addInputFieldHandler(
@@ -758,8 +756,14 @@ const init = () => {
   );
   registrationView.addSignUpBtnHandler(controlRegistrationFormSubmission);
   registrationView.addParaHandler(controlClickLoginParaRegForm, "login_para");
-  loginView.addShowMainModalHandler(controlShowLoginModal, "login");
-  loginView.addHideMainModalHandler(controlHideLoginModal, "login");
+  loginView.addShowMainModalHandler(
+    controlToggleLoginModal.showLoginModal,
+    "login"
+  );
+  loginView.addHideMainModalHandler(
+    controlToggleLoginModal.hideLoginModal,
+    "login"
+  );
   loginView.addParaHandler(
     controlClickRegistrationParaLoginForm,
     "register_paragraph"
