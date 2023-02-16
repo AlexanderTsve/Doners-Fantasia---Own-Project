@@ -10,17 +10,17 @@ const disableHandler = () => {
 const getAndValidateInputs = (validationFn) => {
   registrationView.getRegistrationFormInputs(validationFn);
 };
-const togglePara = (booleanValue) => {
+const togglePara = (booleanValue, para) => {
   booleanValue
-    ? registrationView.hidePara("address")
-    : registrationView.showPara("address");
+    ? registrationView.hidePara(para)
+    : registrationView.showPara(para);
 };
 export const controlRegisterErrorParaAddress = () => {
   getAndValidateInputs(validateRegistration.validateRegistrationAddress);
   const booleanValue =
     state.registrationFormData.addressContentIsOk ||
     !state.registrationFormData.addressContent;
-  togglePara(booleanValue);
+  togglePara(booleanValue, "address");
   disableHandler();
 };
 export const controlRegisterErrorParaPassword = () => {
@@ -28,7 +28,7 @@ export const controlRegisterErrorParaPassword = () => {
   const booleanValue =
     state.registrationFormData.passwordContentIsOk ||
     !state.registrationFormData.passwordContent;
-  togglePara(booleanValue);
+  togglePara(booleanValue, "password");
   disableHandler();
 };
 export const controlRegisterErrorParaConfirmPassword = () => {
@@ -39,7 +39,7 @@ export const controlRegisterErrorParaConfirmPassword = () => {
     state.registrationFormData.confirmPasswordContentIsOk ||
     (!state.registrationFormData.passwordContent &&
       !state.registrationFormData.confirmPasswordContent);
-  togglePara(booleanValue);
+  togglePara(booleanValue, "password_confirm");
   disableHandler();
 };
 export const controlRegisterErrorParaEmail = () => {
@@ -47,7 +47,7 @@ export const controlRegisterErrorParaEmail = () => {
   const booleanValue =
     state.registrationFormData.emailContentIsOk ||
     !state.registrationFormData.emailContent;
-  togglePara(booleanValue);
+  togglePara(booleanValue, "email");
   disableHandler();
 };
 export const controlRegisterErrorParaPhone = () => {
@@ -55,6 +55,6 @@ export const controlRegisterErrorParaPhone = () => {
   const booleanValue =
     state.registrationFormData.phoneContentIsOk ||
     !state.registrationFormData.phoneContent;
-  togglePara(booleanValue);
+  togglePara(booleanValue, "phone");
   disableHandler();
 };
