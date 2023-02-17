@@ -1,6 +1,7 @@
 import Views from "./Views.js";
 class CartPageView extends Views {
   _parentElement = document.querySelector(".cart-container");
+  _formElement = document.querySelector(".order-form-container");
   render(data) {
     if (!data || data.length === 0) {
       this._parentElement.innerText = "No products in the cart!";
@@ -12,6 +13,10 @@ class CartPageView extends Views {
     markupArr.forEach((element) => {
       this._parentElement.append(element);
     });
+    if (!this._formElement.hasChildNodes()) {
+      const formMarkup = this._generateOrderForm();
+      this._formElement.append(formMarkup);
+    }
   }
   addIncreaseCartQtyHandler(handler) {
     const increaseBtns = [
@@ -88,6 +93,77 @@ class CartPageView extends Views {
         handler(name);
       })
     );
+  }
+  addOrderFormInputHandler(validationFn, idEnd) {
+    document
+      .getElementById(`order_form_${idEnd}`)
+      .addEventListener("input", (e) => {
+        validationFn(e.target.value);
+      });
+  }
+  errorParaHandler(classIdent, msg) {
+    document.querySelector(`.order_form_${classIdent}_error`).innerText = msg;
+  }
+  _generateOrderForm() {
+    const orderFormDivEl = document.createElement("form");
+    const orderFormNamesLabelEl = document.createElement("label");
+    const orderFormNamesInputEl = document.createElement("input");
+    const orderFormNamesErrorPara = document.createElement("p");
+    const orderFormAddressLabelEl = document.createElement("label");
+    const orderFormAddressInputEl = document.createElement("input");
+    const orderFormAddressErrorPara = document.createElement("p");
+    const orderFormPhoneLabelEl = document.createElement("label");
+    const orderFormPhoneInputEl = document.createElement("input");
+    const orderFormPhoneErrorPara = document.createElement("p");
+    const orderFormEmailLabelEl = document.createElement("label");
+    const orderFormEmailInputEl = document.createElement("input");
+    const orderFormEmailErrorPara = document.createElement("p");
+    const orderFormBtn = document.createElement("button");
+    orderFormDivEl.id = "order_form";
+    orderFormNamesLabelEl.setAttribute("for", "order_form_names");
+    orderFormNamesLabelEl.innerText = "First and Last Name:";
+    orderFormNamesInputEl.setAttribute("type", "text");
+    orderFormNamesInputEl.id = "order_form_names";
+    orderFormNamesInputEl.setAttribute("required", "");
+    orderFormNamesErrorPara.classList.add("order_form_names_error");
+    orderFormAddressLabelEl.setAttribute("for", "order_form_address");
+    orderFormAddressLabelEl.innerText = "Address:";
+    orderFormAddressInputEl.setAttribute("type", "text");
+    orderFormAddressInputEl.id = "order_form_address";
+    orderFormAddressInputEl.setAttribute("required", "");
+    orderFormAddressErrorPara.classList.add("order_form_address_error");
+    orderFormPhoneLabelEl.setAttribute("for", "order_form_phone");
+    orderFormPhoneLabelEl.innerText = "Phone:";
+    orderFormPhoneInputEl.setAttribute("type", "tel");
+    orderFormPhoneInputEl.id = "order_form_phone";
+    orderFormPhoneInputEl.setAttribute("required", "");
+    orderFormPhoneErrorPara.classList.add("order_form_phone_error");
+    orderFormEmailLabelEl.setAttribute("for", "order_form_email");
+    orderFormEmailLabelEl.innerText = "Email:";
+    orderFormEmailInputEl.setAttribute("type", "email");
+    orderFormEmailInputEl.id = "order_form_email";
+    orderFormEmailInputEl.setAttribute("required", "");
+    orderFormEmailErrorPara.classList.add("order_form_email_error");
+    orderFormBtn.innerText = "Order";
+    orderFormBtn.setAttribute("type", "submit");
+    orderFormBtn.setAttribute("disabled", "");
+    orderFormBtn.classList.add("doner_app_button", "order_form_btn");
+    orderFormDivEl.append(
+      orderFormNamesLabelEl,
+      orderFormNamesInputEl,
+      orderFormNamesErrorPara,
+      orderFormAddressLabelEl,
+      orderFormAddressInputEl,
+      orderFormAddressErrorPara,
+      orderFormPhoneLabelEl,
+      orderFormPhoneInputEl,
+      orderFormPhoneErrorPara,
+      orderFormEmailLabelEl,
+      orderFormEmailInputEl,
+      orderFormEmailErrorPara,
+      orderFormBtn
+    );
+    return orderFormDivEl;
   }
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product, index) => {

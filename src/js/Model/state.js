@@ -42,4 +42,15 @@ export const state = {
   },
   loginFormDataIsOk: false,
   loggedUser: JSON.parse(localStorage.getItem("donerFantasiaLoggedUser")) || {},
+  orderData: {
+    nameContent: "",
+    emailContent: "",
+    phoneContent: "",
+    addressContent: "",
+    nameContentIsOk: false,
+    emailContentIsOk: false,
+    phoneContentIsOk: false,
+    addressContentIsOk: false,
+  },
+  orderDataIsOk: false,
 };
