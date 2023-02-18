@@ -5,6 +5,7 @@
 .products-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content:center;
 }
 .search_dropdown_container {
   background-color: $dark-green-color;
