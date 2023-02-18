@@ -51,6 +51,8 @@
   height: 2rem;
 }
 .cart-tooltip {
+  position: fixed;
+  margin-top: 6rem;
   &-text {
     visibility: hidden;
     position: absolute;
@@ -62,7 +64,7 @@
     border-radius: 1rem;
     padding: 5px;
     top: 4rem;
-    left: -130%;
+    left: -70%;
   }
   &:hover {
     .cart-tooltip-text {
