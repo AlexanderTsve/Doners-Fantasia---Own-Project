@@ -35,7 +35,7 @@
   }
 }
 #order_form {
-  height: 30rem;
+  height: 35rem;
   width: 25rem;
   margin-bottom: 5rem;
   display: flex;
@@ -59,10 +59,29 @@
     line-height: 1.5;
   }
   .order_form_btn {
+    margin: 1.2rem;
     &:disabled {
       background-color: $grey-color;
       color: $white;
       opacity: 1;
+    }
+  }
+}
+.order-tooltip {
+  &-text {
+    text-align: center;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 12rem;
+    color: $dark-green-color;
+    font-size: 12px;
+    background-color: $violet-color;
+    border-radius: 0.5rem;
+  }
+  &:hover {
+    .order-tooltip-text {
+      visibility: visible;
     }
   }
 }

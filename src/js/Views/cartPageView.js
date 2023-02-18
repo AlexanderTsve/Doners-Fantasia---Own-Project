@@ -142,7 +142,9 @@ class CartPageView extends Views {
     const orderFormEmailLabelEl = document.createElement("label");
     const orderFormEmailInputEl = document.createElement("input");
     const orderFormEmailErrorPara = document.createElement("p");
+    const orderBtnDivEl = document.createElement("div");
     const orderFormBtn = document.createElement("button");
+    const tooltipDivEl = document.createElement("div");
     orderFormDivEl.id = "order_form";
     orderFormNamesLabelEl.setAttribute("for", "order_form_names");
     orderFormNamesLabelEl.innerText = "First and Last Name:";
@@ -172,6 +174,10 @@ class CartPageView extends Views {
     orderFormBtn.setAttribute("type", "submit");
     orderFormBtn.setAttribute("disabled", "");
     orderFormBtn.classList.add("doner_app_button", "order_form_btn");
+    tooltipDivEl.innerText = "Please, log in and fill in the form!";
+    tooltipDivEl.classList.add("order-tooltip-text");
+    orderBtnDivEl.classList.add("order-tooltip");
+    orderBtnDivEl.append(tooltipDivEl, orderFormBtn);
     orderFormDivEl.append(
       orderFormNamesLabelEl,
       orderFormNamesInputEl,
@@ -185,7 +191,7 @@ class CartPageView extends Views {
       orderFormEmailLabelEl,
       orderFormEmailInputEl,
       orderFormEmailErrorPara,
-      orderFormBtn
+      orderBtnDivEl
     );
     return orderFormDivEl;
   }
