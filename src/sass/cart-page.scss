@@ -3,10 +3,12 @@
   background-color: $violet-color;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
   .cart-container {
     margin: 7rem;
     color: $color-primary;
+    display: flex;
+    flex-direction: column;
     &-product {
       margin-bottom: 1rem;
       width: 40rem;
@@ -26,6 +28,9 @@
         padding: 0.15rem;
         margin: 0.45rem;
       }
+    }
+    &-para {
+      align-self: center;
     }
   }
 }

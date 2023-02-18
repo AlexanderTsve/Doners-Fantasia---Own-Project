@@ -13,6 +13,7 @@ class CartPageView extends Views {
     markupArr.forEach((element) => {
       this._parentElement.append(element);
     });
+    this._parentElement.append(this._renderTotalAmount());
     if (!this._formElement.hasChildNodes()) {
       const formMarkup = this._generateOrderForm();
       this._formElement.append(formMarkup);
@@ -66,13 +67,16 @@ class CartPageView extends Views {
             .split(":")[1]
             .slice(1)
         );
-        const price = Number(
-          e.target.parentElement.firstChild.innerText
-            .split(",")[2]
-            .split(":")[1]
-            .slice(1)
-            .split(" ")[0]
-        );
+        const price =
+          Math.round(
+            Number(
+              e.target.parentElement.firstChild.innerText
+                .split(",")[2]
+                .split(":")[1]
+                .slice(1)
+                .split(" ")[0]
+            ) * 10
+          ) / 10;
         const obj = {
           name,
           price: price / qty,
@@ -103,6 +107,26 @@ class CartPageView extends Views {
   }
   errorParaHandler(classIdent, msg) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = msg;
+  }
+  clearErrorParaHandler(classIdent) {
+    document.querySelector(`.order_form_${classIdent}_error`).innerText = "";
+  }
+  _renderTotalAmount() {
+    const totalPrice = [
+      ...document.querySelectorAll(".cart-container-product-description"),
+    ]
+      .map((el) =>
+        Number(el.innerText.split(",")[2].split(":")[1].trim().split(" ")[0])
+      )
+      .reduce((acc, el) => {
+        return (acc += el);
+      }, 0);
+    const pricePara = document.createElement("p");
+    pricePara.innerText = `Total Price: ${(
+      Math.round(totalPrice * 10) / 10
+    ).toFixed(2)} BGN`;
+    pricePara.classList.add("cart-container-para");
+    return pricePara;
   }
   _generateOrderForm() {
     const orderFormDivEl = document.createElement("form");

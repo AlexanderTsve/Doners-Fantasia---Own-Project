@@ -4,7 +4,11 @@ import { REGEX_PHONE } from "../config.js";
 import { REGEX_NAME } from "../config.js";
 export const validateOrderFormNames = (nameStr) => {
   try {
+    if (nameStr.length === 0) {
+      return;
+    }
     const regName = REGEX_NAME;
+
     if (!regName.test(nameStr) || !nameStr) {
       throw new Error("Fill in valid names!");
     }
@@ -16,6 +20,9 @@ export const validateOrderFormNames = (nameStr) => {
 };
 export const validateOrderFormAddress = (addressStr) => {
   try {
+    if (addressStr.length === 0) {
+      return;
+    }
     state.orderData.addressContentIsOk =
       addressStr.length < 20 || !addressStr ? false : true;
     if (!state.orderData.addressContentIsOk) {
@@ -28,6 +35,9 @@ export const validateOrderFormAddress = (addressStr) => {
 };
 export const validateOrderFormPhone = (phoneStr) => {
   try {
+    if (phoneStr.length === 0) {
+      return;
+    }
     const regPhone = REGEX_PHONE;
     if (!regPhone.test(phoneStr) || !phoneStr) {
       throw new Error("Fill in valid phone number!");
@@ -40,6 +50,9 @@ export const validateOrderFormPhone = (phoneStr) => {
 };
 export const validateOrderFormEmail = (emailStr) => {
   try {
+    if (emailStr.length === 0) {
+      return;
+    }
     const regEmail = REGEX_EMAIL;
     if (!regEmail.test(emailStr) || !emailStr) {
       throw new Error("Fill in valid email address!");
