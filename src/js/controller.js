@@ -15,6 +15,10 @@ import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
 import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
+import { controlAddItemToCart } from "./Controller/controlAddItemToCart.js";
+import { controlDecreaseItemFromCart } from "./Controller/controlDecreaseItemFromCart.js";
+import { controlRemoveProductFromCart } from "./Controller/controlRemoveProductFromCart.js";
+import * as controlOrderFormValidation from "./Controller/controlOrderFormValidation.js";
 import * as controlRouting from "./Controller/controlRouting.js";
 import * as controlErrorParas from "./Controller/controlErrorParas.js";
 import * as controlToggleRegistrationModal from "./Controller/controlToggleRegistrationModal.js";
@@ -774,6 +778,11 @@ const init = () => {
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
   productsView.renderCartTooltip(getChangedCart());
   cartPageView.render(getChangedCart());
+  if (getChangedCart() && getChangedCart().length > 0) {
+    cartPageView.addIncreaseCartQtyHandler(controlAddItemToCart);
+    cartPageView.addDecreaseCartQtyHandler(controlDecreaseItemFromCart);
+    cartPageView.addRemoveProductHandler(controlRemoveProductFromCart);
+  }
   controlIfUserIsLogged();
 };
 init();

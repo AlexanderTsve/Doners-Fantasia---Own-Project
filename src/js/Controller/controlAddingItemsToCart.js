@@ -8,6 +8,7 @@ import { controlAddItemToCart } from "./controlAddItemToCart.js";
 import { controlDecreaseItemFromCart } from "./controlDecreaseItemFromCart.js";
 import { controlRemoveProductFromCart } from "./controlRemoveProductFromCart.js";
 import * as controlOrderFormValidation from "./controlOrderFormValidation.js";
+import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 export const controlAddingItemsToCart = (obj) => {
   const validationResult = validateAddToCartInput(obj);
   if (!validationResult) {
@@ -22,18 +23,22 @@ export const controlAddingItemsToCart = (obj) => {
   cartPageView.addRemoveProductHandler(controlRemoveProductFromCart);
   cartPageView.addOrderFormInputHandler(
     controlOrderFormValidation.controlNamesValidation,
+    checkLoginAndOrderFormData,
     "names"
   );
   cartPageView.addOrderFormInputHandler(
     controlOrderFormValidation.controlAddressValidation,
+    checkLoginAndOrderFormData,
     "address"
   );
   cartPageView.addOrderFormInputHandler(
     controlOrderFormValidation.controlPhoneValidation,
+    checkLoginAndOrderFormData,
     "phone"
   );
   cartPageView.addOrderFormInputHandler(
     controlOrderFormValidation.controlEmailValidation,
+    checkLoginAndOrderFormData,
     "email"
   );
 };

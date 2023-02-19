@@ -1,4 +1,5 @@
 import { state } from "./state.js";
 export const clearLoginState = () => {
-  localStorage.clear();
+  localStorage.removeItem("donerFantasiaLoggedUser");
+  localStorage.removeItem("rememberUser");
 };

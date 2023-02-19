@@ -8,8 +8,9 @@ export const validateOrderFormNames = (nameStr) => {
       return;
     }
     const regName = REGEX_NAME;
-
     if (!regName.test(nameStr) || !nameStr) {
+      state.orderData.nameContent = "";
+      state.orderData.nameContentIsOk = false;
       throw new Error("Fill in valid names!");
     }
     state.orderData.nameContent = nameStr;
@@ -26,6 +27,7 @@ export const validateOrderFormAddress = (addressStr) => {
     state.orderData.addressContentIsOk =
       addressStr.length < 20 || !addressStr ? false : true;
     if (!state.orderData.addressContentIsOk) {
+      state.orderData.addressContent = "";
       throw new Error("Fill in valid address!");
     }
     state.orderData.addressContent = addressStr;
@@ -40,6 +42,8 @@ export const validateOrderFormPhone = (phoneStr) => {
     }
     const regPhone = REGEX_PHONE;
     if (!regPhone.test(phoneStr) || !phoneStr) {
+      state.orderData.phoneContent = "";
+      state.orderData.phoneContentIsOk = false;
       throw new Error("Fill in valid phone number!");
     }
     state.orderData.phoneContent = phoneStr;
@@ -55,6 +59,8 @@ export const validateOrderFormEmail = (emailStr) => {
     }
     const regEmail = REGEX_EMAIL;
     if (!regEmail.test(emailStr) || !emailStr) {
+      state.orderData.emailContent = "";
+      state.orderData.emailContentIsOk = false;
       throw new Error("Fill in valid email address!");
     }
     state.orderData.emailContent = emailStr;
@@ -62,11 +68,4 @@ export const validateOrderFormEmail = (emailStr) => {
   } catch (err) {
     throw err;
   }
-};
-export const validateOrderForm = () => {
-  state.orderDataIsOk =
-    state.orderData.addressContentIsOk &&
-    state.orderData.emailContentIsOk &&
-    state.orderData.nameContentIsOk &&
-    state.orderData.phoneContentIsOk;
 };

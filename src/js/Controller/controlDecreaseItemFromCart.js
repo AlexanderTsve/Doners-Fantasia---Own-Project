@@ -6,6 +6,7 @@ import cartPageView from "../Views/cartPageView.js";
 import { getChangedCart } from "../Model/getChangedCart.js";
 import { controlAddItemToCart } from "./controlAddItemToCart.js";
 import { controlRemoveProductFromCart } from "./controlRemoveProductFromCart.js";
+import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 export const controlDecreaseItemFromCart = (obj) => {
   removeItemFromCart(obj);
   const cart = getChangedCart();
@@ -14,20 +15,26 @@ export const controlDecreaseItemFromCart = (obj) => {
   cartPageView.addIncreaseCartQtyHandler(controlAddItemToCart);
   cartPageView.addDecreaseCartQtyHandler(controlDecreaseItemFromCart);
   cartPageView.addRemoveProductHandler(controlRemoveProductFromCart);
-  cartPageView.addOrderFormInputHandler(
-    controlOrderFormValidation.controlNamesValidation,
-    "names"
-  );
-  cartPageView.addOrderFormInputHandler(
-    controlOrderFormValidation.controlAddressValidation,
-    "address"
-  );
-  cartPageView.addOrderFormInputHandler(
-    controlOrderFormValidation.controlPhoneValidation,
-    "phone"
-  );
-  cartPageView.addOrderFormInputHandler(
-    controlOrderFormValidation.controlEmailValidation,
-    "email"
-  );
+  if (cart && cart.length > 0) {
+    cartPageView.addOrderFormInputHandler(
+      controlOrderFormValidation.controlNamesValidation,
+      checkLoginAndOrderFormData,
+      "names"
+    );
+    cartPageView.addOrderFormInputHandler(
+      controlOrderFormValidation.controlAddressValidation,
+      checkLoginAndOrderFormData,
+      "address"
+    );
+    cartPageView.addOrderFormInputHandler(
+      controlOrderFormValidation.controlPhoneValidation,
+      checkLoginAndOrderFormData,
+      "phone"
+    );
+    cartPageView.addOrderFormInputHandler(
+      controlOrderFormValidation.controlEmailValidation,
+      checkLoginAndOrderFormData,
+      "email"
+    );
+  }
 };

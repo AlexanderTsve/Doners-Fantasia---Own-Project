@@ -3,8 +3,11 @@ class CartPageView extends Views {
   _parentElement = document.querySelector(".cart-container");
   _formElement = document.querySelector(".order-form-container");
   render(data) {
+    const totalCountEl = document.querySelector(".cart-items-count");
     if (!data || data.length === 0) {
       this._parentElement.innerText = "No products in the cart!";
+      this._formElement.innerHTML = "";
+      totalCountEl.innerText = 0;
       return;
     }
     this._data = data;
@@ -13,11 +16,11 @@ class CartPageView extends Views {
     markupArr.forEach((element) => {
       this._parentElement.append(element);
     });
-    this._parentElement.append(this._renderTotalAmount());
-    if (!this._formElement.hasChildNodes()) {
-      const formMarkup = this._generateOrderForm();
-      this._formElement.append(formMarkup);
-    }
+    this._parentElement.append(this._renderTotalAmount(this._data));
+    totalCountEl.innerText = data.reduce((acc, product) => {
+      return (acc += Number(product.qty));
+    }, 0);
+    this._renderOrderForm();
   }
   addIncreaseCartQtyHandler(handler) {
     const increaseBtns = [
@@ -98,11 +101,19 @@ class CartPageView extends Views {
       })
     );
   }
-  addOrderFormInputHandler(validationFn, idEnd) {
+  addOrderFormInputHandler(validationFn, checkLoginAndOrderFormDataFn, idEnd) {
     document
       .getElementById(`order_form_${idEnd}`)
       .addEventListener("input", (e) => {
         validationFn(e.target.value);
+        const orderBtn = document.querySelector(".order_form_btn");
+        const bool = checkLoginAndOrderFormDataFn();
+        if (bool) {
+          orderBtn.disabled = false;
+        }
+        if (!bool) {
+          orderBtn.disabled = true;
+        }
       });
   }
   errorParaHandler(classIdent, msg) {
@@ -111,16 +122,16 @@ class CartPageView extends Views {
   clearErrorParaHandler(classIdent) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = "";
   }
-  _renderTotalAmount() {
-    const totalPrice = [
-      ...document.querySelectorAll(".cart-container-product-description"),
-    ]
-      .map((el) =>
-        Number(el.innerText.split(",")[2].split(":")[1].trim().split(" ")[0])
-      )
-      .reduce((acc, el) => {
-        return (acc += el);
-      }, 0);
+  _renderOrderForm() {
+    if (!this._formElement.hasChildNodes()) {
+      const formMarkup = this._generateOrderForm();
+      this._formElement.append(formMarkup);
+    }
+  }
+  _renderTotalAmount(arrOfProducts) {
+    const totalPrice = arrOfProducts.reduce((acc, product) => {
+      return (acc += Number(product.price));
+    }, 0);
     const pricePara = document.createElement("p");
     pricePara.innerText = `Total Price: ${(
       Math.round(totalPrice * 10) / 10
