@@ -21,6 +21,8 @@ export const USERS_URL =
   "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-users.json";
 export const POST_LOGIN_URL =
   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD6KelOIQO1vqaFenmxrzOrsKoNgeThnXs";
+export const USER_HISTORY_URL =
+  "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-users/user/orderHistory.json";
 export const RES_PER_PAGE = 8;
 export const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const REGEX_PASSWORD = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;

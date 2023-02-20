@@ -20,6 +20,7 @@ import * as controlErrorParas from "./Controller/controlErrorParas.js";
 import * as controlToggleRegistrationModal from "./Controller/controlToggleRegistrationModal.js";
 import * as controlToggleLoginModal from "./Controller/controlToggleLoginModal.js";
 import * as controlCartProducts from "./Controller/controlCartProducts.js";
+import { controlOrderFormSubmission } from "./Controller/controlOrderFormSubmission.js";
 import * as bootstrap from "bootstrap";
 import urlView from "./Views/urlView.js";
 import searchView from "./Views/searchView.js";
@@ -775,6 +776,7 @@ const init = () => {
   if (getChangedCart() && getChangedCart().length > 0) {
     controlCartProducts.addChangeQtyHandlers();
     controlCartProducts.addOrderInputsHandlers();
+    controlOrderFormSubmission();
   }
   controlIfUserIsLogged();
 };

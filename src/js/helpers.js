@@ -59,7 +59,6 @@ export const sendRegistrationData = async (url, data) => {
         email: data.emailContent,
         phone: data.phoneContent,
         address: data.addressContent,
-        orderHistory: JSON.stringify(data.orderHistory),
       }),
       headers: {
         "Content-Type": "application/json",
@@ -108,4 +107,35 @@ export const toggleCorrectPage = (hash) => {
   });
   const currentPage = document.getElementById(hash);
   currentPage.classList.remove("hidden");
+};
+export const sendOrderData = async (url) => {
+  try {
+    const cart = JSON.parse(localStorage.getItem("doner-cart"));
+    const totalAmount = cart
+      .reduce((acc, product) => {
+        return (acc += Number(product.price));
+      }, 0)
+      .toFixed(2);
+    const initObj = {
+      method: "POST",
+      body: JSON.stringify({
+        date: `${new Date().getDate()}/${
+          new Date().getMonth() + 1
+        }/${new Date().getFullYear()}`,
+        cart,
+        totalAmount,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, initObj);
+    if (!response.ok) {
+      throw new Error(
+        "Something went wrong with the request! No data has been sent! Please, try again later!"
+      );
+    }
+  } catch (err) {
+    throw err;
+  }
 };

@@ -34,7 +34,6 @@ export const state = {
     passwordContentIsOk: false,
     confirmPasswordContentIsOk: false,
     addressContentIsOk: false,
-    orderHistory: [],
   },
   loginFormData: {
     emailContent: "",

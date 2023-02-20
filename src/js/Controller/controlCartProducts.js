@@ -7,7 +7,7 @@ import * as controlOrderFormValidation from "./controlOrderFormValidation.js";
 import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 import { removeItemFromCart } from "../Model/removeItemFromCart.js";
 import { removeProductFromCart } from "../Model/removeProductFromCart.js";
-import { validateAddToCartInput } from "../Model/validateAddToCartInput.js";
+import controlOrderFormSubmission from "./controlOrderFormSubmission.js";
 export const renderCartData = () => {
   const cart = getChangedCart();
   productsView.renderCartTooltip(cart);
@@ -45,12 +45,14 @@ export const controlAddingItemsToCart = (obj) => {
   renderCartData();
   addChangeQtyHandlers();
   addOrderInputsHandlers();
+  controlOrderFormSubmission();
 };
 export const controlAddItemToCart = (obj) => {
   fillCart(obj);
   renderCartData();
   addChangeQtyHandlers();
   addOrderInputsHandlers();
+  controlOrderFormSubmission();
 };
 export const controlDecreaseItemFromCart = (obj) => {
   removeItemFromCart(obj);
@@ -58,6 +60,7 @@ export const controlDecreaseItemFromCart = (obj) => {
   addChangeQtyHandlers();
   if (getChangedCart() && getChangedCart().length > 0) {
     addOrderInputsHandlers();
+    controlOrderFormSubmission();
   }
 };
 export const controlRemoveProductFromCart = (name) => {
@@ -66,5 +69,6 @@ export const controlRemoveProductFromCart = (name) => {
   addChangeQtyHandlers();
   if (getChangedCart() && getChangedCart().length > 0) {
     addOrderInputsHandlers();
+    controlOrderFormSubmission();
   }
 };

@@ -125,6 +125,16 @@ class CartPageView extends Views {
         this.toggleOrderBtnDisabledAttr(bool);
       });
   }
+  addSubmitFormHandler(handler) {
+    const orderForm = document.getElementById("order_form");
+    if (!orderForm) {
+      return;
+    }
+    orderForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      handler();
+    });
+  }
   errorParaHandler(classIdent, msg) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = msg;
   }

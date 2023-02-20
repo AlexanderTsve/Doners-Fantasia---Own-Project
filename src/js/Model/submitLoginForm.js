@@ -14,6 +14,14 @@ export const submitLoginForm = async () => {
         )
       )
     );
+    localStorage.setItem(
+      "donerFantasiaLoggedUserId",
+      JSON.stringify(
+        Object.entries(dataArr).filter((array) =>
+          array.some((el) => el.email === state.loginFormData.emailContent)
+        )[0][0]
+      )
+    );
   } catch (err) {
     throw err;
   }
