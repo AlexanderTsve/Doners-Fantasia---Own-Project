@@ -774,6 +774,7 @@ const init = () => {
   controlCartProducts.renderCartData();
   if (getChangedCart() && getChangedCart().length > 0) {
     controlCartProducts.addChangeQtyHandlers();
+    controlCartProducts.addOrderInputsHandlers();
   }
   controlIfUserIsLogged();
 };

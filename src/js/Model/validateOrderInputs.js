@@ -5,6 +5,7 @@ import { REGEX_NAME } from "../config.js";
 export const validateOrderFormNames = (nameStr) => {
   try {
     if (nameStr.length === 0) {
+      state.orderData.nameContentIsOk = false;
       return;
     }
     const regName = REGEX_NAME;
@@ -22,6 +23,7 @@ export const validateOrderFormNames = (nameStr) => {
 export const validateOrderFormAddress = (addressStr) => {
   try {
     if (addressStr.length === 0) {
+      state.orderData.addressContentIsOk = false;
       return;
     }
     state.orderData.addressContentIsOk =
@@ -38,6 +40,7 @@ export const validateOrderFormAddress = (addressStr) => {
 export const validateOrderFormPhone = (phoneStr) => {
   try {
     if (phoneStr.length === 0) {
+      state.orderData.phoneContentIsOk = false;
       return;
     }
     const regPhone = REGEX_PHONE;
@@ -55,6 +58,7 @@ export const validateOrderFormPhone = (phoneStr) => {
 export const validateOrderFormEmail = (emailStr) => {
   try {
     if (emailStr.length === 0) {
+      state.orderData.emailContentIsOk = false;
       return;
     }
     const regEmail = REGEX_EMAIL;

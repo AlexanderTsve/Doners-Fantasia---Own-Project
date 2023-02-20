@@ -9,6 +9,11 @@ export const controlLogoutBtn = () => {
   clearLoginState();
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
   loginView.changeWelcomePara(state.isLogged);
+  state.orderDataIsOk =
+    state.orderData.addressContentIsOk &&
+    state.orderData.emailContentIsOk &&
+    state.orderData.nameContentIsOk &&
+    state.orderData.phoneContentIsOk;
   const bool = checkLoginAndOrderFormData();
   cartPageView.toggleOrderBtnDisabledAttr(bool);
 };
