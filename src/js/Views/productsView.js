@@ -35,7 +35,7 @@ class ProductsView extends Views {
   renderCartTooltip(data) {
     const container = document.querySelector(".tooltip-container");
     container.innerText = "";
-    if (!data) {
+    if (!data || data.length === 0) {
       container.innerText = "No products in the cart!";
       return;
     }

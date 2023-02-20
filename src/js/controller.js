@@ -15,17 +15,13 @@ import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
 import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
-import { controlAddItemToCart } from "./Controller/controlAddItemToCart.js";
-import { controlDecreaseItemFromCart } from "./Controller/controlDecreaseItemFromCart.js";
-import { controlRemoveProductFromCart } from "./Controller/controlRemoveProductFromCart.js";
-import * as controlOrderFormValidation from "./Controller/controlOrderFormValidation.js";
 import * as controlRouting from "./Controller/controlRouting.js";
 import * as controlErrorParas from "./Controller/controlErrorParas.js";
 import * as controlToggleRegistrationModal from "./Controller/controlToggleRegistrationModal.js";
 import * as controlToggleLoginModal from "./Controller/controlToggleLoginModal.js";
+import * as controlCartProducts from "./Controller/controlCartProducts.js";
 import * as bootstrap from "bootstrap";
 import urlView from "./Views/urlView.js";
-import productsView from "./Views/productsView.js";
 import searchView from "./Views/searchView.js";
 import dropdownFilterView from "./Views/dropdownFilterView.js";
 import paginationView from "./Views/paginationView.js";
@@ -34,7 +30,6 @@ import registrationView from "./Views/registrationView.js";
 import loginView from "./Views/loginView.js";
 import logoutView from "./Views/logoutView.js";
 import navigationView from "./Views/navigationView.js";
-import cartPageView from "./Views/cartPageView.js";
 // import { v4 as uuidv4 } from "uuid";
 // const DATA = [
 //   {
@@ -776,12 +771,9 @@ const init = () => {
   loginView.addLoginBtnHandler(controlLoginSubmission);
   logoutView.addLogoutHandler(controlLogoutBtn);
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
-  productsView.renderCartTooltip(getChangedCart());
-  cartPageView.render(getChangedCart());
+  controlCartProducts.renderCartData();
   if (getChangedCart() && getChangedCart().length > 0) {
-    cartPageView.addIncreaseCartQtyHandler(controlAddItemToCart);
-    cartPageView.addDecreaseCartQtyHandler(controlDecreaseItemFromCart);
-    cartPageView.addRemoveProductHandler(controlRemoveProductFromCart);
+    controlCartProducts.addChangeQtyHandlers();
   }
   controlIfUserIsLogged();
 };

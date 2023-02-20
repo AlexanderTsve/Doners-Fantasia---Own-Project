@@ -1,20 +1,24 @@
 import * as bootstrap from "bootstrap";
 import { fillCart } from "../Model/fillCart.js";
+import { getChangedCart } from "../Model/getChangedCart.js";
 import productsView from "../Views/productsView.js";
 import cartPageView from "../Views/cartPageView.js";
-import { getChangedCart } from "../Model/getChangedCart.js";
 import * as controlOrderFormValidation from "./controlOrderFormValidation.js";
-import { controlDecreaseItemFromCart } from "./controlDecreaseItemFromCart.js";
-import { controlRemoveProductFromCart } from "./controlRemoveProductFromCart.js";
 import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
-export const controlAddItemToCart = (obj) => {
-  fillCart(obj);
+import { removeItemFromCart } from "../Model/removeItemFromCart.js";
+import { removeProductFromCart } from "../Model/removeProductFromCart.js";
+import { validateAddToCartInput } from "../Model/validateAddToCartInput.js";
+export const renderCartData = () => {
   const cart = getChangedCart();
   productsView.renderCartTooltip(cart);
   cartPageView.render(cart);
+};
+export const addChangeQtyHandlers = () => {
   cartPageView.addIncreaseCartQtyHandler(controlAddItemToCart);
   cartPageView.addDecreaseCartQtyHandler(controlDecreaseItemFromCart);
   cartPageView.addRemoveProductHandler(controlRemoveProductFromCart);
+};
+export const addOrderInputsHandlers = () => {
   cartPageView.addOrderFormInputHandler(
     controlOrderFormValidation.controlNamesValidation,
     checkLoginAndOrderFormData,
@@ -35,4 +39,32 @@ export const controlAddItemToCart = (obj) => {
     checkLoginAndOrderFormData,
     "email"
   );
+};
+export const controlAddingItemsToCart = (obj) => {
+  fillCart(obj);
+  renderCartData();
+  addChangeQtyHandlers();
+  addOrderInputsHandlers();
+};
+export const controlAddItemToCart = (obj) => {
+  fillCart(obj);
+  renderCartData();
+  addChangeQtyHandlers();
+  addOrderInputsHandlers();
+};
+export const controlDecreaseItemFromCart = (obj) => {
+  removeItemFromCart(obj);
+  renderCartData();
+  addChangeQtyHandlers();
+  if (getChangedCart() && getChangedCart().length > 0) {
+    addOrderInputsHandlers();
+  }
+};
+export const controlRemoveProductFromCart = (name) => {
+  removeProductFromCart(name);
+  renderCartData();
+  addChangeQtyHandlers();
+  if (getChangedCart() && getChangedCart().length > 0) {
+    addOrderInputsHandlers();
+  }
 };

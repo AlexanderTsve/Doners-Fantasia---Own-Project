@@ -38,13 +38,16 @@ class CartPageView extends Views {
             .split(":")[1]
             .slice(1)
         );
-        const price = Number(
-          e.target.parentElement.firstChild.innerText
-            .split(",")[2]
-            .split(":")[1]
-            .slice(1)
-            .split(" ")[0]
-        );
+        const price =
+          Math.round(
+            Number(
+              e.target.parentElement.firstChild.innerText
+                .split(",")[2]
+                .split(":")[1]
+                .slice(1)
+                .split(" ")[0]
+            ) * 100
+          ) / 100;
         const obj = {
           name,
           price: price / qty,
@@ -78,8 +81,8 @@ class CartPageView extends Views {
                 .split(":")[1]
                 .slice(1)
                 .split(" ")[0]
-            ) * 10
-          ) / 10;
+            ) * 100
+          ) / 100;
         const obj = {
           name,
           price: price / qty,
@@ -140,7 +143,7 @@ class CartPageView extends Views {
     }, 0);
     const pricePara = document.createElement("p");
     pricePara.innerText = `Total Price: ${(
-      Math.round(totalPrice * 10) / 10
+      Math.round(totalPrice * 100) / 100
     ).toFixed(2)} BGN`;
     pricePara.classList.add("cart-container-para");
     return pricePara;

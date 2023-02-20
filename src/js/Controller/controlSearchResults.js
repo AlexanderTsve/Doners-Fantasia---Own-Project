@@ -8,7 +8,7 @@ import searchView from "../Views/searchView.js";
 import dropdownFilterView from "../Views/dropdownFilterView.js";
 import productsView from "../Views/productsView.js";
 import paginationView from "../Views/paginationView.js";
-import { controlAddingItemsToCart } from "./controlAddingItemsToCart.js";
+import * as controlCartProducts from "./controlCartProducts.js";
 export const controlSearchResults = async () => {
   try {
     const query = searchView.getQuery();
@@ -22,7 +22,9 @@ export const controlSearchResults = async () => {
     }
     productsView.render(getProductsPage());
     paginationView.render(state);
-    productsView.addToCartBtnHandler(controlAddingItemsToCart);
+    productsView.addToCartBtnHandler(
+      controlCartProducts.controlAddingItemsToCart
+    );
   } catch (err) {
     productsView.renderError(err.message);
   }

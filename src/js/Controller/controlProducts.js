@@ -6,7 +6,7 @@ import { loadProducts } from "../Model/loadProducts.js";
 import { getProductsPage } from "../Model/getProductsPage.js";
 import productsView from "../Views/productsView.js";
 import paginationView from "../Views/paginationView.js";
-import { controlAddingItemsToCart } from "./controlAddingItemsToCart.js";
+import * as controlCartProducts from "./controlCartProducts.js";
 export const controlProducts = async () => {
   try {
     productsView.renderSpinner();
@@ -16,7 +16,9 @@ export const controlProducts = async () => {
     }
     productsView.render(getProductsPage());
     paginationView.render(state);
-    productsView.addToCartBtnHandler(controlAddingItemsToCart);
+    productsView.addToCartBtnHandler(
+      controlCartProducts.controlAddingItemsToCart
+    );
   } catch (err) {
     productsView.renderError(err.message);
   }

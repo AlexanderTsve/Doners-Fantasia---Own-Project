@@ -4,7 +4,7 @@ import "regenerator-runtime/runtime";
 import { state } from "../Model/state.js";
 import { loadProductDetails } from "../Model/loadProductDetails.js";
 import productDetailsView from "../Views/productDetailsView.js";
-import { controlAddItemToCart } from "./controlAddItemToCart.js";
+import * as controlCartProducts from "./controlCartProducts.js";
 export const controlProductDetails = async () => {
   try {
     productDetailsView.renderSpinner();
@@ -13,7 +13,9 @@ export const controlProductDetails = async () => {
       throw new Error("There is no existing product with such ID!");
     }
     productDetailsView.render(state.productDetails);
-    productDetailsView.addToCartHandler(controlAddItemToCart);
+    productDetailsView.addToCartHandler(
+      controlCartProducts.controlAddItemToCart
+    );
   } catch (err) {
     productDetailsView.renderError(err.message);
   }
