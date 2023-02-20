@@ -101,19 +101,25 @@ class CartPageView extends Views {
       })
     );
   }
+  toggleOrderBtnDisabledAttr(bool) {
+    const orderBtn = document.querySelector(".order_form_btn");
+    if (!orderBtn) {
+      return;
+    }
+    if (bool) {
+      orderBtn.disabled = false;
+    }
+    if (!bool) {
+      orderBtn.disabled = true;
+    }
+  }
   addOrderFormInputHandler(validationFn, checkLoginAndOrderFormDataFn, idEnd) {
     document
       .getElementById(`order_form_${idEnd}`)
       .addEventListener("input", (e) => {
         validationFn(e.target.value);
-        const orderBtn = document.querySelector(".order_form_btn");
         const bool = checkLoginAndOrderFormDataFn();
-        if (bool) {
-          orderBtn.disabled = false;
-        }
-        if (!bool) {
-          orderBtn.disabled = true;
-        }
+        this.toggleOrderBtnDisabledAttr(bool);
       });
   }
   errorParaHandler(classIdent, msg) {
