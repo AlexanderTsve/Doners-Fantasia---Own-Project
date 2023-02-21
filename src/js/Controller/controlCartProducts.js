@@ -7,7 +7,7 @@ import * as controlOrderFormValidation from "./controlOrderFormValidation.js";
 import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 import { removeItemFromCart } from "../Model/removeItemFromCart.js";
 import { removeProductFromCart } from "../Model/removeProductFromCart.js";
-import controlOrderFormSubmission from "./controlOrderFormSubmission.js";
+import { controlOrderFormSubmission } from "./controlOrderFormSubmission.js";
 export const renderCartData = () => {
   const cart = getChangedCart();
   productsView.renderCartTooltip(cart);
