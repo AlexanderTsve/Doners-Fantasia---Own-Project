@@ -16,16 +16,25 @@ export const controlSearchResults = async () => {
     productsView.renderSpinner();
     await loadSearchResults(query, dropdownValue);
     if (!state.products.every(Boolean) || state.products.length === 0) {
-      throw new Error(
-        `There is no existing product with ${query} in its name!`
-      );
+      if (dropdownValue === "none") {
+        throw new Error(
+          `There is no existing product with ${query} in its name!`
+        );
+      }
+      if (dropdownValue !== "none") {
+        throw new Error(
+          `There is no existing product with ${query} in its name (in category ${dropdownValue})!`
+        );
+      }
     }
     productsView.render(getProductsPage());
-    paginationView.render(state);
+    // paginationView.render(state);
     productsView.addToCartBtnHandler(
       controlCartProducts.controlAddingItemsToCart
     );
   } catch (err) {
     productsView.renderError(err.message);
+  } finally {
+    paginationView.render(state);
   }
 };

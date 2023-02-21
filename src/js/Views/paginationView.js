@@ -31,9 +31,8 @@ class PaginationView extends Views {
   }
   _generateMarkup() {
     const currentPage = this._data.productsPageNumber;
-    const numPages = Math.ceil(
-      this._data.products.length / this._data.productsPerPage
-    );
+    const numPages =
+      Math.ceil(this._data.products.length / this._data.productsPerPage) || 1;
     if (numPages > 1 && currentPage === 1) {
       return `${this._generateParaMarkup(
         currentPage,
