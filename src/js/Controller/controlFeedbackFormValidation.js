@@ -23,5 +23,15 @@ export const controlFeedbackFormValidation = async () => {
     feedbackPageView.clearInputs();
     const response = await sendFeedback();
     feedbackPageView.showMessageModal(response, "feedback-page");
+    state.feedbackFormData = {
+      nameContent: "",
+      emailContent: "",
+      phoneContent: "",
+      feedbackContent: "",
+      nameContentIsOk: false,
+      emailContentIsOk: false,
+      phoneContentIsOk: false,
+      feedbackContentIsOk: false,
+    };
   }
 };
