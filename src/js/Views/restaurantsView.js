@@ -5,7 +5,7 @@ import { OSM, Vector as VectorSource } from "ol/source.js";
 import { Point } from "ol/geom.js";
 import TileLayer from "ol/layer/Tile.js";
 import { Vector as VectorLayer } from "ol/layer.js";
-import { fromLonLat } from "ol/proj.js";
+import { fromLonLat, toLonLat } from "ol/proj.js";
 import { Icon, Style } from "ol/style.js";
 class RestaurantsView extends Views {
   _parentElement = document.querySelector(".restaurants-container");
@@ -20,7 +20,7 @@ class RestaurantsView extends Views {
   }
   generateMap(restaurants) {
     const { lat, lon } = restaurants[5].geoLocation;
-    const centeredLocation = fromLonLat([lon, lat]);
+    let centeredLocation = fromLonLat([lon, lat]);
     const locations = restaurants.map((restaurant) => restaurant.geoLocation);
     const features = locations.map((location) => {
       const { lat, lon } = location;
@@ -57,6 +57,24 @@ class RestaurantsView extends Views {
         }),
       ],
       target: "restaurants-map-pane",
+    });
+    map.on("pointermove", (e) => {
+      const pixel = map.getEventPixel(e.originalEvent);
+      const hit = map.hasFeatureAtPixel(pixel);
+      map.getViewport().style.cursor = hit ? "pointer" : "";
+    });
+    map.on("click", (e) => {
+      const pixel = map.getEventPixel(e.originalEvent);
+      const hit = map.hasFeatureAtPixel(pixel);
+      if (hit) {
+        const coords = toLonLat(e.coordinate);
+        const lat = coords[1];
+        const lon = coords[0];
+        console.log(lat, lon);
+        centeredLocation = fromLonLat([lon, lat]);
+        map.getView().setCenter(centeredLocation);
+        map.getView().setZoom(map.getView().getZoom() + 1);
+      }
     });
   }
   _generateMarkupArr(arrOfRestaurants) {

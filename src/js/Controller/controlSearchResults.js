@@ -28,7 +28,6 @@ export const controlSearchResults = async () => {
       }
     }
     productsView.render(getProductsPage());
-    // paginationView.render(state);
     productsView.addToCartBtnHandler(
       controlCartProducts.controlAddingItemsToCart
     );
