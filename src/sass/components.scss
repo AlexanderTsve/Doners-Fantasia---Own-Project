@@ -187,20 +187,6 @@ footer {
     border-radius: 2%;
     width: 30%;
     height: 10rem;
-    &_close {
-      position: absolute;
-      right: 42rem;
-      font-size: 40px;
-      font-weight: bold;
-      color: $color-secondary;
-      cursor: pointer;
-      &:hover {
-        color: $violet-color;
-      }
-      &:active {
-        color: $dark-green-color;
-      }
-    }
     &_container {
       padding: 1rem;
       text-align: center;

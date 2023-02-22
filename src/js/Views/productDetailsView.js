@@ -97,7 +97,9 @@ class ProductDetailsView extends Views {
     priceSpan.innerText = `${Number(this._data.price).toFixed(2)} BGN`;
     priceSpan.classList.add("product-details-font");
     productImageNameDivEl.classList.add("card", "w-50", "text-center");
-    productAllDetailsDivEl.classList.add("product-details-body");
+    this._data.category === "Drink"
+      ? productAllDetailsDivEl.classList.add("product-details-drinks")
+      : productAllDetailsDivEl.classList.add("product-details-body");
     addBtnDetailsEl.innerText = "Add 1 to Cart";
     addBtnDetailsEl.classList.add(
       "doner_app_button",

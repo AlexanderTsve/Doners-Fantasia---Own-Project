@@ -1,5 +1,4 @@
 .modal_registration-content {
-  height: 60rem;
   width: 30%;
 }
 .modal_login-content {
@@ -15,7 +14,6 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
   background-color: $grey-color;
   opacity: 0.95;
   &-content {
@@ -59,7 +57,7 @@
 }
 .login_para,
 .register_paragraph {
-  color: $orange-color;
+  color: $dark-green-color;
   text-decoration: underline;
   cursor: pointer;
   &:hover {

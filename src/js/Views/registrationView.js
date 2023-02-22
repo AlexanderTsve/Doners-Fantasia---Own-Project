@@ -7,25 +7,21 @@ class RegistrationView extends Views {
   showPara(inputEnd) {
     document
       .querySelector(`.para_register_${inputEnd}`)
-      .classList.remove("not_visible");
+      .classList.remove("hidden");
   }
   hidePara(inputEnd) {
     document
       .querySelector(`.para_register_${inputEnd}`)
-      .classList.add("not_visible");
+      .classList.add("hidden");
   }
   clearParas() {
-    document.querySelector(".para_register_email").classList.add("not_visible");
-    document.querySelector(".para_register_phone").classList.add("not_visible");
-    document
-      .querySelector(".para_register_password")
-      .classList.add("not_visible");
+    document.querySelector(".para_register_email").classList.add("hidden");
+    document.querySelector(".para_register_phone").classList.add("hidden");
+    document.querySelector(".para_register_password").classList.add("hidden");
     document
       .querySelector(".para_register_password_confirm")
-      .classList.add("not_visible");
-    document
-      .querySelector(".para_register_address")
-      .classList.add("not_visible");
+      .classList.add("hidden");
+    document.querySelector(".para_register_address").classList.add("hidden");
   }
   clearInputs() {
     document.getElementById("registration_email_input").value = "";

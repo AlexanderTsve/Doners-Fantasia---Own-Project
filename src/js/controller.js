@@ -527,7 +527,13 @@ import navigationView from "./Views/navigationView.js";
 //     weight: 500,
 //     imgIdentifier: "caprichoza",
 //     productId: uuidv4(),
-//     content: ["Chicken fillet", "Cheese", "Tomato sauce", "Savory"],
+//     content: [
+//       "Chicken fillet",
+//       "Cheese",
+//       "Tomato sauce",
+//       "Mushrooms",
+//       "Savory",
+//     ],
 //   },
 //   {
 //     category: "Drink",

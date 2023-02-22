@@ -87,6 +87,9 @@
     padding: 2px;
     top: 7.1rem;
     right: 0.2rem;
+    max-height: 35rem;
+    overflow: auto;
+    text-align: center;
   }
   &:hover {
     .cart-tooltip-text {
