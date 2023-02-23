@@ -116,13 +116,14 @@ export const sendOrderData = async (url) => {
         return (acc += Number(product.price));
       }, 0)
       .toFixed(2);
+    const cartStr = JSON.stringify(cart);
     const initObj = {
       method: "POST",
       body: JSON.stringify({
         date: `${new Date().getDate()}/${
           new Date().getMonth() + 1
         }/${new Date().getFullYear()}`,
-        cart,
+        cart: cartStr,
         totalAmount,
       }),
       headers: {

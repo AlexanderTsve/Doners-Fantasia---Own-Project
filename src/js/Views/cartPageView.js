@@ -111,9 +111,11 @@ class CartPageView extends Views {
     }
     if (bool) {
       orderBtn.disabled = false;
+      document.querySelector(".order-tooltip-text").classList.add("hidden");
     }
     if (!bool) {
       orderBtn.disabled = true;
+      document.querySelector(".order-tooltip-text").classList.remove("hidden");
     }
   }
   addOrderFormInputHandler(validationFn, checkLoginAndOrderFormDataFn, idEnd) {
@@ -141,6 +143,12 @@ class CartPageView extends Views {
   clearErrorParaHandler(classIdent) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = "";
   }
+  clearFormFields() {
+    const orderInputFields = [
+      ...document.querySelectorAll(".order-form-input"),
+    ];
+    orderInputFields.forEach((input) => (input.value = ""));
+  }
   _renderOrderForm() {
     if (!this._formElement.hasChildNodes()) {
       const formMarkup = this._generateOrderForm();
@@ -164,7 +172,7 @@ class CartPageView extends Views {
     const orderFormNamesInputEl = document.createElement("input");
     const orderFormNamesErrorPara = document.createElement("p");
     const orderFormAddressLabelEl = document.createElement("label");
-    const orderFormAddressInputEl = document.createElement("input");
+    const orderFormAddressInputEl = document.createElement("textarea");
     const orderFormAddressErrorPara = document.createElement("p");
     const orderFormPhoneLabelEl = document.createElement("label");
     const orderFormPhoneInputEl = document.createElement("input");
@@ -182,6 +190,7 @@ class CartPageView extends Views {
     orderFormNamesInputEl.setAttribute("placeholder", "First and Last Name...");
     orderFormNamesInputEl.id = "order_form_names";
     orderFormNamesInputEl.setAttribute("required", "");
+    orderFormNamesInputEl.classList.add("order-form-input");
     orderFormNamesErrorPara.classList.add("order_form_names_error");
     orderFormAddressLabelEl.setAttribute("for", "order_form_address");
     orderFormAddressLabelEl.innerText = "Address:";
@@ -189,6 +198,8 @@ class CartPageView extends Views {
     orderFormAddressInputEl.setAttribute("placeholder", "Address...");
     orderFormAddressInputEl.id = "order_form_address";
     orderFormAddressInputEl.setAttribute("required", "");
+    orderFormAddressInputEl.setAttribute("rows", "3");
+    orderFormAddressInputEl.classList.add("order-form-input");
     orderFormAddressErrorPara.classList.add("order_form_address_error");
     orderFormPhoneLabelEl.setAttribute("for", "order_form_phone");
     orderFormPhoneLabelEl.innerText = "Phone:";
@@ -196,6 +207,7 @@ class CartPageView extends Views {
     orderFormPhoneInputEl.setAttribute("placeholder", "Phone...");
     orderFormPhoneInputEl.id = "order_form_phone";
     orderFormPhoneInputEl.setAttribute("required", "");
+    orderFormPhoneInputEl.classList.add("order-form-input");
     orderFormPhoneErrorPara.classList.add("order_form_phone_error");
     orderFormEmailLabelEl.setAttribute("for", "order_form_email");
     orderFormEmailLabelEl.innerText = "Email:";
@@ -203,6 +215,7 @@ class CartPageView extends Views {
     orderFormEmailInputEl.setAttribute("placeholder", "Email...");
     orderFormEmailInputEl.id = "order_form_email";
     orderFormEmailInputEl.setAttribute("required", "");
+    orderFormEmailInputEl.classList.add("order-form-input");
     orderFormEmailErrorPara.classList.add("order_form_email_error");
     orderFormBtn.innerText = "Order";
     orderFormBtn.setAttribute("type", "submit");
@@ -216,15 +229,15 @@ class CartPageView extends Views {
       orderFormNamesLabelEl,
       orderFormNamesInputEl,
       orderFormNamesErrorPara,
-      orderFormAddressLabelEl,
-      orderFormAddressInputEl,
-      orderFormAddressErrorPara,
       orderFormPhoneLabelEl,
       orderFormPhoneInputEl,
       orderFormPhoneErrorPara,
       orderFormEmailLabelEl,
       orderFormEmailInputEl,
       orderFormEmailErrorPara,
+      orderFormAddressLabelEl,
+      orderFormAddressInputEl,
+      orderFormAddressErrorPara,
       orderBtnDivEl
     );
     return orderFormDivEl;

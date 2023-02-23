@@ -6,7 +6,6 @@ export const submitOrderForm = async () => {
       localStorage.getItem("donerFantasiaLoggedUserId")
     );
     if (userId) {
-      console.log(`${USER_HISTORY_URL.replace("/user/", `/${userId}/`)}`);
       await sendOrderData(
         `${USER_HISTORY_URL.replace("/user/", `/${userId}/`)}`
       );
