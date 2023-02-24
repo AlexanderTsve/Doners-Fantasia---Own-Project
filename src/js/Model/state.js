@@ -40,7 +40,8 @@ export const state = {
     passwordContent: "",
   },
   loginFormDataIsOk: false,
-  loggedUser: JSON.parse(localStorage.getItem("donerFantasiaLoggedUser")) || {},
+  loggedUser: {},
+  loggedUserId: "",
   orderData: {
     nameContent: "",
     emailContent: "",

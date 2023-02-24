@@ -1,8 +1,9 @@
+import { async } from "regenerator-runtime";
 import Views from "./Views.js";
 class CartPageView extends Views {
   _parentElement = document.querySelector(".cart-container");
   _formElement = document.querySelector(".order-form-container");
-  render(data) {
+  render(data, formSubmissionHandler) {
     const totalCountEl = document.querySelector(".cart-items-count");
     if (!data || data.length === 0) {
       this._parentElement.innerText = "No products in the cart!";
@@ -20,7 +21,7 @@ class CartPageView extends Views {
     totalCountEl.innerText = data.reduce((acc, product) => {
       return (acc += Number(product.qty));
     }, 0);
-    this._renderOrderForm();
+    this._renderOrderForm(formSubmissionHandler);
   }
   addIncreaseCartQtyHandler(handler) {
     const increaseBtns = [
@@ -127,16 +128,6 @@ class CartPageView extends Views {
         this.toggleOrderBtnDisabledAttr(bool);
       });
   }
-  addSubmitFormHandler(handler) {
-    const orderForm = document.getElementById("order_form");
-    if (!orderForm) {
-      return;
-    }
-    orderForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      handler();
-    });
-  }
   errorParaHandler(classIdent, msg) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = msg;
   }
@@ -149,10 +140,21 @@ class CartPageView extends Views {
     ];
     orderInputFields.forEach((input) => (input.value = ""));
   }
-  _renderOrderForm() {
+  _addSubmitFormHandler(handler) {
+    const orderForm = document.getElementById("order_form");
+    if (!orderForm) {
+      return;
+    }
+    orderForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      handler();
+    });
+  }
+  _renderOrderForm(formSubmissionHandler) {
     if (!this._formElement.hasChildNodes()) {
       const formMarkup = this._generateOrderForm();
       this._formElement.append(formMarkup);
+      this._addSubmitFormHandler(formSubmissionHandler);
     }
   }
   _renderTotalAmount(arrOfProducts) {

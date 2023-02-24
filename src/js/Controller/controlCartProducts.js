@@ -11,7 +11,7 @@ import { controlOrderFormSubmission } from "./controlOrderFormSubmission.js";
 export const renderCartData = () => {
   const cart = getChangedCart();
   productsView.renderCartTooltip(cart);
-  cartPageView.render(cart);
+  cartPageView.render(cart, controlOrderFormSubmission);
 };
 export const addChangeQtyHandlers = () => {
   cartPageView.addIncreaseCartQtyHandler(controlAddItemToCart);
@@ -45,14 +45,12 @@ export const controlAddingItemsToCart = (obj) => {
   renderCartData();
   addChangeQtyHandlers();
   addOrderInputsHandlers();
-  controlOrderFormSubmission();
 };
 export const controlAddItemToCart = (obj) => {
   fillCart(obj);
   renderCartData();
   addChangeQtyHandlers();
   addOrderInputsHandlers();
-  controlOrderFormSubmission();
 };
 export const controlDecreaseItemFromCart = (obj) => {
   removeItemFromCart(obj);
@@ -60,7 +58,6 @@ export const controlDecreaseItemFromCart = (obj) => {
   addChangeQtyHandlers();
   if (getChangedCart() && getChangedCart().length > 0) {
     addOrderInputsHandlers();
-    controlOrderFormSubmission();
   }
 };
 export const controlRemoveProductFromCart = (name) => {
@@ -69,6 +66,5 @@ export const controlRemoveProductFromCart = (name) => {
   addChangeQtyHandlers();
   if (getChangedCart() && getChangedCart().length > 0) {
     addOrderInputsHandlers();
-    controlOrderFormSubmission();
   }
 };

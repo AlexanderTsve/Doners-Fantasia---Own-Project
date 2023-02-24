@@ -6,22 +6,12 @@ export const submitLoginForm = async () => {
   try {
     await sendAuthData(POST_LOGIN_URL, state.loginFormData, LOGIN_AUTH_ERROR);
     const dataArr = await getUsers(USERS_URL);
-    localStorage.setItem(
-      "donerFantasiaLoggedUser",
-      JSON.stringify(
-        Object.values(dataArr).find(
-          (user) => user.email === state.loginFormData.emailContent
-        )
-      )
+    state.loggedUser = Object.values(dataArr).find(
+      (user) => user.email === state.loginFormData.emailContent
     );
-    localStorage.setItem(
-      "donerFantasiaLoggedUserId",
-      JSON.stringify(
-        Object.entries(dataArr).filter((array) =>
-          array.some((el) => el.email === state.loginFormData.emailContent)
-        )[0][0]
-      )
-    );
+    state.loggedUserId = Object.entries(dataArr).filter((array) =>
+      array.some((el) => el.email === state.loginFormData.emailContent)
+    )[0][0];
   } catch (err) {
     throw err;
   }

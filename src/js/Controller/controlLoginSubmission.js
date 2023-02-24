@@ -16,9 +16,7 @@ export const controlLoginSubmission = async () => {
     }
     loginView.addRememberMeHandler(controlIfUserIsRemembered);
     await submitLoginForm();
-    const loggedUser = JSON.parse(
-      localStorage.getItem("donerFantasiaLoggedUser")
-    );
+    const loggedUser = state.loggedUser;
     navigationView.toggleHideShowNavigationBtn(loggedUser);
     loginView.changeWelcomePara(loggedUser, loggedUser.email);
   } catch (err) {

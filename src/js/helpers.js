@@ -122,7 +122,7 @@ export const sendOrderData = async (url) => {
       body: JSON.stringify({
         date: `${new Date().getDate()}/${
           new Date().getMonth() + 1
-        }/${new Date().getFullYear()}`,
+        }/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
         cart: cartStr,
         totalAmount,
       }),
