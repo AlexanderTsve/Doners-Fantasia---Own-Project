@@ -18,9 +18,21 @@ class ProductDetailsView extends Views {
       .addEventListener("click", (e) => {
         const name =
           e.target.parentElement.parentElement.firstChild.lastChild.innerText;
-        const price = Number(
-          e.target.parentElement.children[2].lastChild.innerText.split(" ")[0]
-        );
+        let price;
+        if (
+          e.target.parentElement.classList.contains("product-details-drinks")
+        ) {
+          price = Number(
+            e.target.parentElement.children[1].lastChild.innerText.split(" ")[0]
+          );
+        }
+        if (
+          !e.target.parentElement.classList.contains("product-details-drinks")
+        ) {
+          price = Number(
+            e.target.parentElement.children[2].lastChild.innerText.split(" ")[0]
+          );
+        }
         const obj = {
           name,
           price,
