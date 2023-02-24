@@ -22,6 +22,9 @@ class ProductsView extends Views {
           )[1]
         );
         const qty = Number(e.target.parentElement.firstChild.value);
+        if (!qty || !pricePerUnit) {
+          return;
+        }
         const productObj = {
           name,
           price: pricePerUnit * qty,
