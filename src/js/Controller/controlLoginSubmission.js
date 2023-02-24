@@ -14,8 +14,8 @@ export const controlLoginSubmission = async () => {
     if (!state.loginFormDataIsOk) {
       throw new Error("Please, fill in all of the fields with correct data!");
     }
-    loginView.addRememberMeHandler(controlIfUserIsRemembered);
     await submitLoginForm();
+    loginView.addRememberMeHandler(controlIfUserIsRemembered);
     const loggedUser = state.loggedUser;
     navigationView.toggleHideShowNavigationBtn(loggedUser);
     loginView.changeWelcomePara(loggedUser, loggedUser.email);
