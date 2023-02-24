@@ -8,7 +8,7 @@ export const checkLocalStorage = async () => {
   }
   const dataArr = await getUsers(USERS_URL);
   state.loggedUser = Object.values(dataArr).find(
-    (user) => user.email === state.loginFormData.emailContent
+    (user) => user.email === JSON.parse(rememberedUser).email
   );
   localStorage.setItem("rememberUser", JSON.stringify(state.loggedUser));
 };
