@@ -1,0 +1,13 @@
+#order-history-page{
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .order-history-container{
+    margin: 7rem;
+    color: $color-primary;
+    display: flex;
+    flex-direction: column;
+    }
+}

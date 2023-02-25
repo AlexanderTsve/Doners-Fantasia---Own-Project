@@ -108,7 +108,7 @@ export const toggleCorrectPage = (hash) => {
   const currentPage = document.getElementById(hash);
   currentPage.classList.remove("hidden");
 };
-export const sendOrderData = async (url) => {
+export const sendOrderData = async (url, orderObj) => {
   try {
     const cart = JSON.parse(localStorage.getItem("doner-cart"));
     const totalAmount = cart
@@ -125,6 +125,10 @@ export const sendOrderData = async (url) => {
         }/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
         cart: cartStr,
         totalAmount,
+        name: orderObj.nameContent,
+        email: orderObj.emailContent,
+        phone: orderObj.phoneContent,
+        address: orderObj.addressContent,
       }),
       headers: {
         "Content-Type": "application/json",

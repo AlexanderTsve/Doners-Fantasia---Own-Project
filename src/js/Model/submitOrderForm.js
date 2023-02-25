@@ -15,7 +15,8 @@ export const submitOrderForm = async () => {
     }
     if (userId) {
       await sendOrderData(
-        `${USER_HISTORY_URL.replace("/user/", `/${userId}/`)}`
+        `${USER_HISTORY_URL.replace("/user/", `/${userId}/`)}`,
+        state.orderData
       );
       (state.orderData = {
         nameContent: "",

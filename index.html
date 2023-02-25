@@ -18,6 +18,9 @@
           </li>
         </ul>
         <ul class="nav__list">
+          <li class="nav__item nav__item_order-history header-footer-items hidden">
+            <a href="#order-history-page">Order History</a>
+          </li>
           <li class="nav__item nav__item_login header-footer-items">Login</li>
           <li class="nav__item header-footer-items hidden nav__item_logout">
             Logout
@@ -293,7 +296,9 @@
           <div id="restaurants-map-pane" class="restaurants-map-pane"></div>
         </div>
       </div>
-      <div id="order-history-page" class="hidden">Orders</div>
+      <div id="order-history-page" class="hidden">
+        <div class="order-history-container">There are no previous orders from this profile!</div>
+      </div>
       <div id="cart-page" class="hidden">
         <div class="cart-container">No products in the cart!</div>
         <div class="order-form-container"></div>
