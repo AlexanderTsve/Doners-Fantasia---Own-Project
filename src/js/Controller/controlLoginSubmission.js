@@ -9,6 +9,7 @@ import loginView from "../Views/loginView.js";
 import { controlIfUserIsRemembered } from "./controlIfUserIsRemembered.js";
 import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 import cartPageView from "../Views/cartPageView.js";
+import orderHistoryView from "../Views/orderHistoryView.js";
 export const controlLoginSubmission = async () => {
   try {
     if (!state.loginFormDataIsOk) {
@@ -19,6 +20,7 @@ export const controlLoginSubmission = async () => {
     const loggedUser = state.loggedUser;
     navigationView.toggleHideShowNavigationBtn(loggedUser);
     loginView.changeWelcomePara(loggedUser, loggedUser.email);
+    orderHistoryView.render(loggedUser);
   } catch (err) {
     loginView.showMessageModal(err.message, "modal_log_error");
   } finally {

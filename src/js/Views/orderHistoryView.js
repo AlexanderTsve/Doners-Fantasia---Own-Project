@@ -2,12 +2,13 @@ import Views from "./Views.js";
 class OrderHistoryView extends Views {
   _parentElement = document.querySelector(".order-history-container");
   render(data) {
-    if (!data || data.length === 0) {
+    if (!data.orderHistory || data.orderHistory.length === 0) {
       this._parentElement.innerText =
         "There are no previous orders from this profile!";
       return;
     }
-    this._data = data;
+    const orderData = Object.values(data.orderHistory);
+    this._data = orderData;
     const markupArr = this._generateOrderHistoryMarkup(this._data);
     this._clear();
     markupArr.forEach((element) => {
@@ -15,45 +16,45 @@ class OrderHistoryView extends Views {
     });
   }
   _generateOrderHistoryMarkup(arrOfOrders) {
-    return arrOfOrders.map((order) => {
-      // const orderDivEl = document.createElement("div");
-      // const productPara = document.createElement("p");
-      // const increaseCountBtn = document.createElement("button");
-      // const decreaseCountBtn = document.createElement("button");
-      // const removeProductBtn = document.createElement("button");
-      // productDivEl.classList.add("cart-container-product");
-      // productPara.innerText = `${index + 1}). ${product.name}, Quantity: ${
-      //   product.qty
-      // }, Price: ${Number(product.price).toFixed(2)} BGN`;
-      // productPara.classList.add("cart-container-product-description");
-      // increaseCountBtn.classList.add(
-      //   "doner_app_button",
-      //   "change_qty_btn",
-      //   "change_qty_btn_increase",
-      //   "cart-container-product-increase"
-      // );
-      // increaseCountBtn.innerText = "+";
-      // decreaseCountBtn.classList.add(
-      //   "doner_app_button",
-      //   "change_qty_btn",
-      //   "change_qty_btn_decrease",
-      //   "cart-container-product-decrease"
-      // );
-      // decreaseCountBtn.innerText = "-";
-      // removeProductBtn.innerText = "Remove Item";
-      // removeProductBtn.classList.add(
-      //   "doner_app_button",
-      //   "change_qty_btn_remove",
-      //   "cart-container-product-remove"
-      // );
-      // productDivEl.append(
-      //   productPara,
-      //   increaseCountBtn,
-      //   decreaseCountBtn,
-      //   removeProductBtn
-      // );
-      // return productDivEl;
-    });
+    return arrOfOrders
+      .map((order) => {
+        const orderDivEl = document.createElement("div");
+        const addressDivEl = document.createElement("div");
+        const addressContentParaEl = document.createElement("p");
+        const cartDivEl = document.createElement("div");
+        const dateParaEl = document.createElement("p");
+        const deliveryParaEl = document.createElement("p");
+        const totalAmountParaEl = document.createElement("p");
+        const cartParaEl = document.createElement("p");
+        addressContentParaEl.innerText = `Delivery Address: ${order.address}`;
+        cartParaEl.innerText = "Products:";
+        JSON.parse(order.cart).forEach((product) => {
+          const productParaEl = document.createElement("p");
+          productParaEl.innerText = `${product.name}, Qty: ${
+            product.qty
+          }, Price: ${product.price.toFixed(2)}`;
+          cartDivEl.append(productParaEl);
+        });
+        dateParaEl.innerText = `Delivery Date: ${order.date}`;
+        dateParaEl.classList.add("order-history-container-order-date");
+        deliveryParaEl.innerText = `Delivery Contacts: ${order.name}, ${order.email}, ${order.phone}`;
+        totalAmountParaEl.innerText = `Total Price: ${order.totalAmount}`;
+        addressDivEl.classList.add("order-history-container-order-address");
+        orderDivEl.classList.add("order-history-container-order");
+        cartParaEl.classList.add("order-history-container-order-cart");
+        totalAmountParaEl.classList.add("order-history-container-order-amount");
+        addressDivEl.append(addressContentParaEl);
+        orderDivEl.append(
+          dateParaEl,
+          addressDivEl,
+          deliveryParaEl,
+          cartParaEl,
+          cartDivEl,
+          totalAmountParaEl
+        );
+        return orderDivEl;
+      })
+      .reverse();
   }
 }
 export default new OrderHistoryView();

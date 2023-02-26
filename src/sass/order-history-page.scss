@@ -8,6 +8,25 @@
     margin: 7rem;
     color: $color-primary;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    &-order {
+        width: 50vw;
+        text-align: center;
+        margin: 1rem;
+        background-color: $color-secondary;
+        border-radius: 8%;
+        &-date{
+            margin: 1.5rem;
+            font-weight: bold;
+        }
+        &-cart{
+            text-decoration: underline;
+        }
+        &-amount{
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        }
     }
 }
