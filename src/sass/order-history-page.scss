@@ -18,13 +18,14 @@
         border-radius: 8%;
         &-date{
             margin: 1.5rem;
-            font-weight: bold;
+            font-style: italic;
         }
         &-cart{
             text-decoration: underline;
+            font-style: italic;
         }
         &-amount{
-            font-weight: bold;
+            font-style: italic;
             margin-bottom: 1rem;
         }
         }

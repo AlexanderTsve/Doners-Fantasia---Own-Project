@@ -21,7 +21,6 @@
     margin: 5% auto 15% auto;
     border: 3px solid $dark-green-color;
     img {
-      width: 20%;
       align-self: center;
       border-radius: 3%;
       margin: 1rem 0 1rem 0;
@@ -34,8 +33,10 @@
       &_form-field {
         padding: 0.75rem;
         margin: 0 2rem 0 1rem;
+        font-size: 0.85rem;
         &_label {
           color: $dark-yellow-color;
+          font-size: 0.85rem;
         }
       }
     }
@@ -43,9 +44,11 @@
 }
 .registration_btns {
   margin: 1.5rem;
+  font-size: 0.75rem;
 }
 .login_btns {
   margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+  font-size: 0.75rem;
 }
 .registration_btns,
 .login_btns {
@@ -59,6 +62,7 @@
 .register_paragraph {
   color: $dark-green-color;
   text-decoration: underline;
+  font-size: 0.85rem;
   cursor: pointer;
   &:hover {
     color: $color-secondary;
@@ -82,10 +86,26 @@
   margin: 0.25rem 0 0 0;
   text-align: center;
   color: $color-secondary;
+  font-size: 0.75rem;
 }
 .remember-me-checkbox {
   margin: 1rem 0 0 7rem;
   display: flex;
   width: 35%;
   justify-content: space-around;
+    label {
+    font-size: 0.75rem;  
+  } 
+    input {
+      margin-bottom: 0.5rem;
+  }
+}
+#login_password_input,
+#registration_password_input,
+#registration_password_confirm{
+  font-family: Arial (sans-serif), Arial Black (sans-serif), Verdana (sans-serif), Tahoma (sans-serif)
+  ,Trebuchet MS (sans-serif)
+  ,Impact (sans-serif),
+  Gill Sans (sans-serif);
+  font-size: 1rem;
 }

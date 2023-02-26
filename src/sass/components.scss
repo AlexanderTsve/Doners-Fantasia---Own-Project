@@ -76,7 +76,7 @@ footer {
   cursor: pointer;
   text-decoration: underline;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 1rem;
   &:hover {
     color: $dark-green-color;
   }
@@ -210,5 +210,8 @@ footer {
   padding: 1.5rem;
   &_label {
     color: $dark-yellow-color;
+  }
+  &_input{
+    font-size: 0.85rem;
   }
 }
