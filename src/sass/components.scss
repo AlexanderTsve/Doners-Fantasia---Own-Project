@@ -2,6 +2,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: myFont, Arial (sans-serif), Arial Black (sans-serif), Verdana (sans-serif), Tahoma (sans-serif)
+  ,Trebuchet MS (sans-serif)
+  ,Impact (sans-serif),
+  Gill Sans (sans-serif);
 }
 footer {
   margin-top: auto;
@@ -67,6 +71,7 @@ footer {
   cursor: pointer;
   text-decoration: underline;
   font-weight: bold;
+  font-size: 0.6rem;
   &:hover {
     color: $dark-green-color;
   }

@@ -11,8 +11,10 @@
   background-color: $dark-green-color;
   width: 100vw;
   display: flex;
+  font-size: 0.75rem;
   .search_input {
     width: 15rem;
+    font-size: 0.75rem;
     &_span {
       color: $color-primary;
       background-color: $color-secondary;
@@ -22,6 +24,7 @@
     width: 25rem;
     margin-top: 0.75rem;
     margin-left: 1rem;
+    font-size: 0.75rem;
     &_label {
       padding: 0.5rem;
       border-radius: 5px;
@@ -45,6 +48,7 @@
 .welcome-para {
   color: $color-primary;
   margin: 1.5rem 0 0 14.5rem;
+  font-size: 0.6rem;
 }
 .change_qty_btn {
   width: 2rem;
