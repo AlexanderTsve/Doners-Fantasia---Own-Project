@@ -18,11 +18,12 @@
     &_span {
       color: $color-primary;
       background-color: $color-secondary;
+      font-size: 0.75rem;
     }
   }
   .dropdown {
     width: 25rem;
-    margin-top: 0.75rem;
+    margin-top: 1rem;
     margin-left: 1rem;
     font-size: 0.75rem;
     &_label {
@@ -40,6 +41,7 @@
 .pagination_menu_page {
   display: flex;
   justify-content: center;
+  font-size: 0.75rem;
 }
 .para_current-page {
   margin: 2.75rem;
@@ -47,12 +49,12 @@
 }
 .welcome-para {
   color: $color-primary;
-  margin: 1.5rem 0 0 14.5rem;
-  font-size: 0.6rem;
+  margin: 1.5rem 0 0 8.5rem;
 }
 .change_qty_btn {
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-right: 0.1rem;
 }
 .nav__item_logout,
 .nav__item_register {
@@ -91,7 +93,7 @@
     padding: 2px;
     top: 7.1rem;
     right: 0.2rem;
-    max-height: 35rem;
+    max-height: 32rem;
     overflow: auto;
     text-align: center;
   }
@@ -100,4 +102,7 @@
       visibility: visible;
     }
   }
+}
+.add_to_cart_btn{
+  margin-right: 0.1rem;
 }

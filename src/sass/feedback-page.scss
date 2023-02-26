@@ -3,6 +3,7 @@
   justify-content: center;
   background-color: $violet-color;
   min-height: 81vh;
+  font-size: 0.75rem;
   .feedback-form {
     margin: 5rem;
     border: solid $dark-green-color 3px;
@@ -16,5 +17,14 @@
       padding-top: 1rem;
       color: $dark-yellow-color;
     }
+    &-field_input{
+      font-size: 0.75rem;
+    }
+  }
+  .form-field{
+    padding: 0.25rem 0.5rem;
+  }
+  .feedback_form_submit{
+    font-size: 0.85rem;
   }
 }

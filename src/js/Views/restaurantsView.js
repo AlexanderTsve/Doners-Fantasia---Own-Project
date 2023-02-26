@@ -80,7 +80,7 @@ class RestaurantsView extends Views {
   _generateMarkupArr(arrOfRestaurants) {
     return arrOfRestaurants.map((restaurant) => {
       const restaurantDivEl = document.createElement("div");
-      const nameRestaurantEl = document.createElement("h5");
+      const nameRestaurantEl = document.createElement("h6");
       const restaurantBodyDivEl = document.createElement("div");
       const addressParaEl = document.createElement("p");
       const workingHoursDivEl = document.createElement("div");

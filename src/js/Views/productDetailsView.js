@@ -45,7 +45,7 @@ class ProductDetailsView extends Views {
     const productImageNameDivEl = document.createElement("div");
     const figDetailsEl = document.createElement("figure");
     const imageDetailsEl = document.createElement("img");
-    const nameDetailsEl = document.createElement("h4");
+    const nameDetailsEl = document.createElement("h5");
     const productAllDetailsDivEl = document.createElement("div");
     const weightVolumeDetailsDivEl = document.createElement("div");
     const weightVolumeIcon = document.createElement("img");
@@ -66,7 +66,7 @@ class ProductDetailsView extends Views {
         "list-group-numbered",
         "product-details-content"
       );
-      const contentTitle = document.createElement("h5");
+      const contentTitle = document.createElement("h6");
       contentTitle.innerText = "Content:";
       contentTitle.classList.add("product-details-font");
       productContentDivEl.append(contentTitle);

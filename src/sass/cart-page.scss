@@ -5,21 +5,22 @@
   align-items: center;
   justify-content: center;
   .cart-container {
-    margin: 7rem;
+    margin: 4rem;
     color: $color-primary;
     display: flex;
     flex-direction: column;
     &-product {
       margin-bottom: 1rem;
-      width: 40rem;
+      width: 45rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background-color: $color-secondary;
       border-radius: 15%;
       border: solid 0.15rem $dark-green-color;
+      font-size: 0.85rem;
       &-description {
-        width: 25rem;
+        width: 35rem;
       }
       &-description,
       &-increase,
@@ -31,6 +32,8 @@
     }
     &-para {
       align-self: center;
+      font-size: 0.85rem;
+      text-decoration: underline;
     }
   }
 }
@@ -46,6 +49,7 @@
   align-items: center;
   justify-content: space-around;
   color: $color-primary;
+  font-size: 0.85rem;
   &_names,
   &_address,
   &_phone,
@@ -54,7 +58,7 @@
     border: 1px solid #ced4da;
     border-radius: 0.375rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    font-size: 1rem;
+    font-size: 0.75rem;
     font-weight: 400;
     line-height: 1.5;
   }
@@ -75,7 +79,7 @@
     z-index: 1;
     width: 12rem;
     color: $dark-green-color;
-    font-size: 12px;
+    font-size: 0.7rem;
     background-color: $violet-color;
     border-radius: 0.5rem;
   }

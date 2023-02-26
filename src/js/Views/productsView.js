@@ -69,7 +69,7 @@ class ProductsView extends Views {
       const productDivEl = document.createElement("div");
       const figEl = document.createElement("figure");
       const imageEl = document.createElement("img");
-      const nameEl = document.createElement("h5");
+      const nameEl = document.createElement("h6");
       const productBodyDivEl = document.createElement("div");
       const weightParaEl = document.createElement("p");
       const categoryParaEl = document.createElement("p");
@@ -93,7 +93,7 @@ class ProductsView extends Views {
       nameEl.innerText = `${product.name}`;
       nameEl.classList.add("card-title");
       weightParaEl.innerText = product.weight
-        ? `Weight(gr): ${product.weight}`
+        ? `Weight(gr) : ${product.weight}`
         : "";
       categoryParaEl.innerText = `Category: ${product.category}`;
       priceParaEl.innerText = `Price: ${Number(product.price).toFixed(2)} BGN`;
