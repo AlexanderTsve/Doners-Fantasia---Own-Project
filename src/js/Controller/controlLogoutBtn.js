@@ -6,6 +6,8 @@ import loginView from "../Views/loginView.js";
 import cartPageView from "../Views/cartPageView.js";
 import orderHistoryView from "../Views/orderHistoryView.js";
 import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
+import urlView from "../Views/urlView.js";
+import * as controlRouting from "./controlRouting.js";
 export const controlLogoutBtn = () => {
   clearLoginState();
   navigationView.toggleHideShowNavigationBtn(state.isLogged);
@@ -18,4 +20,8 @@ export const controlLogoutBtn = () => {
   const bool = checkLoginAndOrderFormData();
   cartPageView.toggleOrderBtnDisabledAttr(bool);
   orderHistoryView.render(state.loggedUser);
+  urlView.addUrlChangeHandlerToMain(
+    controlRouting.controlChangePathname("menu-page")
+  );
+  controlRouting.controlChangeHash();
 };

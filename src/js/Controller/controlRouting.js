@@ -6,6 +6,7 @@ import dropdownFilterView from "../Views/dropdownFilterView.js";
 import searchView from "../Views/searchView.js";
 import { URL_ARR } from "../config.js";
 import { controlProductDetails } from "./controlProductDetails.js";
+import { state } from "../Model/state.js";
 const clearDropdownAndSearchField = () => {
   dropdownFilterView.clearValue();
   searchView.clearSearchValue();
@@ -43,8 +44,10 @@ export const controlChangeHash = () => {
   clearDropdownAndSearchField();
   const hash = location.hash.slice(1);
   if (
-    URL_ARR.every((urlEnd) => urlEnd !== hash) &&
-    !hash.includes("details-page")
+    (URL_ARR.every((urlEnd) => urlEnd !== hash) &&
+      !hash.includes("details-page")) ||
+    (hash.includes("order-history") &&
+      Object.values(state.loggedUser).length === 0)
   ) {
     location.hash = URL_ARR[0];
     const currentPage = document.getElementById(URL_ARR[0]);
