@@ -1,7 +1,13 @@
 import { state } from "./state.js";
-import { REGEX_EMAIL } from "../config.js";
-import { REGEX_PHONE } from "../config.js";
-import { REGEX_NAME } from "../config.js";
+import {
+  REGEX_EMAIL,
+  REGEX_PHONE,
+  REGEX_NAME,
+  FILL_IN_VALID_NAMES,
+  FILL_IN_VALID_ADDRESS,
+  FILL_IN_VALID_PHONE_MSG,
+  FILL_IN_VALID_EMAIL_MSG,
+} from "../config.js";
 export const validateOrderFormNames = (nameStr) => {
   try {
     if (nameStr.length === 0) {
@@ -12,7 +18,7 @@ export const validateOrderFormNames = (nameStr) => {
     if (!regName.test(nameStr) || !nameStr) {
       state.orderData.nameContent = "";
       state.orderData.nameContentIsOk = false;
-      throw new Error("Fill in valid names!");
+      throw new Error(FILL_IN_VALID_NAMES);
     }
     state.orderData.nameContent = nameStr;
     state.orderData.nameContentIsOk = true;
@@ -30,7 +36,7 @@ export const validateOrderFormAddress = (addressStr) => {
       addressStr.length < 20 || !addressStr ? false : true;
     if (!state.orderData.addressContentIsOk) {
       state.orderData.addressContent = "";
-      throw new Error("Fill in valid address!");
+      throw new Error(FILL_IN_VALID_ADDRESS);
     }
     state.orderData.addressContent = addressStr;
   } catch (err) {
@@ -47,7 +53,7 @@ export const validateOrderFormPhone = (phoneStr) => {
     if (!regPhone.test(phoneStr) || !phoneStr) {
       state.orderData.phoneContent = "";
       state.orderData.phoneContentIsOk = false;
-      throw new Error("Fill in valid phone number!");
+      throw new Error(FILL_IN_VALID_PHONE_MSG);
     }
     state.orderData.phoneContent = phoneStr;
     state.orderData.phoneContentIsOk = true;
@@ -65,7 +71,7 @@ export const validateOrderFormEmail = (emailStr) => {
     if (!regEmail.test(emailStr) || !emailStr) {
       state.orderData.emailContent = "";
       state.orderData.emailContentIsOk = false;
-      throw new Error("Fill in valid email address!");
+      throw new Error(FILL_IN_VALID_EMAIL_MSG);
     }
     state.orderData.emailContent = emailStr;
     state.orderData.emailContentIsOk = true;

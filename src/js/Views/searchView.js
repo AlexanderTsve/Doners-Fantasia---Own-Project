@@ -1,6 +1,5 @@
 class SearchView {
   _parentElement = document.querySelector(".search_input");
-  _errorMessage = "There is no such product!";
   getQuery() {
     return this._parentElement.lastElementChild.value;
   }

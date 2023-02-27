@@ -2,9 +2,14 @@ import * as bootstrap from "bootstrap";
 import { controlProducts } from "./controlProducts.js";
 import { controlRestaurants } from "./controlRestaurants.js";
 import { toggleCorrectPage } from "../helpers.js";
-import { clearDropdownAndSearchField } from "./clearDropdownAndSearchField.js";
+import dropdownFilterView from "../Views/dropdownFilterView.js";
+import searchView from "../Views/searchView.js";
 import { URL_ARR } from "../config.js";
 import { controlProductDetails } from "./controlProductDetails.js";
+const clearDropdownAndSearchField = () => {
+  dropdownFilterView.clearValue();
+  searchView.clearSearchValue();
+};
 const togglePagesHelper = (hash) => {
   toggleCorrectPage(hash);
   if (hash === "menu-page") {

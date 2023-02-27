@@ -3,6 +3,7 @@ import {
   POST_REGISTRATION_AUTH_URL,
   REGISTRATION_AUTH_ERROR,
   USERS_URL,
+  SUCCESSFUL_REG_MSG,
 } from "../config.js";
 import { sendRegistrationData } from "../helpers.js";
 import { sendAuthData } from "../helpers.js";
@@ -15,7 +16,7 @@ export const submitRegistrationForm = async () => {
       REGISTRATION_AUTH_ERROR
     );
     await sendRegistrationData(USERS_URL, state.registrationFormData);
-    return "Your registration has been successful!";
+    return SUCCESSFUL_REG_MSG;
   } catch (err) {
     return err.message;
   }

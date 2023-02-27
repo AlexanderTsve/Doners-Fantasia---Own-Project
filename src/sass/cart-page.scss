@@ -89,3 +89,13 @@
     }
   }
 }
+.order_form {
+  &_names,
+  &_email,
+  &_phone,
+  &_address {
+    &_error {
+      margin: 0 1rem 1rem 1rem;
+    }
+  }
+}

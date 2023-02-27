@@ -1,12 +1,13 @@
 import { async } from "regenerator-runtime";
 import Views from "./Views.js";
+import { NO_PRODUCTS_IN_CART_MSG } from "../config.js";
 class CartPageView extends Views {
   _parentElement = document.querySelector(".cart-container");
   _formElement = document.querySelector(".order-form-container");
   render(data, formSubmissionHandler) {
     const totalCountEl = document.querySelector(".cart-items-count");
     if (!data || data.length === 0) {
-      this._parentElement.innerText = "No products in the cart!";
+      this._parentElement.innerText = NO_PRODUCTS_IN_CART_MSG;
       this._formElement.innerHTML = "";
       totalCountEl.innerText = 0;
       return;

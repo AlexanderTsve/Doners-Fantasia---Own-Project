@@ -33,3 +33,12 @@ export const REGISTRATION_AUTH_ERROR =
 export const LOGIN_AUTH_ERROR =
   "Please, check the entered email/password, and try again with valid credentials!";
 export const MIN_QTY_OF_ITEM = 1;
+export const NO_PRODUCTS_IN_CART_MSG = "No products in the cart!";
+export const FILL_IN_VALID_EMAIL_MSG = "Fill in a valid email address!";
+export const FILL_IN_FEEDBACK_FIELD_MSG = "Fill in the feedback field!";
+export const FILL_IN_VALID_PHONE_MSG =
+  "Fill in a valid gsm number - starting with +3598... or 08...!";
+export const FILL_IN_VALID_NAMES = "Fill in valid names!";
+export const FILL_IN_VALID_ADDRESS = "Fill in valid address!";
+export const SUCCESSFUL_REG_MSG = "Your registration has been successful!";
+export const PRODUCT_ITEM = 1;

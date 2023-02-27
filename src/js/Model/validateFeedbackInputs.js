@@ -1,14 +1,20 @@
 import { state } from "./state.js";
-import { REGEX_EMAIL } from "../config.js";
-import { REGEX_PHONE } from "../config.js";
-import { REGEX_NAME } from "../config.js";
+import {
+  REGEX_EMAIL,
+  REGEX_PHONE,
+  REGEX_NAME,
+  FILL_IN_FEEDBACK_FIELD_MSG,
+  FILL_IN_VALID_EMAIL_MSG,
+  FILL_IN_VALID_NAMES,
+  FILL_IN_VALID_PHONE_MSG,
+} from "../config.js";
 export const validateFeedbackEmail = (dataObj) => {
   try {
     const { emailContent } = dataObj;
     state.feedbackFormData.emailContent = emailContent;
     const regEmail = REGEX_EMAIL;
     if (!regEmail.test(emailContent) || !emailContent) {
-      throw new Error("Fill in a valid email address!");
+      throw new Error(FILL_IN_VALID_EMAIL_MSG);
     }
     state.feedbackFormData.emailContentIsOk = true;
   } catch (err) {
@@ -20,7 +26,7 @@ export const validateFeedbackFieldInput = (dataObj) => {
     const { feedbackContent } = dataObj;
     state.feedbackFormData.feedbackContent = feedbackContent;
     if (!feedbackContent) {
-      throw new Error("Fill in the feedback field!");
+      throw new Error(FILL_IN_FEEDBACK_FIELD_MSG);
     }
     state.feedbackFormData.feedbackContentIsOk = true;
   } catch (err) {
@@ -33,9 +39,7 @@ export const validateFeedbackPhone = (dataObj) => {
     state.feedbackFormData.phoneContent = phoneContent;
     const regPhone = REGEX_PHONE;
     if (!regPhone.test(phoneContent) || !phoneContent) {
-      throw new Error(
-        "Fill in a valid gsm number - starting with +3598... or 08...!"
-      );
+      throw new Error(FILL_IN_VALID_PHONE_MSG);
     }
     state.feedbackFormData.phoneContentIsOk = true;
   } catch (err) {
@@ -48,7 +52,7 @@ export const validateFeedbackName = (dataObj) => {
     state.feedbackFormData.nameContent = nameContent;
     const regName = REGEX_NAME;
     if (!regName.test(nameContent) || !nameContent) {
-      throw new Error("Fill in valid names!");
+      throw new Error(FILL_IN_VALID_NAMES);
     }
     state.feedbackFormData.nameContentIsOk = true;
   } catch (err) {
