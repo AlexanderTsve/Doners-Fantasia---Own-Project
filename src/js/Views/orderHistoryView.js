@@ -1,10 +1,13 @@
 import Views from "./Views.js";
+import { NO_PREVIOUS_ORDERS_MSG } from "../config.js";
 class OrderHistoryView extends Views {
   _parentElement = document.querySelector(".order-history-container");
   render(data) {
-    if (!data.orderHistory || data.orderHistory.length === 0) {
-      this._parentElement.innerText =
-        "There are no previous orders from this profile!";
+    if (
+      !data.orderHistory ||
+      (Array.isArray(data.orderHistory) && data.orderHistory.length === 0)
+    ) {
+      this._parentElement.innerText = NO_PREVIOUS_ORDERS_MSG;
       return;
     }
     const orderData = Object.values(data.orderHistory);

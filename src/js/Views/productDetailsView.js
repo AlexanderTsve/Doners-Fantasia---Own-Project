@@ -1,11 +1,12 @@
 import * as images from "../../img/products_imgs/*.png";
 import * as icons from "../../img/weight_price_icons/*.png";
 import Views from "./Views.js";
+import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA } from "../config.js";
 class ProductDetailsView extends Views {
   _parentElement = document.querySelector(".product-details");
   render(data) {
-    if (!data) {
-      return this.renderError();
+    if (!data || Object.values(data).length === 0) {
+      return this.renderError(GENERAL_ERR_MSG_PROBLEM_WITH_DATA);
     }
     this._data = data;
     const markupArr = this._generateMarkupArr();

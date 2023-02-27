@@ -1,9 +1,10 @@
 import Views from "./Views.js";
+import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA } from "../config.js";
 class ProductsView extends Views {
   _parentElement = document.querySelector(".products-container");
   render(data) {
-    if (!data) {
-      return this.renderError();
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      return this.renderError(GENERAL_ERR_MSG_PROBLEM_WITH_DATA);
     }
     this._data = data;
     const markupArr = this._generateMarkupArr(this._data);

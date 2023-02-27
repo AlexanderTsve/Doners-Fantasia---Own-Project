@@ -42,3 +42,7 @@ export const FILL_IN_VALID_NAMES = "Fill in valid names!";
 export const FILL_IN_VALID_ADDRESS = "Fill in valid address!";
 export const SUCCESSFUL_REG_MSG = "Your registration has been successful!";
 export const PRODUCT_ITEM = 1;
+export const GENERAL_ERR_MSG_PROBLEM_WITH_DATA =
+  "Problem with the server! Please, try again later!";
+export const NO_PREVIOUS_ORDERS_MSG =
+  "There are no previous orders from this profile!";

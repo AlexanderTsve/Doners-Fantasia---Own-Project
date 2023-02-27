@@ -7,11 +7,12 @@ import TileLayer from "ol/layer/Tile.js";
 import { Vector as VectorLayer } from "ol/layer.js";
 import { fromLonLat, toLonLat } from "ol/proj.js";
 import { Icon, Style } from "ol/style.js";
+import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA } from "../config.js";
 class RestaurantsView extends Views {
   _parentElement = document.querySelector(".restaurants-container");
   render(data) {
-    if (!data) {
-      return this.renderError();
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      return this.renderError(GENERAL_ERR_MSG_PROBLEM_WITH_DATA);
     }
     this._data = data;
     const markupArr = this._generateMarkupArr(this._data);

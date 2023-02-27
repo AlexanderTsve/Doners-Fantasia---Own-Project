@@ -14,7 +14,6 @@ import { controlLoginParaError } from "./Controller/controlLoginParaError.js";
 import { controlLogoutBtn } from "./Controller/controlLogoutBtn.js";
 import { controlLoginSubmission } from "./Controller/controlLoginSubmission.js";
 import { controlIfUserIsLogged } from "./Controller/controlIfUserIsLogged.js";
-import { controlBeforeUnloadEvent } from "./Controller/controlBeforeUnloadEvent.js";
 import * as controlRouting from "./Controller/controlRouting.js";
 import * as controlErrorParas from "./Controller/controlErrorParas.js";
 import * as controlToggleRegistrationModal from "./Controller/controlToggleRegistrationModal.js";
@@ -44,7 +43,6 @@ const init = () => {
   urlView.addUrlChangeHandlerToCartPage(() => {
     controlRouting.controlChangePathname("cart-page");
   });
-  urlView.addBeforeUnloadHandler(controlBeforeUnloadEvent);
   urlView.addHashChangeHandler(controlRouting.controlChangeHash);
   searchView.addHandlerSearch(controlSearchResults);
   dropdownFilterView.addHandlerDropdownFilter(controlSearchResults);

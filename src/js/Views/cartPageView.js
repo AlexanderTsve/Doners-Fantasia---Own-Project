@@ -6,7 +6,7 @@ class CartPageView extends Views {
   _formElement = document.querySelector(".order-form-container");
   render(data, formSubmissionHandler) {
     const totalCountEl = document.querySelector(".cart-items-count");
-    if (!data || data.length === 0) {
+    if (!data || (Array.isArray(data) && data.length === 0)) {
       this._parentElement.innerText = NO_PRODUCTS_IN_CART_MSG;
       this._formElement.innerHTML = "";
       totalCountEl.innerText = 0;

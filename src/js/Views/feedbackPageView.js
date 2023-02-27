@@ -34,15 +34,11 @@ class FeedbackPageView extends Views {
       });
   }
   getFeedbackFormInputsContent(validationFn) {
-    const nameContent = document.getElementById("feedback_name_input").value;
-    const emailContent = document.getElementById("feedback_email_input").value;
-    const phoneContent = document.getElementById("feedback_phone_input").value;
-    const feedbackContent = document.getElementById("feedback-area").value;
     const feedback = {
-      nameContent,
-      emailContent,
-      phoneContent,
-      feedbackContent,
+      nameContent: document.getElementById("feedback_name_input").value,
+      emailContent: document.getElementById("feedback_email_input").value,
+      phoneContent: document.getElementById("feedback_phone_input").value,
+      feedbackContent: document.getElementById("feedback-area").value,
     };
     validationFn(feedback);
   }

@@ -1,12 +1,10 @@
-class UrlView {
+import Views from "./Views.js";
+class UrlView extends Views {
   addUrlChangeHandler(handler) {
     window.addEventListener("load", handler);
   }
   addHashChangeHandler(handler) {
     window.addEventListener("hashchange", handler);
-  }
-  addBeforeUnloadHandler(handler) {
-    window.addEventListener("beforeunload", handler);
   }
   addUrlChangeHandlerToMain(handler) {
     document.querySelector(".menu-item").addEventListener("click", handler);
