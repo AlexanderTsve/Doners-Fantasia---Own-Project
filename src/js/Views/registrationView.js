@@ -3,6 +3,9 @@ class RegistrationView extends Views {
   disabledHandler(boolean) {
     const regBtn = document.querySelector(".register_btn");
     regBtn.disabled = boolean ? false : true;
+    boolean
+      ? document.querySelector(".register-tooltip").classList.add("hidden")
+      : document.querySelector(".register-tooltip").classList.remove("hidden");
   }
   showPara(inputEnd) {
     document

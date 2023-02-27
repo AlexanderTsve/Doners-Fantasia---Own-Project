@@ -93,19 +93,38 @@
   display: flex;
   width: 35%;
   justify-content: space-around;
-    label {
-    font-size: 0.75rem;  
-  } 
-    input {
-      margin-bottom: 0.5rem;
+  label {
+    font-size: 0.75rem;
+  }
+  input {
+    margin-bottom: 0.5rem;
   }
 }
 #login_password_input,
 #registration_password_input,
-#registration_password_confirm{
-  font-family: Arial (sans-serif), Arial Black (sans-serif), Verdana (sans-serif), Tahoma (sans-serif)
-  ,Trebuchet MS (sans-serif)
-  ,Impact (sans-serif),
-  Gill Sans (sans-serif);
+#registration_password_confirm {
+  font-family: Arial (sans-serif), Arial Black (sans-serif),
+    Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+    Impact (sans-serif), Gill Sans (sans-serif);
   font-size: 1rem;
+}
+.register-tooltip {
+  visibility: hidden;
+  width: 18rem;
+  background-color: $color-secondary;
+  color: $color-primary;
+  text-align: center;
+  padding: 0.25rem;
+  border-radius: 3rem;
+  position: absolute;
+  z-index: 13;
+  font-size: 0.75rem;
+  left: -2.5rem;
+  top: -1.8rem;
+}
+.register_btn {
+  position: relative;
+}
+.register_btn:hover .register-tooltip {
+  visibility: visible;
 }

@@ -18,7 +18,9 @@
           </li>
         </ul>
         <ul class="nav__list">
-          <li class="nav__item nav__item_order-history header-footer-items hidden">
+          <li
+            class="nav__item nav__item_order-history header-footer-items hidden"
+          >
             <a href="#order-history-page">Order History</a>
           </li>
           <li class="nav__item nav__item_login header-footer-items">Login</li>
@@ -181,6 +183,9 @@
                 class="doner_app_button register_btn registration_btns"
               >
                 Sign up
+                <span class="register-tooltip"
+                  >Please, fill in all of the fields with valid data!</span
+                >
               </button>
             </div>
             <div>
@@ -233,7 +238,7 @@
                 class="form-label form-field_label modal_login-content_container_form-field_label"
                 >Remember me:</label
               >
-              <input type="checkbox" id="remember-me-checkbox"/>
+              <input type="checkbox" id="remember-me-checkbox" />
             </div>
             <div>
               <button
@@ -297,7 +302,9 @@
         </div>
       </div>
       <div id="order-history-page" class="hidden">
-        <div class="order-history-container">There are no previous orders from this profile!</div>
+        <div class="order-history-container">
+          There are no previous orders from this profile!
+        </div>
       </div>
       <div id="cart-page" class="hidden">
         <div class="cart-container">No products in the cart!</div>
