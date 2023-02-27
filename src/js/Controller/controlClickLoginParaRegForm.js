@@ -1,7 +1,9 @@
-import * as bootstrap from "bootstrap";
+import { clearRegistrationState } from "../Model/clearRegistrationState.js";
 import registrationView from "../Views/registrationView.js";
 import loginView from "../Views/loginView.js";
-import { clearRegistrationState } from "../Model/clearRegistrationState.js";
+/**
+ * Allows the user to navigate from the registration modal to login modal.
+ */
 export const controlClickLoginParaRegForm = () => {
   registrationView.hideMainModal("registration");
   registrationView.clearInputs();

@@ -1,4 +1,3 @@
-import * as bootstrap from "bootstrap";
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
 import { state } from "../Model/state.js";
@@ -7,6 +6,9 @@ import { getProductsPage } from "../Model/getProductsPage.js";
 import productsView from "../Views/productsView.js";
 import paginationView from "../Views/paginationView.js";
 import * as controlCartProducts from "./controlCartProducts.js";
+/**
+ * Controls the rendering of the products on the menu page.
+ */
 export const controlProducts = async () => {
   try {
     productsView.renderSpinner();

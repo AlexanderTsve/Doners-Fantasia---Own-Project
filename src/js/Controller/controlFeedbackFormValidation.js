@@ -1,11 +1,14 @@
-import * as bootstrap from "bootstrap";
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
+import { sendFeedback } from "../Model/sendFeedback.js";
+import { clearFeedbackFormStateData } from "../Model/clearFeedbackFormStateData.js";
 import { state } from "../Model/state.js";
 import * as validateFeedback from "../Model/validateFeedbackInputs.js";
 import feedbackPageView from "../Views/feedbackPageView.js";
 import { validationFeedbackController } from "./validationFeedbackController.js";
-import { sendFeedback } from "../Model/sendFeedback.js";
+/**
+ * Validates the feedback inputs, sends the feedback data to the database and clears the feedback state data.
+ */
 export const controlFeedbackFormValidation = async () => {
   validationFeedbackController(validateFeedback.validateFeedbackName, "name");
   validationFeedbackController(validateFeedback.validateFeedbackEmail, "email");
@@ -23,15 +26,6 @@ export const controlFeedbackFormValidation = async () => {
     feedbackPageView.clearInputs();
     const response = await sendFeedback();
     feedbackPageView.showMessageModal(response, "feedback-page");
-    state.feedbackFormData = {
-      nameContent: "",
-      emailContent: "",
-      phoneContent: "",
-      feedbackContent: "",
-      nameContentIsOk: false,
-      emailContentIsOk: false,
-      phoneContentIsOk: false,
-      feedbackContentIsOk: false,
-    };
+    clearFeedbackFormStateData();
   }
 };

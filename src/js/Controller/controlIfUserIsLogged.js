@@ -1,8 +1,11 @@
-import * as bootstrap from "bootstrap";
 import { state } from "../Model/state.js";
 import navigationView from "../Views/navigationView.js";
 import loginView from "../Views/loginView.js";
 import orderHistoryView from "../Views/orderHistoryView.js";
+/**
+ * Controls what should be shown the user if it has been logged in to the site.
+ * @returns If the user is not logged in, the function returns.
+ */
 export const controlIfUserIsLogged = () => {
   if (Object.keys(state.loggedUser).length === 0) {
     return;

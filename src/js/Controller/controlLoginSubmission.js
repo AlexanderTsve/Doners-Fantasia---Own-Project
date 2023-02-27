@@ -1,19 +1,22 @@
-import * as bootstrap from "bootstrap";
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
 import { state } from "../Model/state.js";
 import { submitLoginForm } from "../Model/submitLoginForm.js";
 import { clearLoginFormState } from "../Model/clearLoginFormState.js";
+import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 import navigationView from "../Views/navigationView.js";
 import loginView from "../Views/loginView.js";
-import { controlIfUserIsRemembered } from "./controlIfUserIsRemembered.js";
-import { checkLoginAndOrderFormData } from "../Model/checkLoginAndOrderFormData.js";
 import cartPageView from "../Views/cartPageView.js";
 import orderHistoryView from "../Views/orderHistoryView.js";
+import { controlIfUserIsRemembered } from "./controlIfUserIsRemembered.js";
+import { LOGIN_INPUT_DATA_ERROR_MSG } from "../config.js";
+/**
+ * Controls the login submission and data clearing afterwards.
+ */
 export const controlLoginSubmission = async () => {
   try {
     if (!state.loginFormDataIsOk) {
-      throw new Error("Please, fill in all of the fields with correct data!");
+      throw new Error(LOGIN_INPUT_DATA_ERROR_MSG);
     }
     await submitLoginForm();
     loginView.addRememberMeHandler(controlIfUserIsRemembered);

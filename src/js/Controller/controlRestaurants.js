@@ -1,9 +1,11 @@
-import * as bootstrap from "bootstrap";
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
 import { state } from "../Model/state.js";
 import { loadRestaurants } from "../Model/loadRestaurants.js";
 import restaurantsView from "../Views/restaurantsView.js";
+/**
+ * Controls rendering the restaurants and the respective map on the restaurants page.
+ */
 export const controlRestaurants = async () => {
   try {
     restaurantsView.renderSpinner();

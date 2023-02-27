@@ -1,12 +1,15 @@
 import { async } from "regenerator-runtime";
 import { checkLocalStorage } from "../Model/checkLocalStorage.js";
 import { submitOrderForm } from "../Model/submitOrderForm.js";
-import cartPageView from "../Views/cartPageView.js";
-import { renderCartData } from "./controlCartProducts.js";
 import { state } from "../Model/state.js";
+import cartPageView from "../Views/cartPageView.js";
 import orderHistoryView from "../Views/orderHistoryView.js";
+import { renderCartData } from "./controlCartProducts.js";
 import { getUsers } from "../helpers.js";
 import { USERS_URL } from "../config.js";
+/**
+ * Controls order form submission.
+ */
 export const controlOrderFormSubmission = async () => {
   let response;
   try {

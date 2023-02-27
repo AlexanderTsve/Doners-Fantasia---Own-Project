@@ -1,6 +1,9 @@
 import * as validateOrderInputs from "../Model/validateOrderInputs.js";
-import cartPageView from "../Views/cartPageView.js";
 import { state } from "../Model/state.js";
+import cartPageView from "../Views/cartPageView.js";
+/**
+ * Check if the order form input data is correct.
+ */
 const validateOrderForm = () => {
   state.orderDataIsOk =
     state.orderData.addressContentIsOk &&
@@ -8,6 +11,10 @@ const validateOrderForm = () => {
     state.orderData.nameContentIsOk &&
     state.orderData.phoneContentIsOk;
 };
+/**
+ * Controls if the order form name input is correct.
+ * @param {String} nameStr The name input to be checked.
+ */
 export const controlNamesValidation = (nameStr) => {
   try {
     validateOrderInputs.validateOrderFormNames(nameStr);
@@ -18,6 +25,10 @@ export const controlNamesValidation = (nameStr) => {
     validateOrderForm();
   }
 };
+/**
+ * Controls if the order form address input is correct.
+ * @param {String} addressStr The address input to be checked.
+ */
 export const controlAddressValidation = (addressStr) => {
   try {
     validateOrderInputs.validateOrderFormAddress(addressStr);
@@ -28,6 +39,10 @@ export const controlAddressValidation = (addressStr) => {
     validateOrderForm();
   }
 };
+/**
+ * Controls if the order form phone input is correct.
+ * @param {String} phoneStr The phone input to be checked.
+ */
 export const controlPhoneValidation = (phoneStr) => {
   try {
     validateOrderInputs.validateOrderFormPhone(phoneStr);
@@ -38,6 +53,10 @@ export const controlPhoneValidation = (phoneStr) => {
     validateOrderForm();
   }
 };
+/**
+ * Controls if the order form email input is correct.
+ * @param {String} emailStr The email input to be checked.
+ */
 export const controlEmailValidation = (emailStr) => {
   try {
     validateOrderInputs.validateOrderFormEmail(emailStr);

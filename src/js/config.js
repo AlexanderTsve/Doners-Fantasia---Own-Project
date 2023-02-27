@@ -46,3 +46,5 @@ export const GENERAL_ERR_MSG_PROBLEM_WITH_DATA =
   "Problem with the server! Please, try again later!";
 export const NO_PREVIOUS_ORDERS_MSG =
   "There are no previous orders from this profile!";
+export const LOGIN_INPUT_DATA_ERROR_MSG =
+  "Please, fill in all of the fields with correct data!";
