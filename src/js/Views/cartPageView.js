@@ -1,9 +1,18 @@
 import { async } from "regenerator-runtime";
 import Views from "./Views.js";
 import { NO_PRODUCTS_IN_CART_MSG } from "../config.js";
+/**
+ * Renders the cart page.
+ */
 class CartPageView extends Views {
   _parentElement = document.querySelector(".cart-container");
   _formElement = document.querySelector(".order-form-container");
+  /**
+   * Renders the products in the cart and the order form.
+   * @param {Array} data array of products added to the cart.
+   * @callback formSubmissionHandler function which is attached to the order button for the order submission.
+   * @returns if there is no products in the array or if the array does not exist.
+   */
   render(data, formSubmissionHandler) {
     const totalCountEl = document.querySelector(".cart-items-count");
     if (!data || (Array.isArray(data) && data.length === 0)) {
@@ -24,6 +33,10 @@ class CartPageView extends Views {
     }, 0);
     this._renderOrderForm(formSubmissionHandler);
   }
+  /**
+   * Lisetns for 'click' event and attaches a handler function to the '+' button for each product in the cart page.
+   * @callback handler function which handles the increase of the respective product's quantity by one unit.
+   */
   addIncreaseCartQtyHandler(handler) {
     const increaseBtns = [
       ...document.querySelectorAll(".change_qty_btn_increase"),
@@ -59,6 +72,10 @@ class CartPageView extends Views {
       })
     );
   }
+  /**
+   * Lisetns for 'click' event and attaches a handler function to the '-' button for each product in the cart page.
+   * @callback handler function which handles the decrease of the respective product's quantity by one unit.
+   */
   addDecreaseCartQtyHandler(handler) {
     const decreaseBtns = [
       ...document.querySelectorAll(".change_qty_btn_decrease"),
@@ -94,6 +111,10 @@ class CartPageView extends Views {
       })
     );
   }
+  /**
+   * Lisetns for 'click' event and attaches a handler function to the 'Remove Item' button for each product in the cart page.
+   * @callback handler function which handles the removal of the respective product from the cart.
+   */
   addRemoveProductHandler(handler) {
     const removeBtns = [...document.querySelectorAll(".change_qty_btn_remove")];
     removeBtns.forEach((btn) =>
@@ -106,6 +127,11 @@ class CartPageView extends Views {
       })
     );
   }
+  /**
+   * Disables or enables the order button and the respective tooltip depending on the boolean parameter.
+   * @param {boolean} bool the value which defines whether the button should be disabled and whether the tooltip should be shown.
+   * @returns if there is no order button.
+   */
   toggleOrderBtnDisabledAttr(bool) {
     const orderBtn = document.querySelector(".order_form_btn");
     if (!orderBtn) {
@@ -120,6 +146,12 @@ class CartPageView extends Views {
       document.querySelector(".order-tooltip-text").classList.remove("hidden");
     }
   }
+  /**
+   * Listens for 'input' event and adds a handler to the input fields.
+   * @callback validationFn validates the respective input.
+   * @callback checkLoginAndOrderFormDataFn checks whether there is a logged user and whether all of the form inputs are correct.
+   * @param {String} idEnd the end of the respective input id, indicates which input is listened currently.
+   */
   addOrderFormInputHandler(validationFn, checkLoginAndOrderFormDataFn, idEnd) {
     document
       .getElementById(`order_form_${idEnd}`)
@@ -129,18 +161,35 @@ class CartPageView extends Views {
         this.toggleOrderBtnDisabledAttr(bool);
       });
   }
+  /**
+   * Shows an error message for each order form field.
+   * @param {String} classIdent indicates which error paragraph should be shown.
+   * @param {String} msg the message that will be rendered to the user.
+   */
   errorParaHandler(classIdent, msg) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = msg;
   }
+  /**
+   * Clears the error message.
+   * @param {String} classIdent indicates which error paragraph should be hidden.
+   */
   clearErrorParaHandler(classIdent) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = "";
   }
+  /**
+   * Clears all of the order form fields.
+   */
   clearFormFields() {
     const orderInputFields = [
       ...document.querySelectorAll(".order-form-input"),
     ];
     orderInputFields.forEach((input) => (input.value = ""));
   }
+  /**
+   * Private method, lisetns for 'submit' event and adds a handler to the order form.
+   * @callback handler function for the submission of the order form.
+   * @returns if there is no order form.
+   */
   _addSubmitFormHandler(handler) {
     const orderForm = document.getElementById("order_form");
     if (!orderForm) {
@@ -151,6 +200,10 @@ class CartPageView extends Views {
       handler();
     });
   }
+  /**
+   * Private method, for rendering the order form
+   * @callback formSubmissionHandler function to be attached for the form submission.
+   */
   _renderOrderForm(formSubmissionHandler) {
     if (!this._formElement.hasChildNodes()) {
       const formMarkup = this._generateOrderForm();
@@ -158,6 +211,11 @@ class CartPageView extends Views {
       this._addSubmitFormHandler(formSubmissionHandler);
     }
   }
+  /**
+   * Private method, renders the total amount of the current cart.
+   * @param {Array} arrOfProducts the array of all of the products in the current cart.
+   * @returns {HTMLElement} paragraph DOM element with the total price.
+   */
   _renderTotalAmount(arrOfProducts) {
     const totalPrice = arrOfProducts.reduce((acc, product) => {
       return (acc += Number(product.price));
@@ -169,6 +227,10 @@ class CartPageView extends Views {
     pricePara.classList.add("cart-container-para");
     return pricePara;
   }
+  /**
+   * Private method, generates the order form DOM element.
+   * @returns {HTMLElement} the order form.
+   */
   _generateOrderForm() {
     const orderFormDivEl = document.createElement("form");
     const orderFormNamesLabelEl = document.createElement("label");
@@ -245,6 +307,11 @@ class CartPageView extends Views {
     );
     return orderFormDivEl;
   }
+  /**
+   * Generates the cart DOM elements.
+   * @param {Array} arrOfProducts added to the cart.
+   * @returns {HTMLElement} containing all of the products in the current cart.
+   */
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product, index) => {
       const productDivEl = document.createElement("div");
