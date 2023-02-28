@@ -1,9 +1,12 @@
-import { RES_PER_PAGE } from "../config.js";
+import { RES_PER_PAGE, START_PAGE } from "../config.js";
+/**
+ * The main object reflecting the user's actions.
+ */
 export const state = {
   productDetails: {},
   products: [],
   productsPerPage: RES_PER_PAGE,
-  productsPageNumber: 1,
+  productsPageNumber: START_PAGE,
   search: {
     query: "",
     results: [],

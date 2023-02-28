@@ -2,6 +2,9 @@ import { state } from "./state.js";
 import { GET_PRODUCTS_URL } from "../config.js";
 import { makeApiCall, returnProductObjects } from "../helpers.js";
 import { async } from "regenerator-runtime";
+/**
+ * Loads the data regarding all of the products.
+ */
 export const loadProducts = async () => {
   try {
     const data = await makeApiCall(GET_PRODUCTS_URL);

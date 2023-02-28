@@ -48,3 +48,7 @@ export const NO_PREVIOUS_ORDERS_MSG =
   "There are no previous orders from this profile!";
 export const LOGIN_INPUT_DATA_ERROR_MSG =
   "Please, fill in all of the fields with correct data!";
+export const START_PAGE = 1;
+export const INITIAL_DROPDOWN_OPTION = "none";
+export const LOCAL_STORAGE_REMEMBERED_USER_KEY = "rememberUser";
+export const LOCAL_STORAGE_DONER_CART_KEY = "doner-cart";

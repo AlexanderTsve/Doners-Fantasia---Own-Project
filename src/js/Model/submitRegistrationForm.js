@@ -8,6 +8,10 @@ import {
 import { sendRegistrationData } from "../helpers.js";
 import { sendAuthData } from "../helpers.js";
 import { async } from "regenerator-runtime";
+/**
+ * Submits registration form.
+ * @returns {String} which indicates whether the registration has been successful or not.
+ */
 export const submitRegistrationForm = async () => {
   try {
     await sendAuthData(

@@ -8,6 +8,10 @@ import {
   FILL_IN_VALID_NAMES,
   FILL_IN_VALID_PHONE_MSG,
 } from "../config.js";
+/**
+ * Validates the email input.
+ * @param {Object} dataObj of the inputs from which we take the email for validation.
+ */
 export const validateFeedbackEmail = (dataObj) => {
   try {
     const { emailContent } = dataObj;
@@ -21,6 +25,10 @@ export const validateFeedbackEmail = (dataObj) => {
     throw err;
   }
 };
+/**
+ * Validates the feedback input.
+ * @param {Object} dataObj of the inputs from which we take the feedback for validation.
+ */
 export const validateFeedbackFieldInput = (dataObj) => {
   try {
     const { feedbackContent } = dataObj;
@@ -33,6 +41,10 @@ export const validateFeedbackFieldInput = (dataObj) => {
     throw err;
   }
 };
+/**
+ * Validates the phone input.
+ * @param {Object} dataObj of the inputs from which we take the phone for validation.
+ */
 export const validateFeedbackPhone = (dataObj) => {
   try {
     const { phoneContent } = dataObj;
@@ -46,6 +58,10 @@ export const validateFeedbackPhone = (dataObj) => {
     throw err;
   }
 };
+/**
+ * Validates the name input.
+ * @param {Object} dataObj of the inputs from which we take the name for validation.
+ */
 export const validateFeedbackName = (dataObj) => {
   try {
     const { nameContent } = dataObj;

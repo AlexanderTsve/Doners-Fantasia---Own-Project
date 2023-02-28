@@ -8,6 +8,11 @@ import {
   FILL_IN_VALID_PHONE_MSG,
   FILL_IN_VALID_EMAIL_MSG,
 } from "../config.js";
+/**
+ * Validates the names input.
+ * @param {String} nameStr the input to be validated.
+ * @returns if the content is not ok.
+ */
 export const validateOrderFormNames = (nameStr) => {
   try {
     if (nameStr.length === 0) {
@@ -26,6 +31,11 @@ export const validateOrderFormNames = (nameStr) => {
     throw err;
   }
 };
+/**
+ * Validates the address input.
+ * @param {String} addressStr the input to be validated.
+ * @returns if the content is not ok.
+ */
 export const validateOrderFormAddress = (addressStr) => {
   try {
     if (addressStr.length === 0) {
@@ -43,6 +53,11 @@ export const validateOrderFormAddress = (addressStr) => {
     throw err;
   }
 };
+/**
+ * Validates the phone input.
+ * @param {String} phoneStr the input to be validated.
+ * @returns if the content is not ok.
+ */
 export const validateOrderFormPhone = (phoneStr) => {
   try {
     if (phoneStr.length === 0) {
@@ -61,6 +76,11 @@ export const validateOrderFormPhone = (phoneStr) => {
     throw err;
   }
 };
+/**
+ * Validates the email input.
+ * @param {String} emailStr the input to be validated.
+ * @returns if the content is not ok.
+ */
 export const validateOrderFormEmail = (emailStr) => {
   try {
     if (emailStr.length === 0) {

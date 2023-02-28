@@ -1,5 +1,9 @@
 import { state } from "./state.js";
 import { REGEX_EMAIL, REGEX_PASSWORD } from "../config.js";
+/**
+ * Validates the whole form content.
+ * @param {Object} dataObj from which we take the data to be validated.
+ */
 export const validateLoginForm = (dataObj) => {
   const { emailContent } = dataObj;
   const { passwordContent } = dataObj;

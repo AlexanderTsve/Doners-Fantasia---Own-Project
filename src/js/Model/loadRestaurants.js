@@ -2,6 +2,9 @@ import { state } from "./state.js";
 import { GET_RESTAURANTS_URL } from "../config.js";
 import { makeApiCall } from "../helpers.js";
 import { async } from "regenerator-runtime";
+/**
+ * Loads the data re the restaurants.
+ */
 export const loadRestaurants = async () => {
   try {
     const data = await makeApiCall(GET_RESTAURANTS_URL);

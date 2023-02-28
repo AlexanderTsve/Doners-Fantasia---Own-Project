@@ -2,6 +2,10 @@ import { state } from "./state.js";
 import { REGEX_EMAIL } from "../config.js";
 import { REGEX_PASSWORD } from "../config.js";
 import { REGEX_PHONE } from "../config.js";
+/**
+ * Validates the registration email input.
+ * @param {Object} dataObj from which we take the email input.
+ */
 export const validateRegistrationEmail = (dataObj) => {
   const { emailContent } = dataObj;
   state.registrationFormData.emailContent = emailContent;
@@ -9,6 +13,10 @@ export const validateRegistrationEmail = (dataObj) => {
   state.registrationFormData.emailContentIsOk =
     !regEmail.test(emailContent) || !emailContent ? false : true;
 };
+/**
+ * Validates the registration password input.
+ * @param {Object} dataObj from which we take the password input.
+ */
 export const validateRegistrationPassword = (dataObj) => {
   const { passwordContent } = dataObj;
   state.registrationFormData.passwordContent = passwordContent;
@@ -16,6 +24,10 @@ export const validateRegistrationPassword = (dataObj) => {
   state.registrationFormData.passwordContentIsOk =
     !regPassword.test(passwordContent) || !passwordContent ? false : true;
 };
+/**
+ * Validates the registration confirmation password input.
+ * @param {Object} dataObj from which we take the confirmation password input.
+ */
 export const validateRegistrationConfirmPassword = (dataObj) => {
   const { passwordConfirmContent } = dataObj;
   state.registrationFormData.confirmPasswordContent = passwordConfirmContent;
@@ -25,6 +37,10 @@ export const validateRegistrationConfirmPassword = (dataObj) => {
       ? false
       : true;
 };
+/**
+ * Validates the registration phone input.
+ * @param {Object} dataObj from which we take the phone input.
+ */
 export const validateRegistrationPhone = (dataObj) => {
   const { phoneContent } = dataObj;
   state.registrationFormData.phoneContent = phoneContent;
@@ -32,12 +48,20 @@ export const validateRegistrationPhone = (dataObj) => {
   state.registrationFormData.phoneContentIsOk =
     !regPhone.test(phoneContent) || !phoneContent ? false : true;
 };
+/**
+ * Validates the registration address input.
+ * @param {Object} dataObj from which we take the address input.
+ */
 export const validateRegistrationAddress = (dataObj) => {
   const { addressContent } = dataObj;
   state.registrationFormData.addressContent = addressContent;
   state.registrationFormData.addressContentIsOk =
     addressContent.length < 20 ? false : true;
 };
+/**
+ * Validates the whole registration form.
+ * @returns {Boolean} whether all of the inputs are correct or not.
+ */
 export const validateRegistrationForm = () => {
   return (
     state.registrationFormData.addressContentIsOk &&
