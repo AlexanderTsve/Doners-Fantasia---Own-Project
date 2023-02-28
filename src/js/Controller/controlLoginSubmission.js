@@ -19,7 +19,6 @@ export const controlLoginSubmission = async () => {
       throw new Error(LOGIN_INPUT_DATA_ERROR_MSG);
     }
     await submitLoginForm();
-    loginView.addRememberMeHandler(controlIfUserIsRemembered);
     const loggedUser = state.loggedUser;
     navigationView.toggleHideShowNavigationBtn(loggedUser);
     loginView.changeWelcomePara(loggedUser, loggedUser.email);
@@ -27,6 +26,7 @@ export const controlLoginSubmission = async () => {
   } catch (err) {
     loginView.showMessageModal(err.message, "modal_log_error");
   } finally {
+    loginView.addRememberMeHandler(controlIfUserIsRemembered);
     loginView.hideMainModal("login");
     loginView.clearInputs();
     clearLoginFormState();
