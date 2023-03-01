@@ -8,8 +8,16 @@ import { Vector as VectorLayer } from "ol/layer.js";
 import { fromLonLat, toLonLat } from "ol/proj.js";
 import { Icon, Style } from "ol/style.js";
 import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA } from "../config.js";
+/**
+ * Renders restaurant page.
+ */
 class RestaurantsView extends Views {
   _parentElement = document.querySelector(".restaurants-container");
+  /**
+   * Renders all of the restaurants cards.
+   * @param {object[]} data array of all of the restaurants objects.
+   * @returns {HTMLElement} A paragraph with the rendered error if there is no existing array or if the array length is zero.
+   */
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0)) {
       return this.renderError(GENERAL_ERR_MSG_PROBLEM_WITH_DATA);
@@ -19,6 +27,10 @@ class RestaurantsView extends Views {
     this._clear();
     markupArr.forEach((htmlEl) => this._parentElement.append(htmlEl));
   }
+  /**
+   * Generates the map element.
+   * @param {object[]} restaurants array of all of the restaurants objects.
+   */
   generateMap(restaurants) {
     const { lat, lon } = restaurants[5].geoLocation;
     let centeredLocation = fromLonLat([lon, lat]);
@@ -78,6 +90,11 @@ class RestaurantsView extends Views {
       }
     });
   }
+  /**
+   * Generate array of DOM elements rendering the restaurants data.
+   * @param {object[]} arrOfRestaurants array of all of the restaurants objects.
+   * @returns {HTMLElement[]} array of all of the restaurant cards.
+   */
   _generateMarkupArr(arrOfRestaurants) {
     return arrOfRestaurants.map((restaurant) => {
       const restaurantDivEl = document.createElement("div");

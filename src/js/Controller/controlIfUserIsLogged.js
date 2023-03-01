@@ -4,7 +4,7 @@ import loginView from "../Views/loginView.js";
 import orderHistoryView from "../Views/orderHistoryView.js";
 /**
  * Controls what should be shown the user if it has been logged in to the site.
- * @returns If the user is not logged in, the function returns.
+ * @returns if the user is not logged in.
  */
 export const controlIfUserIsLogged = () => {
   if (Object.keys(state.loggedUser).length === 0) {

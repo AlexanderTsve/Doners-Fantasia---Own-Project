@@ -2,12 +2,9 @@ export const URL_ARR = [
   "menu-page",
   "details-page",
   "restaurants-page",
-  "order-page",
   "order-history-page",
   "cart-page",
-  "news-page",
   "feedback-page",
-  "error-page",
 ];
 export const GET_PRODUCTS_URL =
   "https://react-http-requests-81638-default-rtdb.europe-west1.firebasedatabase.app/doners-products.json";
@@ -52,3 +49,4 @@ export const START_PAGE = 1;
 export const INITIAL_DROPDOWN_OPTION = "none";
 export const LOCAL_STORAGE_REMEMBERED_USER_KEY = "rememberUser";
 export const LOCAL_STORAGE_DONER_CART_KEY = "doner-cart";
+export const DEFAULT_DROPDOWN_OPTION = 0;

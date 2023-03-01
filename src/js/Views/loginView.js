@@ -4,8 +4,12 @@ import Views from "./Views.js";
  */
 class LoginView extends Views {
   /**
+   * Function that executes when the input (in either of the both fields) changes.
+   * @callback loginInputHandler
+   */
+  /**
    * Listens for the 'input' events for both fields and attaches a handler.
-   * @param {*} handler
+   * @param {loginInputHandler} handler callback that handles the error paragraph above the login input fields.
    */
   addInputFieldsHandler(handler) {
     document
@@ -16,8 +20,13 @@ class LoginView extends Views {
       .addEventListener("input", handler);
   }
   /**
+   * Executes when the form is submitted.
+   * @callback checkRememberMe
+   * @param {object} obj The object contains property indicating whether the checkbox 'remember me' has been checked by the user during logging in.
+   */
+  /**
    * Attaches a handler after the form submission which tracks whether the 'remember me' checkbox has been checked or not.
-   * @param {Function} handler to be executed with parameter object showing whether the checkbox has been checked.
+   * @param {checkRememberMe} handler to be executed with parameter object showing whether the checkbox has been checked.
    */
   addRememberMeHandler(handler) {
     const obj = {
@@ -26,8 +35,12 @@ class LoginView extends Views {
     handler(obj);
   }
   /**
+   * Executes when the login button is clicked and submit the form.
+   * @callback loginSubmissionFn
+   */
+  /**
    * Listens for the "click" event and attaches a handler for the form submission.
-   * @callback handler function for the form submission.
+   * @param {loginSubmissionFn} handler function for the form submission.
    */
   addLoginBtnHandler(handler) {
     document.querySelector(".login_btn").addEventListener("click", handler);
@@ -68,8 +81,12 @@ class LoginView extends Views {
       "Welcome, " + (isLogged ? `${name}!` : "guest!");
   }
   /**
+   * Validates the login inputs.
+   * @callback validateLoginInputs
+   */
+  /**
    * Gets the login inputs.
-   * @param {Function} validationFn validates the login inputs.
+   * @param {validateLoginInputs} validationFn validates the login inputs.
    */
   getLoginFormInputs(validationFn) {
     const emailContent = document.getElementById("login_email_input").value;

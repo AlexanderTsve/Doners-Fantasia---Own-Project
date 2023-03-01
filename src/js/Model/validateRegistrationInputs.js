@@ -4,7 +4,7 @@ import { REGEX_PASSWORD } from "../config.js";
 import { REGEX_PHONE } from "../config.js";
 /**
  * Validates the registration email input.
- * @param {Object} dataObj from which we take the email input.
+ * @param {object} dataObj from which we take the email input.
  */
 export const validateRegistrationEmail = (dataObj) => {
   const { emailContent } = dataObj;
@@ -15,7 +15,7 @@ export const validateRegistrationEmail = (dataObj) => {
 };
 /**
  * Validates the registration password input.
- * @param {Object} dataObj from which we take the password input.
+ * @param {object} dataObj from which we take the password input.
  */
 export const validateRegistrationPassword = (dataObj) => {
   const { passwordContent } = dataObj;
@@ -26,7 +26,7 @@ export const validateRegistrationPassword = (dataObj) => {
 };
 /**
  * Validates the registration confirmation password input.
- * @param {Object} dataObj from which we take the confirmation password input.
+ * @param {object} dataObj from which we take the confirmation password input.
  */
 export const validateRegistrationConfirmPassword = (dataObj) => {
   const { passwordConfirmContent } = dataObj;
@@ -39,7 +39,7 @@ export const validateRegistrationConfirmPassword = (dataObj) => {
 };
 /**
  * Validates the registration phone input.
- * @param {Object} dataObj from which we take the phone input.
+ * @param {object} dataObj from which we take the phone input.
  */
 export const validateRegistrationPhone = (dataObj) => {
   const { phoneContent } = dataObj;
@@ -50,7 +50,7 @@ export const validateRegistrationPhone = (dataObj) => {
 };
 /**
  * Validates the registration address input.
- * @param {Object} dataObj from which we take the address input.
+ * @param {object} dataObj from which we take the address input.
  */
 export const validateRegistrationAddress = (dataObj) => {
   const { addressContent } = dataObj;
@@ -60,7 +60,7 @@ export const validateRegistrationAddress = (dataObj) => {
 };
 /**
  * Validates the whole registration form.
- * @returns {Boolean} whether all of the inputs are correct or not.
+ * @returns {boolean} whether all of the inputs are correct or not.
  */
 export const validateRegistrationForm = () => {
   return (

@@ -10,7 +10,7 @@ import {
 } from "../config.js";
 /**
  * Validates the names input.
- * @param {String} nameStr the input to be validated.
+ * @param {string} nameStr the input to be validated.
  * @returns if the content is not ok.
  */
 export const validateOrderFormNames = (nameStr) => {
@@ -33,7 +33,7 @@ export const validateOrderFormNames = (nameStr) => {
 };
 /**
  * Validates the address input.
- * @param {String} addressStr the input to be validated.
+ * @param {string} addressStr the input to be validated.
  * @returns if the content is not ok.
  */
 export const validateOrderFormAddress = (addressStr) => {
@@ -55,7 +55,7 @@ export const validateOrderFormAddress = (addressStr) => {
 };
 /**
  * Validates the phone input.
- * @param {String} phoneStr the input to be validated.
+ * @param {string} phoneStr the input to be validated.
  * @returns if the content is not ok.
  */
 export const validateOrderFormPhone = (phoneStr) => {
@@ -78,7 +78,7 @@ export const validateOrderFormPhone = (phoneStr) => {
 };
 /**
  * Validates the email input.
- * @param {String} emailStr the input to be validated.
+ * @param {string} emailStr the input to be validated.
  * @returns if the content is not ok.
  */
 export const validateOrderFormEmail = (emailStr) => {

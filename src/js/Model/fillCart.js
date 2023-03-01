@@ -1,7 +1,7 @@
 import { LOCAL_STORAGE_DONER_CART_KEY } from "../config.js";
 /**
  * Changes the cart array in the local storage - add new product or add additional item to an existing one.
- * @param {Object} obj the product object to be added to the cart.
+ * @param {object} obj the product object to be added to the cart.
  */
 export const fillCart = (obj) => {
   let cart = localStorage.getItem(LOCAL_STORAGE_DONER_CART_KEY);

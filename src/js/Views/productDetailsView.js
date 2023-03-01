@@ -1,18 +1,35 @@
 import * as images from "../../img/products_imgs/*.png";
 import * as icons from "../../img/weight_price_icons/*.png";
 import Views from "./Views.js";
-import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA } from "../config.js";
+import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA, PRODUCT_ITEM } from "../config.js";
+/**
+ * Renders the product details page for the respective product.
+ */
 class ProductDetailsView extends Views {
   _parentElement = document.querySelector(".product-details");
+  /**
+   * Renders the correct information for each product on the product details page.
+   * @param {object} data contains all of the data regarding the respective product.
+   * @returns {string} an error message if there has been a problem with the data.
+   */
   render(data) {
     if (!data || Object.values(data).length === 0) {
       return this.renderError(GENERAL_ERR_MSG_PROBLEM_WITH_DATA);
     }
     this._data = data;
-    const markupArr = this._generateMarkupArr();
+    const markupArr = this._generateMarkup();
     this._clear();
     markupArr.forEach((markup) => this._parentElement.append(markup));
   }
+  /**
+   * Handles the adding of one unit of a product to the cart.
+   * @callback addOneItemFromDetailsHandler
+   * @param {object} obj to be added to cart.
+   */
+  /**
+   * Listens for the 'click' event and attaches a handler on the "Add 1 Item" button.
+   * @param {addOneItemFromDetailsHandler} handler Callback for adding of one unit of a product to the cart attached to the button.
+   */
   addToCartHandler(handler) {
     document
       .querySelector(".details_page_add_to_cart_btn")
@@ -20,29 +37,32 @@ class ProductDetailsView extends Views {
         const name =
           e.target.parentElement.parentElement.firstChild.lastChild.innerText;
         let price;
-        if (
-          e.target.parentElement.classList.contains("product-details-drinks")
-        ) {
-          price = Number(
-            e.target.parentElement.children[1].lastChild.innerText.split(" ")[0]
-          );
-        }
-        if (
-          !e.target.parentElement.classList.contains("product-details-drinks")
-        ) {
-          price = Number(
-            e.target.parentElement.children[2].lastChild.innerText.split(" ")[0]
-          );
-        }
+        price = e.target.parentElement.classList.contains(
+          "product-details-drinks"
+        )
+          ? Number(
+              e.target.parentElement.children[1].lastChild.innerText.split(
+                " "
+              )[0]
+            )
+          : Number(
+              e.target.parentElement.children[2].lastChild.innerText.split(
+                " "
+              )[0]
+            );
         const obj = {
           name,
           price,
-          qty: 1,
+          qty: PRODUCT_ITEM,
         };
         handler(obj);
       });
   }
-  _generateMarkupArr() {
+  /**
+   * Generates an array of two elements - one with an image and a title of the product, another with a list of ingredients.
+   * @returns {HTMLElement} - array of two DOM elements.
+   */
+  _generateMarkup() {
     const productImageNameDivEl = document.createElement("div");
     const figDetailsEl = document.createElement("figure");
     const imageDetailsEl = document.createElement("img");

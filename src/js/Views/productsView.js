@@ -1,7 +1,15 @@
 import Views from "./Views.js";
 import { GENERAL_ERR_MSG_PROBLEM_WITH_DATA } from "../config.js";
+/**
+ * Renders all of the products on the menu page.
+ */
 class ProductsView extends Views {
   _parentElement = document.querySelector(".products-container");
+  /**
+   * Renders all of the products on the menu page.
+   * @param {object[]} data array of product objects.
+   * @returns {string} if there is a problem with the request.
+   */
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0)) {
       return this.renderError(GENERAL_ERR_MSG_PROBLEM_WITH_DATA);
@@ -11,7 +19,16 @@ class ProductsView extends Views {
     this._clear();
     markupArr.forEach((htmlEl) => this._parentElement.append(htmlEl));
   }
-  addToCartBtnHandler(validationFn) {
+  /**
+   * Adds a number of items of the respective product (taken from the input field) to the cart.
+   * @callback addItemsToCartHandler
+   * @param {object} productObj the final object to be added to the cart.
+   */
+  /**
+   * Listens for the "click" event and adds a number of items of the respective product (taken from the input field) to the cart.
+   * @param {addItemsToCartHandler} handler adds a number of items of the respective product (taken from the input field) to the cart.
+   */
+  addToCartBtnHandler(handler) {
     const arrOfBtns = [...document.querySelectorAll(".add_to_cart_btn")];
     arrOfBtns.forEach((btn) =>
       btn.addEventListener("click", (e) => {
@@ -31,11 +48,16 @@ class ProductsView extends Views {
           price: pricePerUnit * qty,
           qty,
         };
-        validationFn(productObj);
+        handler(productObj);
         e.target.parentElement.firstChild.value = "";
       })
     );
   }
+  /**
+   * Renders the cart tooltip on the menu page.
+   * @param {object[]} data array of all of the products added to the cart.
+   * @returns if there is no products in the array or if it does not exist.
+   */
   renderCartTooltip(data) {
     const container = document.querySelector(".tooltip-container");
     container.innerText = "";
@@ -53,11 +75,21 @@ class ProductsView extends Views {
       container.append(paraNameEl, paraQtyEl, paraPriceEl);
     });
   }
+  /**
+   * Private method, remove the spinner from the img element (after it has been loaded).
+   * @param {HTMLElement} container which contains the product image as well as its title.
+   * @param {HTMLElement} imageEl which contains the product image.
+   * @param {HTMLElement} nameEl which contains the product title.
+   */
   _loadImageHandler(container, imageEl, nameEl) {
     container.innerHTML = "";
     container.append(imageEl, nameEl);
     imageEl.classList.remove("loading");
   }
+  /**
+   * Private method, changes the hash in accordance with the product id.
+   * @param {string} id of the respective product.
+   */
   _changeUrlToDetails(id) {
     const previousPage = document.getElementById(location.hash.slice(1));
     location.hash = `details-page/${id}`;
@@ -65,6 +97,11 @@ class ProductsView extends Views {
     previousPage.classList.add("hidden");
     currentPage.classList.remove("hidden");
   }
+  /**
+   * Private method, generates an array of DOM elements.
+   * @param {object[]} arrOfProducts array of objects representing each product.
+   * @returns {HTMLElement[]} array of DOM elements.
+   */
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product) => {
       const productDivEl = document.createElement("div");

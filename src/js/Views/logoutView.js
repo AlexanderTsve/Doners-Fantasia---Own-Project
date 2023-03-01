@@ -4,8 +4,12 @@ import Views from "./Views.js";
  */
 class LogoutView extends Views {
   /**
+   * Function to be executed when 'Logout' has been clicked.
+   * @callback logoutHandler
+   */
+  /**
    * Listens for the "click" event and attaches a handler to the logout button.
-   * @callback handler function to be executed when the button is clicked.
+   * @param {logoutHandler} handler function to be executed when the button is clicked.
    */
   addLogoutHandler(handler) {
     document

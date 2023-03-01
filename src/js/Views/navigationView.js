@@ -1,5 +1,12 @@
 import Views from "./Views.js";
+/**
+ * Shows the correct navigation depending whether the user is a guest or is logged in.
+ */
 class NavigationView extends Views {
+  /**
+   * Shows or hides the correct buttons in the navigation bar.
+   * @param {object} loggedData indicates whether the user is a guest or is logged in.
+   */
   toggleHideShowNavigationBtn(loggedData) {
     const logoutNavItem = document.querySelector(".nav__item_logout");
     const loginNavItem = document.querySelector(".nav__item_login");

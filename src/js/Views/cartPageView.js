@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime";
 import Views from "./Views.js";
-import { NO_PRODUCTS_IN_CART_MSG } from "../config.js";
+import { NO_PRODUCTS_IN_CART_MSG, PRODUCT_ITEM } from "../config.js";
 /**
  * Renders the cart page.
  */
@@ -8,9 +8,13 @@ class CartPageView extends Views {
   _parentElement = document.querySelector(".cart-container");
   _formElement = document.querySelector(".order-form-container");
   /**
+   * Function which is attached to the order button for the order submission.
+   * @callback orderSubmissionFn
+   */
+  /**
    * Renders the products in the cart and the order form.
-   * @param {Array} data array of products added to the cart.
-   * @callback formSubmissionHandler function which is attached to the order button for the order submission.
+   * @param {object[]} data array of products added to the cart.
+   * @param {orderSubmissionFn} formSubmissionHandler callback attached to the order button for the order submission.
    * @returns if there is no products in the array or if the array does not exist.
    */
   render(data, formSubmissionHandler) {
@@ -34,8 +38,12 @@ class CartPageView extends Views {
     this._renderOrderForm(formSubmissionHandler);
   }
   /**
-   * Lisetns for 'click' event and attaches a handler function to the '+' button for each product in the cart page.
-   * @callback handler function which handles the increase of the respective product's quantity by one unit.
+   * Function which handles the increase of the respective product's quantity by one unit.
+   * @callback increaseQtyHandler
+   */
+  /**
+   * Listens for 'click' event and attaches a handler function to the '+' button for each product in the cart page.
+   * @param {increaseQtyHandler} handler callback which handles the increase of the respective product's quantity by one unit.
    */
   addIncreaseCartQtyHandler(handler) {
     const increaseBtns = [
@@ -66,15 +74,19 @@ class CartPageView extends Views {
         const obj = {
           name,
           price: price / qty,
-          qty: 1,
+          qty: PRODUCT_ITEM,
         };
         handler(obj);
       })
     );
   }
   /**
-   * Lisetns for 'click' event and attaches a handler function to the '-' button for each product in the cart page.
-   * @callback handler function which handles the decrease of the respective product's quantity by one unit.
+   * Function which handles the decrease of the respective product's quantity by one unit.
+   * @callback decreaseQtyHandler
+   */
+  /**
+   * Listens for 'click' event and attaches a handler function to the '-' button for each product in the cart page.
+   * @param {decreaseQtyHandler} handler callback which handles the decrease of the respective product's quantity by one unit.
    */
   addDecreaseCartQtyHandler(handler) {
     const decreaseBtns = [
@@ -105,15 +117,19 @@ class CartPageView extends Views {
         const obj = {
           name,
           price: price / qty,
-          qty: 1,
+          qty: PRODUCT_ITEM,
         };
         handler(obj);
       })
     );
   }
   /**
-   * Lisetns for 'click' event and attaches a handler function to the 'Remove Item' button for each product in the cart page.
-   * @callback handler function which handles the removal of the respective product from the cart.
+   * Function which handles the removal of the respective product from the cart.
+   * @callback removeBtnHandler
+   */
+  /**
+   * Listens for 'click' event and attaches a handler function to the 'Remove Item' button for each product in the cart page.
+   * @param {removeBtnHandler} handler callback handles the removal of the respective product from the cart.
    */
   addRemoveProductHandler(handler) {
     const removeBtns = [...document.querySelectorAll(".change_qty_btn_remove")];
@@ -147,10 +163,18 @@ class CartPageView extends Views {
     }
   }
   /**
+   * Function which validates the respective input.
+   * @callback orderInputValidationFn
+   */
+  /**
+   * Function that checks whether there is a logged user and whether all of the form inputs are correct.
+   * @callback checkLoginAndOrderFormDataFn
+   */
+  /**
    * Listens for 'input' event and adds a handler to the input fields.
-   * @callback validationFn validates the respective input.
-   * @callback checkLoginAndOrderFormDataFn checks whether there is a logged user and whether all of the form inputs are correct.
-   * @param {String} idEnd the end of the respective input id, indicates which input is listened currently.
+   * @param {orderInputValidationFn} validationFn Callback that validates the respective input.
+   * @param {checkLoginAndOrderFormDataFn} checkLoginAndOrderFormDataFn Callback that checks whether there is a logged user and whether all of the form inputs are correct.
+   * @param {string} idEnd the end of the respective input id, indicates which input is listened currently.
    */
   addOrderFormInputHandler(validationFn, checkLoginAndOrderFormDataFn, idEnd) {
     document
@@ -163,15 +187,15 @@ class CartPageView extends Views {
   }
   /**
    * Shows an error message for each order form field.
-   * @param {String} classIdent indicates which error paragraph should be shown.
-   * @param {String} msg the message that will be rendered to the user.
+   * @param {string} classIdent indicates which error paragraph should be shown.
+   * @param {string} msg the message that will be rendered to the user.
    */
   errorParaHandler(classIdent, msg) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = msg;
   }
   /**
    * Clears the error message.
-   * @param {String} classIdent indicates which error paragraph should be hidden.
+   * @param {string} classIdent indicates which error paragraph should be hidden.
    */
   clearErrorParaHandler(classIdent) {
     document.querySelector(`.order_form_${classIdent}_error`).innerText = "";
@@ -186,8 +210,12 @@ class CartPageView extends Views {
     orderInputFields.forEach((input) => (input.value = ""));
   }
   /**
-   * Private method, lisetns for 'submit' event and adds a handler to the order form.
-   * @callback handler function for the submission of the order form.
+   * Function that submits the order form.
+   * @callback orderSubmissionFnHandler
+   */
+  /**
+   * Private method, listens for 'submit' event and adds a handler to the order form.
+   * @param {orderSubmissionFnHandler} handler callback for the submission of the order form.
    * @returns if there is no order form.
    */
   _addSubmitFormHandler(handler) {
@@ -201,8 +229,12 @@ class CartPageView extends Views {
     });
   }
   /**
+   * Function that submits the order form.
+   * @callback orderSubmissionFnHandler
+   */
+  /**
    * Private method, for rendering the order form
-   * @callback formSubmissionHandler function to be attached for the form submission.
+   * @param {orderSubmissionFnHandler} formSubmissionHandler function to be attached for the form submission.
    */
   _renderOrderForm(formSubmissionHandler) {
     if (!this._formElement.hasChildNodes()) {
@@ -213,7 +245,7 @@ class CartPageView extends Views {
   }
   /**
    * Private method, renders the total amount of the current cart.
-   * @param {Array} arrOfProducts the array of all of the products in the current cart.
+   * @param {object[]} arrOfProducts the array of all of the products in the current cart.
    * @returns {HTMLElement} paragraph DOM element with the total price.
    */
   _renderTotalAmount(arrOfProducts) {
@@ -309,8 +341,8 @@ class CartPageView extends Views {
   }
   /**
    * Generates the cart DOM elements.
-   * @param {Array} arrOfProducts added to the cart.
-   * @returns {HTMLElement} containing all of the products in the current cart.
+   * @param {object[]} arrOfProducts added to the cart.
+   * @returns {HTMLElement[]} containing all of the products in the current cart.
    */
   _generateMarkupArr(arrOfProducts) {
     return arrOfProducts.map((product, index) => {

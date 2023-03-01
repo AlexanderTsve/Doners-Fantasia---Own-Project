@@ -3,7 +3,7 @@ import { GET_RESTAURANTS_URL } from "../config.js";
 import { makeApiCall } from "../helpers.js";
 import { async } from "regenerator-runtime";
 /**
- * Loads the data re the restaurants.
+ * Loads the data regarding the restaurants.
  */
 export const loadRestaurants = async () => {
   try {

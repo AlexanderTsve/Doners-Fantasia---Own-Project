@@ -1,7 +1,15 @@
 import Views from "./Views.js";
 import { NO_PREVIOUS_ORDERS_MSG } from "../config.js";
+/**
+ * Renders order history page.
+ */
 class OrderHistoryView extends Views {
   _parentElement = document.querySelector(".order-history-container");
+  /**
+   * Renders the order history page depending on the data param - rendering all of the orders made by the currently logged in user.
+   * @param {object} data from which we take the orderHistory property's value (an array of orders).
+   * @returns if the orderHistory property is an empty array or if it does not exist.
+   */
   render(data) {
     if (
       !data.orderHistory ||
@@ -18,6 +26,11 @@ class OrderHistoryView extends Views {
       this._parentElement.append(element);
     });
   }
+  /**
+   * Private method, generates the DOM element for each order from an array of orders.
+   * @param {object[]} arrOfOrders of orders.
+   * @returns {HTMLElement} rendering all of the orders made by the currently logged in user.
+   */
   _generateOrderHistoryMarkup(arrOfOrders) {
     return arrOfOrders
       .map((order) => {

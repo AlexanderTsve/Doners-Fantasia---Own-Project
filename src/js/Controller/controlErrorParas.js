@@ -10,8 +10,12 @@ const disableHandler = () => {
   );
 };
 /**
- * Gets and validates the user inputs in the registration form.
- * @callback validationFn A callback function which should validate the user inputs.
+ * Validates the user inputs in the registration form.
+ * @callback validationRegistrationFn
+ */
+/**
+ *
+ * @param {validationRegistrationFn} validationFn function which should validate the user inputs.
  */
 const getAndValidateInputs = (validationFn) => {
   registrationView.getRegistrationFormInputs(validationFn);
@@ -19,7 +23,7 @@ const getAndValidateInputs = (validationFn) => {
 /**
  * Shows or hides the respective error paragraph in the registration form.
  * @param {boolean} booleanValue It shows whether the respective error paragraph should be rendered to or removed from the DOM.
- * @param {String} para It shows which error paragraph should be removed or rendered.
+ * @param {string} para It shows which error paragraph should be removed or rendered.
  */
 const togglePara = (booleanValue, para) => {
   booleanValue

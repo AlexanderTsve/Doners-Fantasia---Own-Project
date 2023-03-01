@@ -8,8 +8,8 @@ class FeedbackPageView extends Views {
   ];
   /**
    * Renders an error paragraph.
-   * @param {String} message the message to be rendered.
-   * @param {String} elClassEnd indicates which error element should be rendered.
+   * @param {string} message the message to be rendered.
+   * @param {string} elClassEnd indicates which error element should be rendered.
    */
   renderError(message, elClassEnd) {
     const [parentElement] = this._errorElements.filter((el) =>
@@ -23,7 +23,7 @@ class FeedbackPageView extends Views {
   }
   /**
    * Clears an error paragraph.
-   * @param {String} elClassEnd indicates which paragraph should be hidden.
+   * @param {string} elClassEnd indicates which paragraph should be hidden.
    */
   clearError(elClassEnd) {
     const [parentElement] = this._errorElements.filter((el) =>
@@ -41,8 +41,12 @@ class FeedbackPageView extends Views {
     inputFields.forEach((field) => (field.value = ""));
   }
   /**
+   * Function to be executed when the feedback form is submitted.
+   * @callback feedbackHandlerFormValidation
+   */
+  /**
    * Listens for the 'click' event and attaches a handler to the form.
-   * @callback handlerFormValidation function to be executed when the form is submitted.
+   * @param {feedbackHandlerFormValidation} handlerFormValidation callback to be executed when the form is submitted.
    */
   addSubmitFormHandler(handlerFormValidation) {
     document
@@ -53,8 +57,12 @@ class FeedbackPageView extends Views {
       });
   }
   /**
+   * Checks all of the feedback form inputs.
+   * @callback feedbackValidationFn
+   */
+  /**
    * Gets the feedback form inputs.
-   * @callback validationFn to check all of the inputs.
+   * @param {feedbackValidationFn} validationFn checks all of the feedback form inputs.
    */
   getFeedbackFormInputsContent(validationFn) {
     const feedback = {

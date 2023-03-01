@@ -5,7 +5,7 @@ import {
 } from "../config.js";
 /**
  * Removes one unit from the quantity of the respective product object, the whole object if there has been one unit only.
- * @param {Object} obj from which the function deducts one unit.
+ * @param {object} obj from which the function deducts one unit.
  * @returns if there is no cart in the local storage or if the cart is empty.
  */
 export const removeItemFromCart = (obj) => {

@@ -4,7 +4,7 @@ import { state } from "./state.js";
 import { async } from "regenerator-runtime";
 /**
  * Loads the correct data concerning the respective product.
- * @param {String} productId the id of the respective product in the database.
+ * @param {string} productId the id of the respective product in the database.
  */
 export const loadProductDetails = async (productId) => {
   try {

@@ -50,7 +50,7 @@ export const addOrderInputsHandlers = () => {
 };
 /**
  * Controls adding items from the menu page to the cart, and the rerendering of the new cart at the cart page and on the cart tooltip.
- * @param {Object} obj An object which contains the data necessary for the cart.
+ * @param {object} obj An object which contains the data necessary for the cart.
  */
 export const controlAddingItemsToCart = (obj) => {
   fillCart(obj);
@@ -60,7 +60,7 @@ export const controlAddingItemsToCart = (obj) => {
 };
 /**
  * Controls adding an item from the product-details page or from the cart page to the cart, and the rerendering of the new cart at the cart page and on the cart tooltip.
- * @param {Object} obj An object which contains the data necessary for the cart.
+ * @param {object} obj An object which contains the data necessary for the cart.
  */
 export const controlAddItemToCart = (obj) => {
   fillCart(obj);
@@ -70,7 +70,7 @@ export const controlAddItemToCart = (obj) => {
 };
 /**
  * Controls decreasing the respective product with one unit from the cart at the cart page, and the rerendering of the new cart at the cart page and on the cart tooltip.
- * @param {Object} obj An object which contains the data to be removed from the cart.
+ * @param {object} obj An object which contains the data to be removed from the cart.
  */
 export const controlDecreaseItemFromCart = (obj) => {
   removeItemFromCart(obj);
@@ -82,7 +82,7 @@ export const controlDecreaseItemFromCart = (obj) => {
 };
 /**
  * Controls removing of the respective product from the cart at the cart page, and the rerendering of the new cart at the cart page and on the cart tooltip.
- * @param {String} name A string pointing out which product should be removed from the cart.
+ * @param {string} name A string pointing out which product should be removed from the cart.
  */
 export const controlRemoveProductFromCart = (name) => {
   removeProductFromCart(name);

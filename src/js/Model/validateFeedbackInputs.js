@@ -10,7 +10,7 @@ import {
 } from "../config.js";
 /**
  * Validates the email input.
- * @param {Object} dataObj of the inputs from which we take the email for validation.
+ * @param {object} dataObj of the inputs from which we take the email for validation.
  */
 export const validateFeedbackEmail = (dataObj) => {
   try {
@@ -27,7 +27,7 @@ export const validateFeedbackEmail = (dataObj) => {
 };
 /**
  * Validates the feedback input.
- * @param {Object} dataObj of the inputs from which we take the feedback for validation.
+ * @param {object} dataObj of the inputs from which we take the feedback for validation.
  */
 export const validateFeedbackFieldInput = (dataObj) => {
   try {
@@ -43,7 +43,7 @@ export const validateFeedbackFieldInput = (dataObj) => {
 };
 /**
  * Validates the phone input.
- * @param {Object} dataObj of the inputs from which we take the phone for validation.
+ * @param {object} dataObj of the inputs from which we take the phone for validation.
  */
 export const validateFeedbackPhone = (dataObj) => {
   try {
@@ -60,7 +60,7 @@ export const validateFeedbackPhone = (dataObj) => {
 };
 /**
  * Validates the name input.
- * @param {Object} dataObj of the inputs from which we take the name for validation.
+ * @param {object} dataObj of the inputs from which we take the name for validation.
  */
 export const validateFeedbackName = (dataObj) => {
   try {

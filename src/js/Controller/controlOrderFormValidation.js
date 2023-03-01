@@ -13,7 +13,7 @@ const validateOrderForm = () => {
 };
 /**
  * Controls if the order form name input is correct.
- * @param {String} nameStr The name input to be checked.
+ * @param {string} nameStr The name input to be checked.
  */
 export const controlNamesValidation = (nameStr) => {
   try {
@@ -27,7 +27,7 @@ export const controlNamesValidation = (nameStr) => {
 };
 /**
  * Controls if the order form address input is correct.
- * @param {String} addressStr The address input to be checked.
+ * @param {string} addressStr The address input to be checked.
  */
 export const controlAddressValidation = (addressStr) => {
   try {
@@ -41,7 +41,7 @@ export const controlAddressValidation = (addressStr) => {
 };
 /**
  * Controls if the order form phone input is correct.
- * @param {String} phoneStr The phone input to be checked.
+ * @param {string} phoneStr The phone input to be checked.
  */
 export const controlPhoneValidation = (phoneStr) => {
   try {
@@ -55,7 +55,7 @@ export const controlPhoneValidation = (phoneStr) => {
 };
 /**
  * Controls if the order form email input is correct.
- * @param {String} emailStr The email input to be checked.
+ * @param {string} emailStr The email input to be checked.
  */
 export const controlEmailValidation = (emailStr) => {
   try {

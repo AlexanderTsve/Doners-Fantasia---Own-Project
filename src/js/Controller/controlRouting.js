@@ -15,7 +15,7 @@ const clearDropdownAndSearchField = () => {
 };
 /**
  * Renders the correct page depending on the hash param.
- * @param {String} hash a string indicating the current hash.
+ * @param {string} hash a string indicating the current hash.
  */
 const togglePagesHelper = (hash) => {
   toggleCorrectPage(hash);
@@ -53,7 +53,7 @@ export const controlUrlChange = () => {
 };
 /**
  * Controls changing the respective page depending on the hash.
- * @param {String} hash a string indicating the current hash.
+ * @param {string} hash a string indicating the current hash.
  */
 export const controlChangePathname = (hash) => {
   clearDropdownAndSearchField();

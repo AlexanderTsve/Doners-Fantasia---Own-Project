@@ -4,8 +4,8 @@ import { state } from "./state.js";
 import { async } from "regenerator-runtime";
 /**
  * Loads the correct data depending on the search field input and the chosen dropdown option.
- * @param {String} query the search field input entered by the user.
- * @param {String} dropdownValue chosen by the user.
+ * @param {string} query the search field input entered by the user.
+ * @param {string} dropdownValue chosen by the user.
  */
 export const loadSearchResults = async (query, dropdownValue) => {
   try {
