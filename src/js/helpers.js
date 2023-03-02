@@ -1,6 +1,11 @@
 import { async } from "regenerator-runtime";
 import "regenerator-runtime/runtime";
 import * as images from "../img/products_imgs/*.png";
+/**
+ * Makes a GET request to some url.
+ * @param {string} url to which the function is sending a request.
+ * @returns {object}
+ */
 export const makeApiCall = async (url) => {
   const response = await fetch(url);
   if (!response.ok) {
@@ -11,6 +16,12 @@ export const makeApiCall = async (url) => {
   const data = await response.json();
   return data;
 };
+/**
+ * Sends a POST request with the data from the submitted feedback form.
+ * @param {string} url to which the function is sending a request.
+ * @param {object} data contains all of the data from the feedback form.
+ * @returns {string} indicating whether the request has been successful.
+ */
 export const sendDataRequest = async (url, data) => {
   const initObj = {
     method: "POST",
@@ -30,6 +41,12 @@ export const sendDataRequest = async (url, data) => {
   }
   return "Your feedback has been sent successfully! Thank you!";
 };
+/**
+ * Sends a POST request to the respective url - sends the login data.
+ * @param {string} url to which the function is sending a request.
+ * @param {object} data contains all of the data from the login form.
+ * @param {string} error message to be rendered to the user in the case of failed request.
+ */
 export const sendAuthData = async (url, data, error) => {
   try {
     const initObj = {
@@ -51,6 +68,11 @@ export const sendAuthData = async (url, data, error) => {
     throw err;
   }
 };
+/**
+ * Sends a POST request to the respective url - sends the registration data.
+ * @param {string} url to which the function is sending a request.
+ * @param {object} data contains all of the necessary details from the registration form.
+ */
 export const sendRegistrationData = async (url, data) => {
   try {
     const initObj = {
@@ -74,6 +96,11 @@ export const sendRegistrationData = async (url, data) => {
     throw err;
   }
 };
+/**
+ * Makes a GET request to some url.
+ * @param {string} url to which the function is sending a request.
+ * @returns {object[]} of all the users registration data.
+ */
 export const getUsers = async (url) => {
   try {
     const response = await fetch(url);
@@ -88,6 +115,11 @@ export const getUsers = async (url) => {
     throw err;
   }
 };
+/**
+ * Takes the initial array of product objects and returns another containing the necessary information.
+ * @param {object[]} arrOfProducts the initial array of products.
+ * @returns {object[]} an array of products with the correct data.
+ */
 export const returnProductObjects = (arrOfProducts) => {
   return arrOfProducts.map((product) => {
     return {
@@ -100,6 +132,10 @@ export const returnProductObjects = (arrOfProducts) => {
     };
   });
 };
+/**
+ * Depending on the hash parameter shows a page and hides the other pages.
+ * @param {string} hash of the correct page.
+ */
 export const toggleCorrectPage = (hash) => {
   const pages = [...document.querySelectorAll(`[id$="page"]`)];
   pages.forEach((page) => {
@@ -108,6 +144,11 @@ export const toggleCorrectPage = (hash) => {
   const currentPage = document.getElementById(hash);
   currentPage.classList.remove("hidden");
 };
+/**
+ * Sends a POST request - contains the information regarding submitted order.
+ * @param {string} url to which the function is sending a request.
+ * @param {object} orderObj the data object containing all of the information regarding the successful order.
+ */
 export const sendOrderData = async (url, orderObj) => {
   try {
     const cart = JSON.parse(localStorage.getItem("doner-cart"));
