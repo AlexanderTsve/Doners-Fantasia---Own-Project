@@ -9,37 +9,6 @@ body {
 footer {
   margin-top: auto;
 }
-.product_card {
-  width: 21rem;
-  margin: 1.87rem;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.1);
-  }
-  &_body,
-  &_header {
-    background-color: $color-primary;
-  }
-  &_body {
-    font-size: 0.85rem;
-  }
-  &_header {
-    display: block;
-    margin-block: 0;
-    margin-inline: 0;
-  }
-  &_footer {
-    background-color: $color-secondary;
-    display: flex;
-  }
-  &_qty_input {
-    margin-right: 0.1rem;
-    width: 4.15rem;
-    border-radius: 5px;
-    font-size: 0.75rem;
-  }
-}
 .restaurant_card {
   width: 20rem;
   margin: 1.87rem;

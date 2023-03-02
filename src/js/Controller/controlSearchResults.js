@@ -20,12 +20,12 @@ export const controlSearchResults = async () => {
     if (!state.products.every(Boolean) || state.products.length === 0) {
       if (dropdownValue === "none") {
         throw new Error(
-          `There is no existing product with ${query} in its name!`
+          `There is no existing product with ${query} in its name !`
         );
       }
       if (dropdownValue !== "none") {
         throw new Error(
-          `There is no existing product with ${query} in its name (in category ${dropdownValue})!`
+          `There is no existing product with ${query} in its name (in category ${dropdownValue}) !`
         );
       }
     }

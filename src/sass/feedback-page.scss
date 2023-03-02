@@ -1,17 +1,17 @@
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1000px) {
   #feedback-page {
     display: flex;
     justify-content: center;
     background-color: $violet-color;
     min-height: 92vh;
-    font-size: 1rem;
+    font-size: 0.75rem;
     .feedback-form {
       margin: 5rem;
       border: solid $dark-green-color 3px;
       border-radius: 5%;
       background-color: $color-secondary;
       min-height: 68vh;
-      min-width: 45vw;
+      min-width: 33vw;
       &-error-message {
         display: flex;
         justify-content: center;
@@ -21,14 +21,48 @@
         color: $dark-yellow-color;
       }
       &-field_input {
-        font-size: 1rem;
+        font-size: 0.75rem;
       }
     }
     .form-field {
       padding: 0.25rem 0.5rem;
     }
     .feedback_form_submit {
-      font-size: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+@media only screen and (max-width: 999px) {
+  #feedback-page {
+    display: flex;
+    justify-content: center;
+    background-color: $violet-color;
+    min-height: 92vh;
+    font-size: 1.2rem;
+    .feedback-form {
+      margin: 5rem;
+      border: solid $dark-green-color 3px;
+      border-radius: 5%;
+      background-color: $color-secondary;
+      min-height: 68vh;
+      min-width: 55vw;
+      &-error-message {
+        display: flex;
+        justify-content: center;
+      }
+      &-error {
+        padding-top: 1rem;
+        color: $dark-yellow-color;
+      }
+      &-field_input {
+        font-size: 1.2rem;
+      }
+    }
+    .form-field {
+      padding: 0.25rem 0.5rem;
+    }
+    .feedback_form_submit {
+      font-size: 1.2rem;
     }
   }
 }
@@ -105,14 +139,14 @@
     display: flex;
     justify-content: center;
     background-color: $violet-color;
-    height: 70vh;
-    font-size: 0.65rem;
+    height: 100vh;
+    font-size: 0.8rem;
     .feedback-form {
-      margin-bottom: 0.5rem;
+      margin-bottom: 2.5rem;
       border: solid $dark-green-color 3px;
       border-radius: 5%;
       background-color: $color-secondary;
-      min-height: 70vh;
+      min-height: 88vh;
       min-width: 100vw;
       &-error-message {
         display: flex;
@@ -123,14 +157,14 @@
         margin-bottom: 0;
       }
       &-field_input {
-        font-size: 0.65rem;
+        font-size: 0.8rem;
       }
     }
     .form-field {
       padding: 0.25rem 0.5rem;
     }
     .feedback_form_submit {
-      font-size: 0.65rem;
+      font-size: 0.8rem;
     }
   }
 }
