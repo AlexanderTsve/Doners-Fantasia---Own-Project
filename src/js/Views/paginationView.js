@@ -62,7 +62,7 @@ class PaginationView extends Views {
    * @returns {HTMLElement} paragraph indicating which page is currently rendered to the user along with the buttons for changing the page.
    */
   _generateMarkup() {
-    const currentPage = this._data.productsPageNumber;
+    let currentPage = this._data.productsPageNumber;
     const numPages =
       Math.ceil(this._data.products.length / this._data.productsPerPage) || 1;
     if (numPages > 1 && currentPage === 1) {
@@ -71,7 +71,11 @@ class PaginationView extends Views {
         numPages
       )}${this._generateBtnMarkup("next", currentPage)}`;
     }
-    if (numPages === 1 && currentPage === 1) {
+    if (
+      (numPages === 1 && currentPage === 1) ||
+      (currentPage > numPages && numPages === 1)
+    ) {
+      currentPage = numPages;
       return `${this._generateParaMarkup(currentPage, numPages)}`;
     }
     if (numPages === currentPage) {
