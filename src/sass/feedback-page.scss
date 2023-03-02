@@ -1,30 +1,136 @@
-#feedback-page {
-  display: flex;
-  justify-content: center;
-  background-color: $violet-color;
-  min-height: 81vh;
-  font-size: 0.75rem;
-  .feedback-form {
-    margin: 5rem;
-    border: solid $dark-green-color 3px;
-    border-radius: 5%;
-    background-color: $color-secondary;
-    &-error-message {
-      display: flex;
-      justify-content: center;
+@media only screen and (min-width: 768px) {
+  #feedback-page {
+    display: flex;
+    justify-content: center;
+    background-color: $violet-color;
+    min-height: 92vh;
+    font-size: 1rem;
+    .feedback-form {
+      margin: 5rem;
+      border: solid $dark-green-color 3px;
+      border-radius: 5%;
+      background-color: $color-secondary;
+      min-height: 68vh;
+      min-width: 45vw;
+      &-error-message {
+        display: flex;
+        justify-content: center;
+      }
+      &-error {
+        padding-top: 1rem;
+        color: $dark-yellow-color;
+      }
+      &-field_input {
+        font-size: 1rem;
+      }
     }
-    &-error {
-      padding-top: 1rem;
-      color: $dark-yellow-color;
+    .form-field {
+      padding: 0.25rem 0.5rem;
     }
-    &-field_input{
-      font-size: 0.75rem;
+    .feedback_form_submit {
+      font-size: 1rem;
     }
   }
-  .form-field{
-    padding: 0.25rem 0.5rem;
+}
+@media only screen and (max-width: 767px) {
+  #feedback-page {
+    display: flex;
+    justify-content: center;
+    background-color: $violet-color;
+    min-height: 92vh;
+    font-size: 1rem;
+    .feedback-form {
+      margin: 5rem;
+      border: solid $dark-green-color 3px;
+      border-radius: 5%;
+      background-color: $color-secondary;
+      min-height: 68vh;
+      min-width: 45vw;
+      &-error-message {
+        display: flex;
+        justify-content: center;
+      }
+      &-error {
+        padding-top: 1rem;
+        color: $dark-yellow-color;
+      }
+      &-field_input {
+        font-size: 1rem;
+      }
+    }
+    .form-field {
+      padding: 0.25rem 0.5rem;
+    }
+    .feedback_form_submit {
+      font-size: 1rem;
+    }
   }
-  .feedback_form_submit{
+}
+@media only screen and (max-width: 600px) {
+  #feedback-page {
+    display: flex;
+    justify-content: center;
+    background-color: $violet-color;
+    height: 90vh;
     font-size: 0.85rem;
+    .feedback-form {
+      margin-bottom: 1rem;
+      border: solid $dark-green-color 3px;
+      border-radius: 5%;
+      background-color: $color-secondary;
+      min-height: 80vh;
+      min-width: 100vw;
+      &-error-message {
+        display: flex;
+        justify-content: center;
+      }
+      &-error {
+        color: $dark-yellow-color;
+        margin-bottom: 0;
+      }
+      &-field_input {
+        font-size: 0.85rem;
+      }
+    }
+    .form-field {
+      padding: 0.25rem 0.5rem;
+    }
+    .feedback_form_submit {
+      font-size: 0.85rem;
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  #feedback-page {
+    display: flex;
+    justify-content: center;
+    background-color: $violet-color;
+    height: 70vh;
+    font-size: 0.65rem;
+    .feedback-form {
+      margin-bottom: 0.5rem;
+      border: solid $dark-green-color 3px;
+      border-radius: 5%;
+      background-color: $color-secondary;
+      min-height: 70vh;
+      min-width: 100vw;
+      &-error-message {
+        display: flex;
+        justify-content: center;
+      }
+      &-error {
+        color: $dark-yellow-color;
+        margin-bottom: 0;
+      }
+      &-field_input {
+        font-size: 0.65rem;
+      }
+    }
+    .form-field {
+      padding: 0.25rem 0.5rem;
+    }
+    .feedback_form_submit {
+      font-size: 0.65rem;
+    }
   }
 }

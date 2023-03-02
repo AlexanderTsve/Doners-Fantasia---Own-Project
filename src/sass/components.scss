@@ -2,10 +2,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: myFont, Arial (sans-serif), Arial Black (sans-serif), Verdana (sans-serif), Tahoma (sans-serif)
-  ,Trebuchet MS (sans-serif)
-  ,Impact (sans-serif),
-  Gill Sans (sans-serif);
+  font-family: myFont, Arial (sans-serif), Arial Black (sans-serif),
+    Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+    Impact (sans-serif), Gill Sans (sans-serif);
 }
 footer {
   margin-top: auto;
@@ -22,7 +21,7 @@ footer {
   &_header {
     background-color: $color-primary;
   }
-  &_body{
+  &_body {
     font-size: 0.85rem;
   }
   &_header {
@@ -47,7 +46,7 @@ footer {
   background-color: $color-primary;
   border-radius: 5px;
   cursor: pointer;
-  &_name{
+  &_name {
     margin-top: 0.5rem;
     text-decoration: underline;
   }
@@ -211,7 +210,7 @@ footer {
   &_label {
     color: $dark-yellow-color;
   }
-  &_input{
+  &_input {
     font-size: 0.85rem;
   }
 }
