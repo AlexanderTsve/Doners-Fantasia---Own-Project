@@ -50,6 +50,10 @@ export const controlUrlChange = () => {
   if (URL_ARR.some((urlEnd) => urlEnd === hash)) {
     togglePagesHelper(hash);
   }
+  if (hash.includes("details-page")) {
+    toggleCorrectPage(hash.split("/")[0]);
+    controlProductDetails();
+  }
 };
 /**
  * Controls changing the respective page depending on the hash.
