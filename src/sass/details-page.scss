@@ -1,60 +1,322 @@
-#details-page {
-  min-height: 80vh;
-  background-color: $violet-color;
-  display: flex;
-  justify-content: center;
-  .product-details {
-    margin: 14rem;
+@media only screen and (min-width: 1000px) {
+  #details-page {
+    min-height: 80vh;
+    background-color: $violet-color;
     display: flex;
-    justify-content: space-between;
-    &-drinks{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-    &-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    &-price,
-    &-weight {
+    justify-content: center;
+    .product-details {
+      margin: 14rem;
       display: flex;
       justify-content: space-between;
-      width: 10rem;
-      margin: 1rem;
-    }
-    &-figure {
-      $card-bg: $color-secondary;
-    }
-    &-image {
-      background-color: $color-secondary;
-      border-radius: 5%;
-    }
-    &-name {
-      background-color: $color-primary;
-      border-radius: 20%;
-    }
-    &-content {
-      height: 17rem;
-      padding-left: 0;
-      color: $color-primary;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-size: 0.85rem;
-    }
-    &-font {
-      color: $dark-green-color;
-      font-weight: bold;
-      font-size: 0.85rem;
+      &-drinks {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      &-price,
+      &-weight {
+        display: flex;
+        justify-content: space-between;
+        width: 10rem;
+        margin: 1rem;
+      }
+      &-figure {
+        $card-bg: $color-secondary;
+      }
+      &-image {
+        background-color: $color-secondary;
+        border-radius: 5%;
+      }
+      &-name {
+        background-color: $color-primary;
+        border-radius: 20%;
+      }
+      &-content {
+        height: 17rem;
+        padding-left: 0;
+        color: $color-primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 0.85rem;
+      }
+      &-font {
+        color: $dark-green-color;
+        font-weight: 100;
+        font-size: 0.85rem;
+      }
     }
   }
+  .card {
+    --bs-card-bg: $violet-color;
+    border: none;
+  }
+  .details_page_add_to_cart_btn {
+    padding: 0.3rem 1rem;
+  }
 }
-.card {
-  --bs-card-bg: $violet-color;
-  border: none;
+@media only screen and (max-width: 999px) {
+  #details-page {
+    min-height: 86vh;
+    background-color: $violet-color;
+    display: flex;
+    justify-content: center;
+    .product-details {
+      margin: 5rem;
+      display: flex;
+      justify-content: space-between;
+      &-drinks {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      &-body {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+      }
+      &-price,
+      &-weight {
+        display: flex;
+        justify-content: space-between;
+        width: 10rem;
+        margin: 1rem;
+      }
+      &-figure {
+        $card-bg: $color-secondary;
+        width: 40vw;
+      }
+      &-image {
+        background-color: $color-secondary;
+        border-radius: 5%;
+      }
+      &-name {
+        background-color: $color-primary;
+        border-radius: 20%;
+      }
+      &-content {
+        height: 17rem;
+        padding-left: 0;
+        color: $color-primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 0.85rem;
+      }
+      &-font {
+        color: $dark-green-color;
+        font-weight: 100;
+        font-size: 0.85rem;
+      }
+    }
+  }
+  .card {
+    --bs-card-bg: $violet-color;
+    border: none;
+  }
+  .details_page_add_to_cart_btn {
+    padding: 0.3rem 1rem;
+  }
 }
-.details_page_add_to_cart_btn{
-  padding: 0.3rem 1rem;
+@media only screen and (max-width: 767px) {
+  #details-page {
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    justify-content: center;
+    .product-details {
+      margin: 14rem;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      &-drinks {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      &-price,
+      &-weight {
+        display: flex;
+        justify-content: space-between;
+        width: 10rem;
+        margin: 1rem;
+      }
+      &-figure {
+        $card-bg: $color-secondary;
+        width: 75vw;
+      }
+      &-image {
+        background-color: $color-secondary;
+        border-radius: 5%;
+      }
+      &-name {
+        background-color: $color-primary;
+        border-radius: 20%;
+      }
+      &-content {
+        height: 17rem;
+        padding-left: 0;
+        color: $color-primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 0.85rem;
+      }
+      &-font {
+        color: $dark-green-color;
+        font-weight: 100;
+        font-size: 0.85rem;
+      }
+    }
+  }
+  .card {
+    --bs-card-bg: $violet-color;
+    border: none;
+  }
+  .details_page_add_to_cart_btn {
+    padding: 0.3rem 1rem;
+    width: 35vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #details-page {
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    .product-details {
+      margin: 14rem;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      &-drinks {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      &-price,
+      &-weight {
+        display: flex;
+        justify-content: space-between;
+        width: 10rem;
+        margin: 1rem;
+      }
+      &-figure {
+        $card-bg: $color-secondary;
+        width: 75vw;
+      }
+      &-image {
+        background-color: $color-secondary;
+        border-radius: 5%;
+      }
+      &-name {
+        background-color: $color-primary;
+        border-radius: 20%;
+      }
+      &-content {
+        height: 17rem;
+        padding-left: 0;
+        color: $color-primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 0.85rem;
+      }
+      &-font {
+        color: $dark-green-color;
+        font-weight: 100;
+        font-size: 0.85rem;
+      }
+    }
+  }
+  .card {
+    --bs-card-bg: $violet-color;
+    border: none;
+  }
+  .details_page_add_to_cart_btn {
+    padding: 0.3rem 1rem;
+    width: 45vw;
+  }
+}
+@media only screen and (max-width: 400px) {
+  #details-page {
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    .product-details {
+      margin: 14rem;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      &-drinks {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      &-price,
+      &-weight {
+        display: flex;
+        justify-content: space-between;
+        width: 10rem;
+        margin: 1rem;
+      }
+      &-figure {
+        $card-bg: $color-secondary;
+        width: 75vw;
+      }
+      &-image {
+        background-color: $color-secondary;
+        border-radius: 5%;
+      }
+      &-name {
+        background-color: $color-primary;
+        border-radius: 20%;
+      }
+      &-content {
+        height: 17rem;
+        padding-left: 0;
+        color: $color-primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 0.85rem;
+      }
+      &-font {
+        color: $dark-green-color;
+        font-weight: 100;
+        font-size: 0.85rem;
+      }
+    }
+  }
+  .card {
+    --bs-card-bg: $violet-color;
+    border: none;
+  }
+  .details_page_add_to_cart_btn {
+    padding: 0.3rem 1rem;
+    width: 50vw;
+  }
 }
