@@ -1,101 +1,531 @@
-#cart-page {
-  min-height: 80vh;
-  background-color: $violet-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .cart-container {
-    margin: 4rem;
-    color: $color-primary;
+@media only screen and (min-width: 1000px) {
+  #cart-page {
+    min-height: 90vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    .cart-container {
+      margin: 2rem;
+      color: $color-primary;
+      display: flex;
+      flex-direction: column;
+      &-product {
+        margin-bottom: 1rem;
+        width: 35rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $color-secondary;
+        border-radius: 15%;
+        border: solid 0.15rem $dark-green-color;
+        font-size: 0.85rem;
+        &-description {
+          width: 30rem;
+        }
+        &-description,
+        &-increase,
+        &-decrease,
+        &-remove {
+          padding: 0.15rem;
+          margin: 0.45rem;
+        }
+      }
+      &-para {
+        align-self: center;
+        font-size: 0.85rem;
+        text-decoration: underline;
+      }
+    }
+  }
+  #order_form {
+    height: 35rem;
+    width: 25rem;
+    margin: 5rem 3rem 5rem 0.5rem;
     display: flex;
     flex-direction: column;
-    &-product {
-      margin-bottom: 1rem;
-      width: 45rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: $color-secondary;
-      border-radius: 15%;
-      border: solid 0.15rem $dark-green-color;
-      font-size: 0.85rem;
-      &-description {
-        width: 35rem;
-      }
-      &-description,
-      &-increase,
-      &-decrease,
-      &-remove {
-        padding: 0.15rem;
-        margin: 0.45rem;
+    border: solid 0.15rem $dark-green-color;
+    border-radius: 5%;
+    background-color: $color-secondary;
+    align-items: center;
+    justify-content: space-around;
+    color: $color-primary;
+    font-size: 0.85rem;
+    &_names,
+    &_address,
+    &_phone,
+    &_email {
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .order_form_btn {
+      margin: 1.2rem;
+      &:disabled {
+        background-color: $grey-color;
+        color: $white;
+        opacity: 1;
       }
     }
-    &-para {
-      align-self: center;
-      font-size: 0.85rem;
-      text-decoration: underline;
+  }
+  .order-tooltip {
+    &-text {
+      text-align: center;
+      visibility: hidden;
+      position: absolute;
+      z-index: 1;
+      width: 12rem;
+      color: $dark-green-color;
+      font-size: 0.7rem;
+      background-color: $violet-color;
+      border-radius: 0.5rem;
+    }
+    &:hover {
+      .order-tooltip-text {
+        visibility: visible;
+      }
+    }
+  }
+  .order_form {
+    &_names,
+    &_email,
+    &_phone,
+    &_address {
+      &_error {
+        margin: 0 1rem 1rem 1rem;
+      }
     }
   }
 }
-#order_form {
-  height: 35rem;
-  width: 25rem;
-  margin: 5rem 9rem 5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  border: solid 0.15rem $dark-green-color;
-  border-radius: 5%;
-  background-color: $color-secondary;
-  align-items: center;
-  justify-content: space-around;
-  color: $color-primary;
-  font-size: 0.85rem;
-  &_names,
-  &_address,
-  &_phone,
-  &_email {
-    padding: 0.375rem 0.75rem;
-    border: 1px solid #ced4da;
-    border-radius: 0.375rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 1.5;
-  }
-  .order_form_btn {
-    margin: 1.2rem;
-    &:disabled {
-      background-color: $grey-color;
-      color: $white;
-      opacity: 1;
-    }
-  }
-}
-.order-tooltip {
-  &-text {
-    text-align: center;
-    visibility: hidden;
-    position: absolute;
-    z-index: 1;
-    width: 12rem;
-    color: $dark-green-color;
-    font-size: 0.7rem;
+@media only screen and (max-width: 999px) {
+  #cart-page {
+    min-height: 90vh;
     background-color: $violet-color;
-    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    .cart-container {
+      margin: 4rem;
+      color: $color-primary;
+      display: flex;
+      flex-direction: column;
+      &-product {
+        margin-bottom: 1rem;
+        width: 45rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $color-secondary;
+        border-radius: 15%;
+        border: solid 0.15rem $dark-green-color;
+        font-size: 0.85rem;
+        &-description {
+          width: 35rem;
+        }
+        &-description,
+        &-increase,
+        &-decrease,
+        &-remove {
+          padding: 0.15rem;
+          margin: 0.45rem;
+        }
+      }
+      &-para {
+        align-self: center;
+        font-size: 0.85rem;
+        text-decoration: underline;
+      }
+    }
   }
-  &:hover {
-    .order-tooltip-text {
-      visibility: visible;
+  #order_form {
+    height: 35rem;
+    width: 25rem;
+    margin: 2rem 2rem 5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    border: solid 0.15rem $dark-green-color;
+    border-radius: 5%;
+    background-color: $color-secondary;
+    align-items: center;
+    justify-content: space-around;
+    color: $color-primary;
+    font-size: 0.85rem;
+    &_names,
+    &_address,
+    &_phone,
+    &_email {
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .order_form_btn {
+      margin: 1.2rem;
+      &:disabled {
+        background-color: $grey-color;
+        color: $white;
+        opacity: 1;
+      }
+    }
+  }
+  .order-tooltip {
+    &-text {
+      text-align: center;
+      visibility: hidden;
+      position: absolute;
+      z-index: 1;
+      width: 12rem;
+      color: $dark-green-color;
+      font-size: 0.7rem;
+      background-color: $violet-color;
+      border-radius: 0.5rem;
+    }
+    &:hover {
+      .order-tooltip-text {
+        visibility: visible;
+      }
+    }
+  }
+  .order_form {
+    &_names,
+    &_email,
+    &_phone,
+    &_address {
+      &_error {
+        margin: 0 1rem 1rem 1rem;
+      }
     }
   }
 }
-.order_form {
-  &_names,
-  &_email,
-  &_phone,
-  &_address {
-    &_error {
-      margin: 0 1rem 1rem 1rem;
+@media only screen and (max-width: 767px) {
+  #cart-page {
+    min-height: 90vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    .cart-container {
+      margin: 4rem;
+      color: $color-primary;
+      display: flex;
+      &-product {
+        margin-bottom: 1rem;
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $color-secondary;
+        border-radius: 15%;
+        border: solid 0.15rem $dark-green-color;
+        font-size: 0.85rem;
+        &-description {
+          width: 70vw;
+          text-align: center;
+        }
+        &-description,
+        &-increase,
+        &-decrease,
+        &-remove {
+          padding: 0.15rem;
+          margin: 0.45rem;
+          font-size: 0.75rem;
+        }
+      }
+      &-para {
+        align-self: center;
+        font-size: 0.85rem;
+        text-decoration: underline;
+      }
+    }
+  }
+  #order_form {
+    height: 35rem;
+    width: 60vw;
+    margin: 2rem 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    border: solid 0.15rem $dark-green-color;
+    border-radius: 5%;
+    background-color: $color-secondary;
+    align-items: center;
+    justify-content: space-around;
+    color: $color-primary;
+    font-size: 0.85rem;
+    &_names,
+    &_address,
+    &_phone,
+    &_email {
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .order_form_btn {
+      margin: 1.2rem;
+      &:disabled {
+        background-color: $grey-color;
+        color: $white;
+        opacity: 1;
+      }
+    }
+  }
+  .order-tooltip {
+    &-text {
+      text-align: center;
+      visibility: hidden;
+      position: absolute;
+      z-index: 1;
+      width: 12rem;
+      color: $dark-green-color;
+      font-size: 0.7rem;
+      background-color: $violet-color;
+      border-radius: 0.5rem;
+    }
+    &:hover {
+      .order-tooltip-text {
+        visibility: visible;
+      }
+    }
+  }
+  .order_form {
+    &_names,
+    &_email,
+    &_phone,
+    &_address {
+      &_error {
+        margin: 0 1rem 1rem 1rem;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  #cart-page {
+    min-height: 90vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    .cart-container {
+      margin: 2rem 2rem 2rem 3rem;
+      color: $color-primary;
+      display: flex;
+      &-product {
+        margin-bottom: 1rem;
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $color-secondary;
+        border-radius: 15%;
+        border: solid 0.15rem $dark-green-color;
+        font-size: 0.85rem;
+        &-description {
+          width: 70vw;
+          text-align: center;
+        }
+        &-description,
+        &-increase,
+        &-decrease,
+        &-remove {
+          padding: 0.15rem;
+          margin: 0.45rem;
+          font-size: 0.75rem;
+        }
+      }
+      &-para {
+        align-self: center;
+        font-size: 0.85rem;
+        text-decoration: underline;
+      }
+    }
+  }
+  #order_form {
+    height: 35rem;
+    width: 80vw;
+    margin: 1rem 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    border: solid 0.15rem $dark-green-color;
+    border-radius: 5%;
+    background-color: $color-secondary;
+    align-items: center;
+    justify-content: space-around;
+    color: $color-primary;
+    font-size: 0.85rem;
+    &_names,
+    &_address,
+    &_phone,
+    &_email {
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .order_form_btn {
+      margin: 1.2rem;
+      &:disabled {
+        background-color: $grey-color;
+        color: $white;
+        opacity: 1;
+      }
+    }
+  }
+  .order-tooltip {
+    &-text {
+      text-align: center;
+      visibility: hidden;
+      position: absolute;
+      z-index: 1;
+      width: 12rem;
+      color: $dark-green-color;
+      font-size: 0.7rem;
+      background-color: $violet-color;
+      border-radius: 0.5rem;
+    }
+    &:hover {
+      .order-tooltip-text {
+        visibility: visible;
+      }
+    }
+  }
+  .order_form {
+    &_names,
+    &_email,
+    &_phone,
+    &_address {
+      &_error {
+        margin: 0 1rem 1rem 1rem;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  #cart-page {
+    min-height: 90vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    .cart-container {
+      margin: 2rem 2rem 2rem 3rem;
+      color: $color-primary;
+      display: flex;
+      &-product {
+        margin-bottom: 1rem;
+        width: 85vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $color-secondary;
+        border-radius: 15%;
+        border: solid 0.15rem $dark-green-color;
+        font-size: 0.85rem;
+        &-description {
+          width: 70vw;
+          text-align: center;
+        }
+        &-description,
+        &-increase,
+        &-decrease,
+        &-remove {
+          padding: 0.15rem;
+          margin: 0.45rem;
+          font-size: 0.75rem;
+        }
+      }
+      &-para {
+        align-self: center;
+        font-size: 0.85rem;
+        text-decoration: underline;
+      }
+    }
+  }
+  .order-form-container {
+    margin: 1rem 2rem 2rem 3rem;
+    #order_form {
+      height: 35rem;
+      width: 85vw;
+      margin: 1rem 0 1rem 0;
+      display: flex;
+      flex-direction: column;
+      border: solid 0.15rem $dark-green-color;
+      border-radius: 5%;
+      background-color: $color-secondary;
+      align-items: center;
+      justify-content: space-around;
+      color: $color-primary;
+      font-size: 0.85rem;
+      &_names,
+      &_address,
+      &_phone,
+      &_email {
+        padding: 0.375rem 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        font-size: 0.75rem;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+      .order_form_btn {
+        margin: 1.2rem;
+        &:disabled {
+          background-color: $grey-color;
+          color: $white;
+          opacity: 1;
+        }
+      }
+    }
+    .order-tooltip {
+      &-text {
+        text-align: center;
+        visibility: hidden;
+        position: absolute;
+        right: 2rem;
+        z-index: 1;
+        width: 12rem;
+        color: $dark-green-color;
+        font-size: 0.7rem;
+        background-color: $violet-color;
+        border-radius: 0.5rem;
+      }
+      &:hover {
+        .order-tooltip-text {
+          visibility: visible;
+        }
+      }
+    }
+    .order_form {
+      &_names,
+      &_email,
+      &_phone,
+      &_address {
+        &_error {
+          margin: 0 1rem 1rem 1rem;
+        }
+      }
     }
   }
 }
