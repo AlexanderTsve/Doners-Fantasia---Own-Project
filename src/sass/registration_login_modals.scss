@@ -1,12 +1,433 @@
+@media only screen and (min-width: 1000px) {
+  .modal_login {
+    display: none;
+    padding-top: 0;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: $grey-color;
+    opacity: 0.95;
+    &-content {
+      height: 30rem;
+      width: 27vw;
+      background-color: $violet-color;
+      margin: 5% auto 15% auto;
+      border: 3px solid $dark-green-color;
+      img {
+        align-self: center;
+        border-radius: 3%;
+        margin: 1rem 0 1rem 0;
+      }
+      &_container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        &_form-field {
+          padding: 0.75rem;
+          margin: 0 2rem 0 1rem;
+          font-size: 0.85rem;
+          &_label {
+            color: $dark-yellow-color;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+  .login_btns {
+    margin: 0.5rem 1.2rem 0.5rem 1.2rem;
+    font-size: 0.75rem;
+    &:disabled {
+      background-color: $grey-color;
+      color: $white;
+      opacity: 1;
+    }
+  }
+  .para_login {
+    margin: 0.25rem 0 0 0;
+    text-align: center;
+    color: $color-secondary;
+    font-size: 0.75rem;
+  }
+  .remember-me-checkbox {
+    margin: 1rem 0 0 5.7rem;
+    display: flex;
+    width: 45%;
+    justify-content: center;
+    label {
+      font-size: 0.75rem;
+    }
+    input {
+      margin-bottom: 0.5rem;
+      margin-left: 1rem;
+    }
+  }
+  #login_password_input {
+    font-family: Arial (sans-serif), Arial Black (sans-serif),
+      Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+      Impact (sans-serif), Gill Sans (sans-serif);
+    font-size: 1rem;
+  }
+  .register_paragraph {
+    color: $dark-green-color;
+    text-decoration: underline;
+    font-size: 0.65rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary;
+    }
+    &:active {
+      color: $dark-green-color;
+    }
+  }
+}
+@media only screen and (max-width: 999px) {
+  .modal_login {
+    display: none;
+    padding-top: 0;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: $grey-color;
+    opacity: 0.95;
+    &-content {
+      height: 30rem;
+      width: 50vw;
+      background-color: $violet-color;
+      margin: 5% auto 15% auto;
+      border: 3px solid $dark-green-color;
+      img {
+        align-self: center;
+        border-radius: 3%;
+        margin: 1rem 0 1rem 0;
+      }
+      &_container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        &_form-field {
+          padding: 0.75rem;
+          margin: 0 2rem 0 1rem;
+          font-size: 0.85rem;
+          &_label {
+            color: $dark-yellow-color;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+  .login_btns {
+    margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    &:disabled {
+      background-color: $grey-color;
+      color: $white;
+      opacity: 1;
+    }
+  }
+  .para_login {
+    margin: 0.25rem 0 0 0;
+    text-align: center;
+    color: $color-secondary;
+    font-size: 0.75rem;
+  }
+  .remember-me-checkbox {
+    margin: 1rem 0 0 8.5rem;
+    display: flex;
+    width: 35%;
+    justify-content: space-around;
+    label {
+      font-size: 0.75rem;
+    }
+    input {
+      margin-bottom: 0.5rem;
+    }
+  }
+  #login_password_input {
+    font-family: Arial (sans-serif), Arial Black (sans-serif),
+      Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+      Impact (sans-serif), Gill Sans (sans-serif);
+    font-size: 1rem;
+  }
+  .register_paragraph {
+    color: $dark-green-color;
+    text-decoration: underline;
+    font-size: 0.85rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary;
+    }
+    &:active {
+      color: $dark-green-color;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .modal_login {
+    display: none;
+    padding-top: 0;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: $grey-color;
+    opacity: 0.95;
+    &-content {
+      height: 30rem;
+      width: 70vw;
+      background-color: $violet-color;
+      margin: 5% auto 15% auto;
+      border: 3px solid $dark-green-color;
+      img {
+        align-self: center;
+        border-radius: 3%;
+        margin: 1rem 0 1rem 0;
+      }
+      &_container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        &_form-field {
+          padding: 0.75rem;
+          margin: 0 2rem 0 1rem;
+          font-size: 0.85rem;
+          &_label {
+            color: $dark-yellow-color;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+  .login_btns {
+    margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    &:disabled {
+      background-color: $grey-color;
+      color: $white;
+      opacity: 1;
+    }
+  }
+  .para_login {
+    margin: 0.25rem 0 0 0;
+    text-align: center;
+    color: $color-secondary;
+    font-size: 0.75rem;
+  }
+  .remember-me-checkbox {
+    margin: 1rem 0 0 7rem;
+    display: flex;
+    width: 35%;
+    justify-content: space-around;
+    label {
+      font-size: 0.75rem;
+    }
+    input {
+      margin-bottom: 0.5rem;
+    }
+  }
+  #login_password_input {
+    font-family: Arial (sans-serif), Arial Black (sans-serif),
+      Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+      Impact (sans-serif), Gill Sans (sans-serif);
+    font-size: 1rem;
+  }
+  .register_paragraph {
+    color: $dark-green-color;
+    text-decoration: underline;
+    font-size: 0.85rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary;
+    }
+    &:active {
+      color: $dark-green-color;
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .modal_login {
+    display: none;
+    padding-top: 0;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: $grey-color;
+    opacity: 0.95;
+    &-content {
+      height: 30rem;
+      width: 80vw;
+      background-color: $violet-color;
+      margin: 5% auto 15% auto;
+      border: 3px solid $dark-green-color;
+      img {
+        align-self: center;
+        border-radius: 3%;
+        margin: 1rem 0 1rem 0;
+      }
+      &_container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        &_form-field {
+          padding: 0.75rem;
+          margin: 0 2rem 0 1rem;
+          font-size: 0.85rem;
+          &_label {
+            color: $dark-yellow-color;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+  .login_btns {
+    margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    &:disabled {
+      background-color: $grey-color;
+      color: $white;
+      opacity: 1;
+    }
+  }
+  .para_login {
+    margin: 0.25rem 0 0 0;
+    text-align: center;
+    color: $color-secondary;
+    font-size: 0.75rem;
+  }
+  .remember-me-checkbox {
+    margin: 1rem 0 0 7rem;
+    display: flex;
+    width: 35%;
+    justify-content: space-around;
+    label {
+      font-size: 0.75rem;
+    }
+    input {
+      margin-bottom: 0.5rem;
+    }
+  }
+  #login_password_input {
+    font-family: Arial (sans-serif), Arial Black (sans-serif),
+      Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+      Impact (sans-serif), Gill Sans (sans-serif);
+    font-size: 1rem;
+  }
+  .register_paragraph {
+    color: $dark-green-color;
+    text-decoration: underline;
+    font-size: 0.85rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary;
+    }
+    &:active {
+      color: $dark-green-color;
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  .modal_login {
+    display: none;
+    padding-top: 0;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: $grey-color;
+    opacity: 0.95;
+    &-content {
+      height: 32rem;
+      width: 90vw;
+      background-color: $violet-color;
+      margin: 5% auto 15% auto;
+      border: 3px solid $dark-green-color;
+      img {
+        align-self: center;
+        border-radius: 3%;
+        margin: 1rem 0 1rem 0;
+      }
+      &_container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        &_form-field {
+          padding: 0.75rem;
+          margin: 0 2rem 0 1rem;
+          font-size: 0.85rem;
+          &_label {
+            color: $dark-yellow-color;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+  .login_btns {
+    margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    &:disabled {
+      background-color: $grey-color;
+      color: $white;
+      opacity: 1;
+    }
+  }
+  .para_login {
+    margin: 0.25rem 0 0 0;
+    text-align: center;
+    color: $color-secondary;
+    font-size: 0.75rem;
+  }
+  .remember-me-checkbox {
+    margin: 1rem 0 0 6rem;
+    display: flex;
+    width: 45%;
+    justify-content: space-around;
+    label {
+      font-size: 0.65rem;
+    }
+    input {
+      margin-bottom: 0.5rem;
+    }
+  }
+  #login_password_input {
+    font-family: Arial (sans-serif), Arial Black (sans-serif),
+      Verdana (sans-serif), Tahoma (sans-serif), Trebuchet MS (sans-serif),
+      Impact (sans-serif), Gill Sans (sans-serif);
+    font-size: 1rem;
+  }
+  .register_paragraph {
+    color: $dark-green-color;
+    text-decoration: underline;
+    font-size: 0.65rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary;
+    }
+    &:active {
+      color: $dark-green-color;
+    }
+  }
+}
 .modal_registration-content {
   width: 30%;
 }
-.modal_login-content {
-  height: 30rem;
-  width: 23%;
-}
-.modal_registration,
-.modal_login {
+.modal_registration {
   display: none;
   padding-top: 0;
   position: fixed;
@@ -46,29 +467,11 @@
   margin: 1.5rem;
   font-size: 0.75rem;
 }
-.login_btns {
-  margin: 0.5rem 1.5rem 0.5rem 1.5rem;
-  font-size: 0.75rem;
-}
-.registration_btns,
-.login_btns {
+.registration_btns {
   &:disabled {
     background-color: $grey-color;
     color: $white;
     opacity: 1;
-  }
-}
-.login_para,
-.register_paragraph {
-  color: $dark-green-color;
-  text-decoration: underline;
-  font-size: 0.85rem;
-  cursor: pointer;
-  &:hover {
-    color: $color-secondary;
-  }
-  &:active {
-    color: $dark-green-color;
   }
 }
 .para_register {
@@ -82,25 +485,18 @@
     font-weight: bold;
   }
 }
-.para_login {
-  margin: 0.25rem 0 0 0;
-  text-align: center;
-  color: $color-secondary;
-  font-size: 0.75rem;
-}
-.remember-me-checkbox {
-  margin: 1rem 0 0 7rem;
-  display: flex;
-  width: 35%;
-  justify-content: space-around;
-  label {
-    font-size: 0.75rem;
+.login_para {
+  color: $dark-green-color;
+  text-decoration: underline;
+  font-size: 0.85rem;
+  cursor: pointer;
+  &:hover {
+    color: $color-secondary;
   }
-  input {
-    margin-bottom: 0.5rem;
+  &:active {
+    color: $dark-green-color;
   }
 }
-#login_password_input,
 #registration_password_input,
 #registration_password_confirm {
   font-family: Arial (sans-serif), Arial Black (sans-serif),
