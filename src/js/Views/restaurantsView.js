@@ -57,7 +57,7 @@ class RestaurantsView extends Views {
     const map = new Map({
       view: new View({
         center: centeredLocation,
-        zoom: 6.85,
+        zoom: 5.85,
       }),
       layers: [
         new TileLayer({
@@ -83,7 +83,6 @@ class RestaurantsView extends Views {
         const coords = toLonLat(e.coordinate);
         const lat = coords[1];
         const lon = coords[0];
-        console.log(lat, lon);
         centeredLocation = fromLonLat([lon, lat]);
         map.getView().setCenter(centeredLocation);
         map.getView().setZoom(map.getView().getZoom() + 1);

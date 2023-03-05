@@ -9,22 +9,6 @@ body {
 footer {
   margin-top: auto;
 }
-.restaurant_card {
-  width: 20rem;
-  margin: 1.87rem;
-  background-color: $color-primary;
-  border-radius: 5px;
-  cursor: pointer;
-  &_name {
-    margin-top: 0.5rem;
-    text-decoration: underline;
-  }
-  &:hover {
-    .restaurant_card_name {
-      animation: move 2s infinite linear;
-    }
-  }
-}
 .doner_app_button {
   cursor: pointer;
   border-radius: 5px;
