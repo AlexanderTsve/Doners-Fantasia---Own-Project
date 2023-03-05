@@ -1,13 +1,80 @@
-.footer {
-  height: 3.5rem;
-  display: flex;
-  justify-content: space-around;
-  background-color: $color-primary;
-  color: $color-secondary;
-  font-weight: bold;
-  font-style: italic;
-  &_item {
+@media only screen and (min-width: 1000px) {
+  .footer {
+    height: 3.5rem;
     display: flex;
-    padding: 1rem;
+    justify-content: space-around;
+    background-color: $color-primary;
+    color: $color-secondary;
+    font-weight: bold;
+    font-style: italic;
+    &_item {
+      display: flex;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  }
+}
+@media only screen and (max-width: 999px) {
+  .footer {
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-around;
+    background-color: $color-primary;
+    color: $color-secondary;
+    font-weight: bold;
+    font-style: italic;
+    &_item {
+      display: flex;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .footer {
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-around;
+    background-color: $color-primary;
+    color: $color-secondary;
+    font-weight: bold;
+    font-style: italic;
+    &_item {
+      display: flex;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .footer {
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-around;
+    background-color: $color-primary;
+    color: $color-secondary;
+    font-weight: bold;
+    font-style: italic;
+    &_item {
+      display: flex;
+      padding: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  .footer {
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-around;
+    background-color: $color-primary;
+    color: $color-secondary;
+    font-weight: bold;
+    font-style: italic;
+    &_item {
+      display: flex;
+      padding: 1rem;
+      font-size: 0.75rem;
+    }
   }
 }
