@@ -1,33 +1,185 @@
-#order-history-page{
+@media only screen and (min-width: 1000px) {
+  #order-history-page {
+    overflow-x: hidden;
     min-height: 80vh;
     background-color: $violet-color;
     display: flex;
     align-items: center;
     justify-content: center;
-    .order-history-container{
-    margin: 7rem;
-    color: $color-primary;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    &-order {
-        width: 50vw;
+    .order-history-container {
+      margin: 7rem;
+      color: $color-primary;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      &-order {
+        width: 45vw;
         text-align: center;
         margin: 1rem;
         background-color: $color-secondary;
         border-radius: 8%;
-        &-date{
-            margin: 1.5rem;
-            font-style: italic;
+        font-size: 0.8rem;
+        &-date {
+          margin: 1.5rem;
+          font-style: italic;
         }
-        &-cart{
-            text-decoration: underline;
-            font-style: italic;
+        &-cart {
+          text-decoration: underline;
+          font-style: italic;
         }
-        &-amount{
-            font-style: italic;
-            margin-bottom: 1rem;
+        &-amount {
+          font-style: italic;
+          margin-bottom: 1rem;
         }
-        }
+      }
     }
+  }
+}
+@media only screen and (max-width: 999px) {
+  #order-history-page {
+    overflow-x: hidden;
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .order-history-container {
+      margin: 7rem;
+      color: $color-primary;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      &-order {
+        width: 65vw;
+        text-align: center;
+        margin: 1rem;
+        background-color: $color-secondary;
+        border-radius: 8%;
+        font-size: 0.8rem;
+        &-date {
+          margin: 1.5rem;
+          font-style: italic;
+        }
+        &-cart {
+          text-decoration: underline;
+          font-style: italic;
+        }
+        &-amount {
+          font-style: italic;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  #order-history-page {
+    overflow-x: hidden;
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .order-history-container {
+      margin: 7rem;
+      color: $color-primary;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      &-order {
+        width: 75vw;
+        text-align: center;
+        margin: 1rem;
+        background-color: $color-secondary;
+        border-radius: 8%;
+        font-size: 0.8rem;
+        &-date {
+          margin: 1.5rem;
+          font-style: italic;
+        }
+        &-cart {
+          text-decoration: underline;
+          font-style: italic;
+        }
+        &-amount {
+          font-style: italic;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  #order-history-page {
+    overflow-x: hidden;
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .order-history-container {
+      margin: 7rem;
+      color: $color-primary;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      &-order {
+        width: 85vw;
+        text-align: center;
+        margin: 1rem;
+        background-color: $color-secondary;
+        border-radius: 8%;
+        font-size: 0.8rem;
+        &-date {
+          margin: 1.5rem;
+          font-style: italic;
+        }
+        &-cart {
+          text-decoration: underline;
+          font-style: italic;
+        }
+        &-amount {
+          font-style: italic;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  #order-history-page {
+    overflow-x: hidden;
+    min-height: 80vh;
+    background-color: $violet-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .order-history-container {
+      margin: 7rem;
+      color: $color-primary;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      &-order {
+        width: 95vw;
+        text-align: center;
+        margin: 1rem;
+        background-color: $color-secondary;
+        border-radius: 8%;
+        font-size: 0.8rem;
+        &-date {
+          margin: 1.5rem;
+          font-style: italic;
+        }
+        &-cart {
+          text-decoration: underline;
+          font-style: italic;
+        }
+        &-amount {
+          font-style: italic;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
 }
