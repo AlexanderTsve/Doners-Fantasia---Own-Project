@@ -9,6 +9,13 @@ export const submitLoginForm = async () => {
   try {
     await sendAuthData(POST_LOGIN_URL, state.loginFormData, LOGIN_AUTH_ERROR);
     const dataArr = await getUsers(USERS_URL);
+    if (
+      !Object.values(dataArr).find(
+        (user) => user.email === state.loginFormData.emailContent
+      )
+    ) {
+      throw new Error(LOGIN_AUTH_ERROR);
+    }
     state.loggedUser = Object.values(dataArr).find(
       (user) => user.email === state.loginFormData.emailContent
     );
