@@ -45,7 +45,7 @@ class RestaurantsView extends Views {
           anchor: [0.5, 46],
           anchorXUnits: "fraction",
           anchorYUnits: "pixels",
-          src: `${icons.marker}.png`,
+          src: `${icons.marker}`,
         }),
       });
       const iconFeature = new Feature({
@@ -125,7 +125,7 @@ class RestaurantsView extends Views {
         (hour === startWorkingHour && startWorkingMinutes > minutes) ||
         (hour === endWorkingHour && endWorkingMinutes <= minutes)
       ) {
-        openCloseImgEl.src = `${icons.close}.png`;
+        openCloseImgEl.src = `${icons.close}`;
       }
       if (
         isWorkDay &&
@@ -133,7 +133,7 @@ class RestaurantsView extends Views {
           (hour === startWorkingHour && startWorkingMinutes <= minutes) ||
           (hour === endWorkingHour && endWorkingMinutes > minutes))
       ) {
-        openCloseImgEl.src = `${icons.open}.png`;
+        openCloseImgEl.src = `${icons.open}`;
       }
       workingHoursParaEl.innerText = `Working Hours: ${restaurant.workingHours}, Mon-Sat`;
       phoneParaEl.innerText = `Phone: ${restaurant.phone}`;
